@@ -1,11 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:XamarinFormsDemo"
-             x:Class="XamarinFormsDemo.MainPage">
+             x:Class="XamarinFormsDemo.MainPage"
+             xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
+             BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
 
-  <Label Text="Welcome to Xamarin Forms!"
-           VerticalOptions="Center"
-           HorizontalOptions="Center" />
+  <Grid HorizontalOptions="Center" VerticalOptions="Center">
+    <Grid.RowDefinitions>
+      <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
+    </Grid.RowDefinitions>
+    <controls:ObjectBindablePicker Grid.Row="0"
+                          ItemsSource="{Binding ColorsList}"
+                          DisplayMember="Name"
+                          SelectedValue="{Binding SelectedValue}"
+                          SelectedValuePath="Name"
+                          SelectedItem="{Binding SelectedColor, Mode=TwoWay}"></controls:ObjectBindablePicker>
+    <Button Grid.Row="1"
+            Command="{Binding TryDebugCommand}"
+            Text="Try Debug"></Button>
+  </Grid>
 
 </ContentPage>
