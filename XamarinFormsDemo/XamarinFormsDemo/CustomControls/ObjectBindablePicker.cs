@@ -30,10 +30,6 @@ namespace XamarinFormsDemo.CustomControls
     using System.Reflection;
     using Xamarin.Forms;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <seealso cref="Xamarin.Forms.Picker" />
     public class ObjectBindablePicker : Picker
     {
         public static BindableProperty ItemsSourceProperty =
