@@ -3,22 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinFormsDemo.MainPage"
              xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
+             xmlns:b="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
              BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
-
+  <!--<b:Interaction.Behaviors>
+    <b:BehaviorCollection>
+      <b:EventToCommand
+        EventName="Appearing"
+        Command="{Binding OnAppearingCommand}"/>
+    </b:BehaviorCollection>
+  </b:Interaction.Behaviors>-->
   <Grid HorizontalOptions="Center" VerticalOptions="Center">
     <Grid.RowDefinitions>
       <RowDefinition></RowDefinition>
       <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
     </Grid.RowDefinitions>
-    <controls:ObjectBindablePicker Grid.Row="0"
+    
+    <Label Grid.Row="0" Text="This control does not works if you are loading data with behaviors in OnAppearing event"></Label>
+    <controls:ObjectBindablePicker Grid.Row="1"
                           ItemsSource="{Binding ColorsList}"
                           DisplayMember="Name"
                           SelectedValue="{Binding SelectedValue}"
                           SelectedValuePath="Name"
                           SelectedItem="{Binding SelectedColor, Mode=TwoWay}"></controls:ObjectBindablePicker>
-    <Button Grid.Row="1"
+    
+    <Label Grid.Row="2" Text="This control works if you are loading data with behaviors in OnAppearing event because it implements NotificationEvents for Collection"></Label>
+    <controls:ObjectBindableCollection Grid.Row="3"
+                          ItemsSource="{Binding ColorsList}"
+                          DisplayMember="Name"
+                          SelectedItem="{Binding SelectedColor, Mode=TwoWay}"></controls:ObjectBindableCollection>
+    <Button Grid.Row="4"
             Command="{Binding TryDebugCommand}"
-            Text="Try Debug"></Button>
+            Text="Try Debug" />
   </Grid>
 
 </ContentPage>

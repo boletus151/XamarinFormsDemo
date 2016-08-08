@@ -12,12 +12,16 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
 namespace XamarinFormsDemo.ViewModel
 {
+    using Constants;
+    using GalaSoft.MvvmLight.Messaging;
+    using GalaSoft.MvvmLight.Views;
+    using Services;
+    
     /// <summary>
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
@@ -29,33 +33,38 @@ namespace XamarinFormsDemo.ViewModel
         /// </summary>
         public ViewModelLocator()
         {
+            if (!ServiceLocator.IsLocationProviderSet)
+            {
+                this.SetLocatorProvider();
+            }
+        }
+
+        public void SetLocatorProvider()
+        {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            var nav = this.ConfigureNavigationPages();
+
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
+            SimpleIoc.Default.Register<IMessenger, Messenger>();
+            SimpleIoc.Default.Register<IDialogService, DialogService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-        
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
+        }
+
+        public ExtendedNavigationService ConfigureNavigationPages()
+        {
+            var nav = new ExtendedNavigationService();
+            nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
+
+            return nav;
         }
     }
 }

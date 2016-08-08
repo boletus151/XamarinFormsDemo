@@ -7,6 +7,12 @@ using Xamarin.Forms;
 
 namespace XamarinFormsDemo
 {
+    using Constants;
+    using GalaSoft.MvvmLight.Views;
+    using Microsoft.Practices.ServiceLocation;
+    using Services;
+    using ViewModel;
+
     public partial class App : Application
     {
         public App()
@@ -18,7 +24,13 @@ namespace XamarinFormsDemo
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            this.ConfigureNavigation();
+        }
+
+        private void ConfigureNavigation()
+        {
+            var navigationService = ServiceLocator.Current.GetInstance<INavigationService>() as ExtendedNavigationService;
+            //navigationService?.NavigateTo(AppConstants.NavigationPages.MainPage);
         }
 
         protected override void OnSleep()

@@ -1,5 +1,5 @@
 ﻿/*--------------------------------------------------------------------------------------------------------------------
-<copyright file="ObjectBindablePicker" company="CodigoEdulis">
+<copyright file="ObjectBindableCollection" company="CodigoEdulis">
    Código Edulis 2016
    http://www.codigoedulis.es
  </copyright>
@@ -26,15 +26,16 @@ namespace XamarinFormsDemo.CustomControls
 {
     using System;
     using System.Collections;
+    using System.Collections.Specialized;
     using System.Linq;
     using System.Reflection;
     using Xamarin.Forms;
 
-    public class ObjectBindablePicker : Picker
+    public class ObjectBindableCollection : Picker
     {
         #region Constructors
 
-        public ObjectBindablePicker()
+        public ObjectBindableCollection()
         {
             this.SelectedIndexChanged += this.OnSelectedIndexChanged;
         }
@@ -92,15 +93,41 @@ namespace XamarinFormsDemo.CustomControls
 
         #region Private Static Methods
 
-        /// <summary>
-        /// Called when [items source changed].
-        /// </summary>
-        /// <param name="bindableObject">The bindable object.</param>
-        /// <param name="oldValue">The old value.</param>
-        /// <param name="newValue">The new value.</param>
-        private static void OnItemsSourceChanged(BindableObject bindableObject, object oldValue, object newValue)
+        private static NotifyCollectionChangedEventHandler NotifyCollectionOnCollectionChanged(ObjectBindableCollection picker)
         {
-            var picker = bindableObject as ObjectBindablePicker;
+            return (sender, args) =>
+            {
+                if(args.Action == NotifyCollectionChangedAction.Reset)
+                {
+                    picker.Items.Clear();
+                    return;
+                }
+
+                if(args.NewItems == null)
+                {
+                    return;
+                }
+
+                if(args.OldItems != null)
+                {
+                    foreach(var oldItem in args.OldItems)
+                    {
+                        picker.Items.Remove((oldItem ?? "").ToString());
+                    }
+                }
+                picker.RefreshItems(args.NewItems);
+            };
+        }
+
+        /// <summary>
+        ///     Called when [items source changed].
+        /// </summary>
+        /// <param name="bindableObject">The bindableObject.</param>
+        /// <param name="oldvalue">The old value.</param>
+        /// <param name="newvalue">The new value.</param>
+        private static void OnItemsSourceChanged(BindableObject bindableObject, object oldvalue, object newvalue)
+        {
+            var picker = bindableObject as ObjectBindableCollection;
 
             if(picker == null)
             {
@@ -109,33 +136,17 @@ namespace XamarinFormsDemo.CustomControls
 
             picker.Items.Clear();
 
-            var list = newValue as IList;
-            if(list == null)
+            if(newvalue == null)
             {
                 return;
             }
-            foreach(var item in list)
-            {
-                if(string.IsNullOrEmpty(picker.DisplayMember))
-                {
-                    picker.Items.Add(item.ToString());
-                }
-                else
-                {
-                    // for PCL
-                    /*var type = item.GetType();
-                        var prop = type.GetProperty(picker.DisplayMember);
-                        picker.Items.Add(prop.GetValue(item).ToString());*/
 
-                    var prop = item.GetType()
-                        .GetRuntimeProperties()
-                        .FirstOrDefault(p => string.Equals(p.Name, picker.DisplayMember, StringComparison.OrdinalIgnoreCase));
-                    if(prop != null)
-                    {
-                        picker.Items.Add(prop.GetValue(item).ToString());
-                    }
-                }
+            var notifyCollection = newvalue as INotifyCollectionChanged;
+            if(notifyCollection != null)
+            {
+                notifyCollection.CollectionChanged += NotifyCollectionOnCollectionChanged(picker);
             }
+            picker.RefreshItems(newvalue as IList);
         }
 
         /// <summary>
@@ -146,7 +157,7 @@ namespace XamarinFormsDemo.CustomControls
         /// <param name="newvalue">The newvalue.</param>
         private static void OnSelectedItemChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            var picker = bindable as ObjectBindablePicker;
+            var picker = bindable as ObjectBindableCollection;
 
             if(picker?.ItemsSource == null)
             {
@@ -175,7 +186,7 @@ namespace XamarinFormsDemo.CustomControls
             }
             else
             {
-                var picker = sender as ObjectBindablePicker;
+                var picker = sender as ObjectBindableCollection;
                 if(picker == null)
                 {
                     return;
@@ -198,18 +209,44 @@ namespace XamarinFormsDemo.CustomControls
             }
         }
 
+        private void RefreshItems(IList newvalue)
+        {
+            foreach(var item in newvalue)
+            {
+                if(string.IsNullOrEmpty(this.DisplayMember))
+                {
+                    this.Items.Add(item.ToString());
+                }
+                else
+                {
+                    // for PCL
+                    /*var type = item.GetType();
+                    var prop = type.GetProperty(picker.DisplayMember);
+                    picker.Items.Add(prop.GetValue(item).ToString());*/
+
+                    var prop = item.GetType()
+                        .GetRuntimeProperties()
+                        .FirstOrDefault(p => string.Equals(p.Name, this.DisplayMember, StringComparison.OrdinalIgnoreCase));
+                    if(prop != null)
+                    {
+                        this.Items.Add(prop.GetValue(item).ToString());
+                    }
+                }
+            }
+        }
+
         #endregion
 
         public static BindableProperty ItemsSourceProperty = BindableProperty.Create
-            (nameof(ItemsSource), typeof(IList), typeof(ObjectBindablePicker), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
+            (nameof(ItemsSource), typeof(IList), typeof(ObjectBindableCollection), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
 
         public static BindableProperty SelectedItemProperty = BindableProperty.Create
-            (nameof(SelectedItem), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
+            (nameof(SelectedItem), typeof(object), typeof(ObjectBindableCollection), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
 
         public static BindableProperty SelectedValueProperty = BindableProperty.Create
-            (nameof(SelectedValueProperty), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.OneWayToSource);
+            (nameof(SelectedValueProperty), typeof(object), typeof(ObjectBindableCollection), default(object), BindingMode.TwoWay);
 
         public static BindableProperty SelectedValuePathProperty = BindableProperty.Create
-            (nameof(SelectedValuePathProperty), typeof(string), typeof(ObjectBindablePicker), string.Empty);
+            (nameof(SelectedValuePathProperty), typeof(string), typeof(ObjectBindableCollection), string.Empty);
     }
 }
