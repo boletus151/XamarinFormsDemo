@@ -12,16 +12,16 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
-
 namespace XamarinFormsDemo.ViewModel
 {
     using Constants;
+    using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;
+    using Microsoft.Practices.ServiceLocation;
     using Services;
-    
+    using View;
+
     /// <summary>
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
@@ -35,17 +35,14 @@ namespace XamarinFormsDemo.ViewModel
         {
             if (!ServiceLocator.IsLocationProviderSet)
             {
-                this.SetLocatorProvider();
+                SetLocatorProvider();
             }
         }
 
-        public void SetLocatorProvider()
+        public static void SetLocatorProvider()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            var nav = this.ConfigureNavigationPages();
-
-            SimpleIoc.Default.Register<INavigationService>(() => nav);
             SimpleIoc.Default.Register<IMessenger, Messenger>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
 
@@ -57,14 +54,6 @@ namespace XamarinFormsDemo.ViewModel
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
-        }
-
-        public ExtendedNavigationService ConfigureNavigationPages()
-        {
-            var nav = new ExtendedNavigationService();
-            nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
-
-            return nav;
         }
     }
 }

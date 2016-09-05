@@ -8,9 +8,11 @@ using Xamarin.Forms;
 namespace XamarinFormsDemo
 {
     using Constants;
+    using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Views;
     using Microsoft.Practices.ServiceLocation;
     using Services;
+    using View;
     using ViewModel;
 
     public partial class App : Application
@@ -19,18 +21,18 @@ namespace XamarinFormsDemo
         {
             InitializeComponent();
 
-            MainPage = new XamarinFormsDemo.MainPage();
+            //MainPage = new XamarinFormsDemo.MainPage();
         }
 
         protected override void OnStart()
         {
-            this.ConfigureNavigation();
-        }
+            ViewModelLocator.SetLocatorProvider();
+            var nav = this.ConfigureNavigationPages();
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
 
-        private void ConfigureNavigation()
-        {
-            var navigationService = ServiceLocator.Current.GetInstance<INavigationService>() as ExtendedNavigationService;
-            //navigationService?.NavigateTo(AppConstants.NavigationPages.MainPage);
+            var navPage = new NavigationPage(new MainPage());
+            nav.Initialize(navPage);
+            this.MainPage = navPage;
         }
 
         protected override void OnSleep()
@@ -41,6 +43,15 @@ namespace XamarinFormsDemo
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public ExtendedNavigationService ConfigureNavigationPages()
+        {
+            var nav = new ExtendedNavigationService();
+            nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
+            nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
+
+            return nav;
         }
     }
 }

@@ -5,8 +5,9 @@ namespace XamarinFormsDemo.ViewModel
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
-    using GalaSoft.MvvmLight;
+    using Constants;
     using GalaSoft.MvvmLight.Command;
+    using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;
     using Model;
 
@@ -22,7 +23,7 @@ namespace XamarinFormsDemo.ViewModel
     ///         See http://www.galasoft.ch/mvvm
     ///     </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ParentViewModel
     {
         #region Private Fields
 
@@ -31,28 +32,15 @@ namespace XamarinFormsDemo.ViewModel
         private string _selectedValue;
         private ICommand _tryDebugCommand;
         private ICommand _onAppearingCommand;
-        private readonly IDialogService dialogService;
+        private ICommand _goToControlTemplatePageCommand;
 
         #endregion
 
         #region Constructors
 
-        /// <summary>
-        ///     Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        public MainViewModel(IDialogService dialogService)
+        public MainViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
+            : base(messenger, navigationService, dialogService)
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
-
-            this.dialogService = dialogService;
-
             var c1 = new MyColor("White", "#FFFFFF");
             var c2 = new MyColor("Black", "#000000");
 
@@ -79,10 +67,16 @@ namespace XamarinFormsDemo.ViewModel
         }
 
         public ICommand OnAppearingCommand => this._onAppearingCommand ?? (this._onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
+        public ICommand GoToControlTemplatePageCommand => this._goToControlTemplatePageCommand ?? (this._goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
+
+        private void GoToControlTemplatePage()
+        {
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
+        }
 
         private async Task OnAppearing()
         {
-            await this.dialogService.ShowMessage("OnAppearing", string.Empty);
+            await this.DialogService.ShowMessage("OnAppearing", string.Empty);
         }
 
         public MyColor SelectedColor

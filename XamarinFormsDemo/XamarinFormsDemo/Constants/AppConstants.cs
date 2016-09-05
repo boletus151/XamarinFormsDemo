@@ -12,6 +12,7 @@ namespace XamarinFormsDemo.Constants
         public static class NavigationPages
         {
             public const string MainPage = "MainPage";
+            public const string ControlTemplatePage = "ControlTemplatePage";
         }
     }
 }
