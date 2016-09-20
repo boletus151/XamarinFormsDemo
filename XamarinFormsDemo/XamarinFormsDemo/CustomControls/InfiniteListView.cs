@@ -104,6 +104,10 @@ namespace XamarinFormsDemo.CustomControls
             }
             else
             {
+                if (numberOfItems > listView.FullItemsSource.Count)
+                {
+                    numberOfItems = listView.FullItemsSource.Count;
+                }
                 var items = listView.FullItemsSource.ToList().GetRange(0, numberOfItems);
                 foreach (var elem in items)
                 {
@@ -126,12 +130,29 @@ namespace XamarinFormsDemo.CustomControls
             }
 
             var indexOfItem = this.observableList.IndexOf((T)e.Item);
-            var numberOfItems = uint.Parse(listView.PageSize);
+            var numberOfItems = int.Parse(listView.PageSize);
 
             if((indexOfItem > -1) && (e.Item == this.observableList.LastOrDefault()))
             {
-                var items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, (int)numberOfItems);
-                foreach(var elem in items)
+                if (numberOfItems > listView.FullItemsSource.Count)
+                {
+                    numberOfItems = listView.FullItemsSource.Count;
+                }
+
+                var observableItemsCount = this.observableList.Count;
+                var fullItemsCount = listView.FullItemsSource.Count;
+                
+                List<T> items;
+                try
+                {
+                    items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, numberOfItems);
+
+                }
+                catch (System.ArgumentOutOfRangeException)
+                {
+                    items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, fullItemsCount - observableItemsCount);
+                }
+                foreach (var elem in items)
                 {
                     observableList.Add(elem);
                 }
