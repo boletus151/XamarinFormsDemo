@@ -104,9 +104,10 @@ namespace XamarinFormsDemo.CustomControls
             }
             else
             {
-                for(var i = 0; i < numberOfItems - 1; i++)
+                var items = listView.FullItemsSource.ToList().GetRange(0, (int)numberOfItems);
+                foreach (var elem in items)
                 {
-                    this.observableList.Add(listView.FullItemsSource[i]);
+                    observableList.Add(elem);
                 }
             }
         }
@@ -130,14 +131,10 @@ namespace XamarinFormsDemo.CustomControls
 
             if((indexOfItem > -1) && (e.Item == this.observableList.LastOrDefault()))
             {
-                var numElemsToAdd = (numberOfItems - 1) + numberOfItems;
-                var fullItemsCount = listView.FullItemsSource.Count;
-                var count = 0;
-
-                for(var i = lastIndex + 1; count < numElemsToAdd && i < fullItemsCount; i++)
+                var items = listView.FullItemsSource.ToList().GetRange(lastIndex + 1, (int)numberOfItems);
+                foreach(var elem in items)
                 {
-                    this.observableList.Add(listView.FullItemsSource[i]);
-                    count++;
+                    observableList.Add(elem);
                 }
             }
         }
