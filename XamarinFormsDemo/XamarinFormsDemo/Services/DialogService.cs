@@ -7,13 +7,7 @@
 
     public class DialogService : IDialogService
     {
-        #region Private Fields
-
         private Page _dialogPage;
-
-        #endregion
-
-        #region Interface Members
 
         public async Task ShowError(string message, string title, string buttonText, Action afterHideCallback)
         {
@@ -68,15 +62,9 @@
             await this._dialogPage.DisplayAlert(title, message, "OK");
         }
 
-        #endregion
-
-        #region Public Methods
-
         public void Initialize(Page dialogPage)
         {
             this._dialogPage = dialogPage;
         }
-
-        #endregion
     }
 }

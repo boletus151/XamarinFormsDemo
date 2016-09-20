@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xamarin.Forms;
-
-namespace XamarinFormsDemo
+﻿namespace XamarinFormsDemo
 {
     using Constants;
     using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Views;
-    using Microsoft.Practices.ServiceLocation;
     using Services;
     using View;
     using ViewModel;
+    using Xamarin.Forms;
 
     public partial class App : Application
     {
@@ -22,6 +15,26 @@ namespace XamarinFormsDemo
             InitializeComponent();
 
             //MainPage = new XamarinFormsDemo.MainPage();
+        }
+
+        public ExtendedNavigationService ConfigureNavigationPages()
+        {
+            var nav = new ExtendedNavigationService();
+            nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
+            nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
+            nav.Configure(AppConstants.NavigationPages.InfiniteScrollingPage, typeof(InfiniteScrollingPage));
+
+            return nav;
+        }
+
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
+        }
+
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
         }
 
         protected override void OnStart()
@@ -33,25 +46,6 @@ namespace XamarinFormsDemo
             var navPage = new NavigationPage(new MainPage());
             nav.Initialize(navPage);
             this.MainPage = navPage;
-        }
-
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-        }
-
-        public ExtendedNavigationService ConfigureNavigationPages()
-        {
-            var nav = new ExtendedNavigationService();
-            nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
-            nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
-
-            return nav;
         }
     }
 }

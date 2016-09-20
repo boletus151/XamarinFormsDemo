@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace XamarinFormsDemo.iOS
@@ -22,6 +18,8 @@ namespace XamarinFormsDemo.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Corcav.Behaviors.Infrastructure.Init();
+
             global::Xamarin.Forms.Forms.Init();
 
             LoadApplication(new App());

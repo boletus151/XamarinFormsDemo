@@ -1,5 +1,6 @@
 namespace XamarinFormsDemo.ViewModel
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
@@ -25,19 +26,28 @@ namespace XamarinFormsDemo.ViewModel
     /// </summary>
     public class MainViewModel : ParentViewModel
     {
-        #region Private Fields
+        private ObservableCollection<MyColor> colorsList;
 
-        private ObservableCollection<MyColor> _colorsList;
-        private MyColor _selectedColor;
-        private string _selectedValue;
-        private ICommand _tryDebugCommand;
-        private ICommand _onAppearingCommand;
-        private ICommand _goToControlTemplatePageCommand;
+        private ICommand goToControlTemplatePageCommand;
 
-        #endregion
+        private ICommand goToInfiniteScrollingViewCommand;
 
-        #region Constructors
+        private ObservableCollection<MyColor> infiniteColorsList;
 
+        private ICommand onAppearingCommand;
+
+        private MyColor selectedColor;
+
+        private string selectedValue;
+
+        private ICommand tryDebugCommand;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        /// </summary>
+        /// <param name="messenger">The messenger.</param>
+        /// <param name="navigationService">The navigation service.</param>
+        /// <param name="dialogService">The dialog service.</param>
         public MainViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
             : base(messenger, navigationService, dialogService)
         {
@@ -50,66 +60,106 @@ namespace XamarinFormsDemo.ViewModel
                 c2
             };
             this.SelectedColor = this.ColorsList.First();
+
+            this.InfiniteColorsList = new ObservableCollection<MyColor>();
+            var random = new Random();
+            for(var i = 0; i < 1000; i++)
+            {
+                var hexadecimalColor = random.Next(100000, 999999);
+                var color = new MyColor
+                {
+                    HexadecimalValue = $"#{hexadecimalColor}",
+                    Name = i.ToString()
+                };
+                InfiniteColorsList.Add(color);
+            }
         }
-
-        #endregion
-
-        #region Public Properties
 
         public ObservableCollection<MyColor> ColorsList
         {
-            get { return this._colorsList; }
+            get
+            {
+                return this.colorsList;
+            }
             set
             {
-                this._colorsList = value;
+                this.colorsList = value;
                 this.RaisePropertyChanged();
             }
         }
 
-        public ICommand OnAppearingCommand => this._onAppearingCommand ?? (this._onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
-        public ICommand GoToControlTemplatePageCommand => this._goToControlTemplatePageCommand ?? (this._goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
+        public ICommand GoToControlTemplatePageCommand
+            => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
 
-        private void GoToControlTemplatePage()
+        public ICommand GoToInfiniteScrollingViewCommand
+            => this.goToInfiniteScrollingViewCommand ?? (this.goToInfiniteScrollingViewCommand = new RelayCommand(this.GoToInfiniteScrollingView));
+
+        public ObservableCollection<MyColor> InfiniteColorsList
         {
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
+            get
+            {
+                return this.infiniteColorsList;
+            }
+            set
+            {
+                this.infiniteColorsList = value;
+                this.RaisePropertyChanged();
+            }
         }
 
-        private async Task OnAppearing()
-        {
-            await this.DialogService.ShowMessage("OnAppearing", string.Empty);
-        }
+        public ICommand OnAppearingCommand
+            => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 
         public MyColor SelectedColor
         {
-            get { return this._selectedColor; }
+            get
+            {
+                return this.selectedColor;
+            }
             set
             {
-                this._selectedColor = value;
+                this.selectedColor = value;
                 this.RaisePropertyChanged();
             }
         }
 
         public string SelectedValue
         {
-            get { return this._selectedValue; }
+            get
+            {
+                return this.selectedValue;
+            }
             set
             {
-                this._selectedValue = value;
+                this.selectedValue = value;
                 this.RaisePropertyChanged();
             }
         }
 
-        public ICommand TryDebugCommand => this._tryDebugCommand ?? (this._tryDebugCommand = new RelayCommand(this.TryDebug));
+        public ICommand TryDebugCommand => this.tryDebugCommand ?? (this.tryDebugCommand = new RelayCommand(this.TryDebug));
 
-        #endregion
+        private void GoToControlTemplatePage()
+        {
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
+        }
 
-        #region Private Methods
+        private void GoToInfiniteScrollingView()
+        {
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
+        }
+
+#pragma warning disable 1998
+        private async Task OnAppearing()
+#pragma warning restore 1998
+        {
+            Debug.WriteLine($"　　　 OnAppearing");
+
+            //await this.DialogService.ShowMessage("OnAppearing", string.Empty);
+        }
 
         private void TryDebug()
         {
             Debug.WriteLine($"　　　The Selected Item is: {this.SelectedColor}");
         }
-
-        #endregion
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace XamarinFormsDemo.Model
+﻿namespace XamarinFormsDemo.Model
 {
+    using System;
+
     public class MyColor : IEquatable<MyColor>
     {
         public MyColor(string name, string hexadecimalValue)
@@ -10,9 +10,13 @@ namespace XamarinFormsDemo.Model
             this.HexadecimalValue = hexadecimalValue;
         }
 
-        public string Name { get; set; }
+        public MyColor()
+        {
+        }
 
         public string HexadecimalValue { get; set; }
+
+        public string Name { get; set; }
 
         public bool Equals(MyColor other)
         {

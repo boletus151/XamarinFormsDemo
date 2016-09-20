@@ -5,16 +5,17 @@
              xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
              xmlns:b="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
              BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
-  <!--<b:Interaction.Behaviors>
+  <b:Interaction.Behaviors>
     <b:BehaviorCollection>
       <b:EventToCommand
         EventName="Appearing"
         Command="{Binding OnAppearingCommand}"/>
     </b:BehaviorCollection>
-  </b:Interaction.Behaviors>-->
+  </b:Interaction.Behaviors>
   <Grid HorizontalOptions="Center"
         VerticalOptions="Center">
     <Grid.RowDefinitions>
+      <RowDefinition></RowDefinition>
       <RowDefinition></RowDefinition>
       <RowDefinition></RowDefinition>
       <RowDefinition></RowDefinition>
@@ -44,6 +45,9 @@
     <Button Grid.Row="5"
             Command="{Binding GoToControlTemplatePageCommand}"
             Text="Go to Control Template example" />
+    <Button Grid.Row="6"
+            Command="{Binding GoToInfiniteScrollingViewCommand}"
+            Text="Go to Infinite Scrolling example" />
   </Grid>
 
 </ContentPage>

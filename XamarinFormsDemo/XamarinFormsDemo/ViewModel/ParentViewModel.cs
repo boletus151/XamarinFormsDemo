@@ -18,15 +18,9 @@ namespace XamarinFormsDemo.ViewModel
     /// </summary>
     public class ParentViewModel : ViewModelBase
     {
-        #region Protected Fields
-
-        protected INavigationService NavigationService;
-
         protected IDialogService DialogService;
 
-        #endregion
-
-        #region Constructors
+        protected INavigationService NavigationService;
 
         public ParentViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
             : base(messenger)
@@ -34,7 +28,5 @@ namespace XamarinFormsDemo.ViewModel
             this.NavigationService = navigationService;
             this.DialogService = dialogService;
         }
-
-        #endregion
     }
 }

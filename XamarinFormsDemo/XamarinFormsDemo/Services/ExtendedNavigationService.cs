@@ -10,8 +10,6 @@
 
     public class ExtendedNavigationService : INavigationService
     {
-        #region Private Fields
-
         /// <summary>
         ///     The pages by key.
         /// </summary>
@@ -21,10 +19,6 @@
         ///     The navigation.
         /// </summary>
         private NavigationPage navigation;
-
-        #endregion
-
-        #region Interface Members
 
         /// <summary>
         ///     Gets the current page key.
@@ -66,14 +60,21 @@
             this.NavigateTo(pageKey, null, null);
         }
 
+        /// <summary>
+        /// Instructs the navigation service to display a new page
+        /// corresponding to the given key, and passes a parameter
+        /// to the new page.
+        /// Depending on the platforms, the navigation service might
+        /// have to be Configure with a key/page list.
+        /// </summary>
+        /// <param name="pageKey">The key corresponding to the page
+        /// that should be displayed.</param>
+        /// <param name="parameter">The parameter that should be passed
+        /// to the new page.</param>
         public void NavigateTo(string pageKey, object parameter)
         {
             this.NavigateTo(pageKey, parameter, null);
         }
-
-        #endregion
-
-        #region Public Methods
 
         /// <summary>
         ///     The configure.
@@ -229,7 +230,7 @@
                              c =>
                              {
                                  var p = c.GetParameters();
-                                 return p.Count() == 2 && p[0].ParameterType == parameter1.GetType() && p[1].ParameterType == parameter2.GetType();
+                                 return parameter1 != null && (p.Count() == 2 && p[0].ParameterType == parameter1.GetType() && p[1].ParameterType == parameter2.GetType());
                              });
 
                         parameters = new[]
@@ -253,10 +254,6 @@
                 }
             }
         }
-
-        #endregion
-
-        #region Private Methods
 
         /// <summary>
         ///     The empty navigation stack.
@@ -290,7 +287,5 @@
         {
             e.Page.BindingContext = null;
         }
-
-        #endregion
     }
 }
