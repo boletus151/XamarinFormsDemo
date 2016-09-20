@@ -24,6 +24,7 @@
 
 namespace XamarinFormsDemo.CustomControls
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -134,24 +135,20 @@ namespace XamarinFormsDemo.CustomControls
 
             if((indexOfItem > -1) && (e.Item == this.observableList.LastOrDefault()))
             {
+                var observableItemsCount = this.observableList.Count;
+                var fullItemsCount = listView.FullItemsSource.Count;
+
                 if (numberOfItems > listView.FullItemsSource.Count)
                 {
                     numberOfItems = listView.FullItemsSource.Count;
                 }
-
-                var observableItemsCount = this.observableList.Count;
-                var fullItemsCount = listView.FullItemsSource.Count;
                 
-                List<T> items;
-                try
+                if (numberOfItems > fullItemsCount - observableItemsCount)
                 {
-                    items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, numberOfItems);
+                    numberOfItems = fullItemsCount - observableItemsCount;
+                }
 
-                }
-                catch (System.ArgumentOutOfRangeException)
-                {
-                    items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, fullItemsCount - observableItemsCount);
-                }
+                var items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, numberOfItems);
                 foreach (var elem in items)
                 {
                     observableList.Add(elem);

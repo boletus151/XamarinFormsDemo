@@ -2,12 +2,12 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="XamarinFormsDemo.App"
-             xmlns:forms="http://xamarin.com/schemas/2014/forms"
-             xmlns:viewModel="clr-namespace:XamarinFormsDemo.ViewModel;assembly=XamarinFormsDemo">
+             xmlns:viewModel="clr-namespace:XamarinFormsDemo.ViewModel;assembly=XamarinFormsDemo"
+             xmlns:converters="clr-namespace:XamarinFormsDemo.Converters;assembly=XamarinFormsDemo">
   <Application.Resources>
-    <!-- Application resource dictionary -->
-    <forms:ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary>
+      <converters:HexadecimalToColorConverter x:Key="HexadecimalToColorConverter" />
       <viewModel:ViewModelLocator x:Key="Locator"/>
-    </forms:ResourceDictionary>
+    </ResourceDictionary>
   </Application.Resources>
 </Application>

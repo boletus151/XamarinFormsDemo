@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants\AppConstants.cs" />
+    <Compile Include="Converters\HexadecimalToColorConverter.cs" />
     <Compile Include="CustomControls\InfiniteListView.cs" />
     <Compile Include="CustomControls\ObjectBindableCollection.cs" />
     <Compile Include="CustomControls\ObjectBindablePicker.cs" />

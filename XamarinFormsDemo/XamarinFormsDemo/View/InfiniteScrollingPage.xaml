@@ -9,14 +9,27 @@
   <StackLayout>
     <Label Text="Infinite srolling list"
            VerticalOptions="Center"
-           HorizontalOptions="Center" />
+           HorizontalOptions="Center"
+           FontSize="15"/>
 
-    <customControls:InfiniteListView x:TypeArguments="myModel:MyColor" FullItemsSource="{Binding InfiniteColorsList}"
+    <Label Text="My Colors List"
+           VerticalOptions="Center"
+           HorizontalOptions="Center"
+           FontSize="20" 
+           FontAttributes="Bold"/>
+
+    <customControls:InfiniteListView x:TypeArguments="myModel:MyColor" 
+                                     FullItemsSource="{Binding InfiniteColorsList}"
                                      PageSize="15">
       <customControls:InfiniteListView.ItemTemplate>
         <DataTemplate>
           <ViewCell BindingContext="{Binding}">
-            <Label Text="{Binding Name}"></Label>
+            <StackLayout Orientation="Horizontal" 
+                         Padding="5">              
+              <Label Text="{Binding HexadecimalValue}" />
+              <Label Text="{Binding Name}"
+                     TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />            
+            </StackLayout>
           </ViewCell>
         </DataTemplate>
       </customControls:InfiniteListView.ItemTemplate>
