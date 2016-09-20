@@ -3,6 +3,7 @@
     using Constants;
     using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Views;
+    using Microsoft.Practices.ServiceLocation;
     using Services;
     using View;
     using ViewModel;
@@ -15,16 +16,6 @@
             InitializeComponent();
 
             //MainPage = new XamarinFormsDemo.MainPage();
-        }
-
-        public ExtendedNavigationService ConfigureNavigationPages()
-        {
-            var nav = new ExtendedNavigationService();
-            nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
-            nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
-            nav.Configure(AppConstants.NavigationPages.InfiniteScrollingPage, typeof(InfiniteScrollingPage));
-
-            return nav;
         }
 
         protected override void OnResume()
@@ -40,11 +31,9 @@
         protected override void OnStart()
         {
             ViewModelLocator.SetLocatorProvider();
-            var nav = this.ConfigureNavigationPages();
-            SimpleIoc.Default.Register<INavigationService>(() => nav);
-
             var navPage = new NavigationPage(new MainPage());
-            nav.Initialize(navPage);
+            var nav = ServiceLocator.Current.GetInstance<INavigationService>() as ExtendedNavigationService;
+            nav?.Initialize(navPage);
             this.MainPage = navPage;
         }
     }

@@ -14,11 +14,13 @@
 
 namespace XamarinFormsDemo.ViewModel
 {
+    using Constants;
     using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;
     using Microsoft.Practices.ServiceLocation;
     using Services;
+    using View;
 
     /// <summary>
     ///     This class contains static references to all the view models in the
@@ -31,13 +33,12 @@ namespace XamarinFormsDemo.ViewModel
         /// </summary>
         public ViewModelLocator()
         {
-            if(!ServiceLocator.IsLocationProviderSet)
-            {
-                SetLocatorProvider();
-            }
+            SetLocatorProvider();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        public InfiniteListViewViewModel InfiniteList => ServiceLocator.Current.GetInstance<InfiniteListViewViewModel>();
 
         public static void Cleanup()
         {
@@ -46,12 +47,35 @@ namespace XamarinFormsDemo.ViewModel
 
         public static void SetLocatorProvider()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            if (!ServiceLocator.IsLocationProviderSet)
+            {
+                ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+                RegisterInIocContainer();
+            }
 
+        }
+
+        public static ExtendedNavigationService ConfigureNavigationPages()
+        {
+            var nav = new ExtendedNavigationService();
+
+            nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
+            nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
+            nav.Configure(AppConstants.NavigationPages.InfiniteScrollingPage, typeof(InfiniteScrollingPage));
+
+            return nav;
+        }
+
+        public static void RegisterInIocContainer()
+        {
             SimpleIoc.Default.Register<IMessenger, Messenger>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
+            var nav = ConfigureNavigationPages();
+            SimpleIoc.Default.Register<INavigationService>(()=>nav);
 
+            SimpleIoc.Default.Register<ParentViewModel>(true);
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<InfiniteListViewViewModel>(true);
         }
     }
 }

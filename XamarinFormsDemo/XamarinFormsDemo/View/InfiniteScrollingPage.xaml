@@ -4,7 +4,7 @@
              xmlns:customControls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
              xmlns:myModel="clr-namespace:XamarinFormsDemo.Model;assembly=XamarinFormsDemo"
              x:Class="XamarinFormsDemo.View.InfiniteScrollingPage"
-             BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
+             BindingContext="{Binding Source={StaticResource Locator}, Path=InfiniteList}">
 
   <StackLayout>
     <Label Text="Infinite srolling list"
@@ -18,23 +18,58 @@
            FontSize="20" 
            FontAttributes="Bold"/>
 
-    <customControls:InfiniteListView x:TypeArguments="myModel:MyColor" 
-                                     FullItemsSource="{Binding InfiniteColorsList}"
-                                     PageSize="15">
-      <customControls:InfiniteListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell BindingContext="{Binding}">
-            <StackLayout Orientation="Horizontal" 
-                         Padding="5">              
-              <Label Text="{Binding HexadecimalValue}" />
-              <Label Text="{Binding Name}"
-                     TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />            
-            </StackLayout>
-          </ViewCell>
-        </DataTemplate>
-      </customControls:InfiniteListView.ItemTemplate>
-    </customControls:InfiniteListView>
-
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="50*"></RowDefinition>
+        <RowDefinition Height="50*"></RowDefinition>
+      </Grid.RowDefinitions>
+      
+      <StackLayout Grid.Row="0" Padding="10">
+        <Label Text="My color list loaded from constructor"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               FontSize="15"/>
+        <customControls:InfiniteListView x:TypeArguments="myModel:MyColor"
+                                         FullItemsSource="{Binding InfiniteColorsList}"
+                                         PageSize="15">
+          <customControls:InfiniteListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell BindingContext="{Binding}">
+                <StackLayout Orientation="Horizontal"
+                             Padding="5">
+                  <Label Text="{Binding HexadecimalValue}" />
+                  <Label Text="{Binding Name}"
+                         TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />
+                </StackLayout>
+              </ViewCell>
+            </DataTemplate>
+          </customControls:InfiniteListView.ItemTemplate>
+        </customControls:InfiniteListView>
+      </StackLayout>    
+      
+      <StackLayout Grid.Row="1" Padding="10">
+        <Label Text="My color list loaded with navigation message"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               FontSize="15"/>
+        <customControls:InfiniteListView x:TypeArguments="myModel:MyColor"
+                                         FullItemsSource="{Binding InfiniteColorsList2}"
+                                         PageSize="15">
+          <customControls:InfiniteListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell BindingContext="{Binding}">
+                <StackLayout Orientation="Horizontal"
+                             Padding="5">
+                  <Label Text="{Binding HexadecimalValue}" />
+                  <Label Text="{Binding Name}"
+                         TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />
+                </StackLayout>
+              </ViewCell>
+            </DataTemplate>
+          </customControls:InfiniteListView.ItemTemplate>
+        </customControls:InfiniteListView>
+      </StackLayout>    
+    </Grid>
   </StackLayout>  
   
   

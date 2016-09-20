@@ -1,6 +1,5 @@
 namespace XamarinFormsDemo.ViewModel
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
@@ -32,8 +31,6 @@ namespace XamarinFormsDemo.ViewModel
 
         private ICommand goToInfiniteScrollingViewCommand;
 
-        private ObservableCollection<MyColor> infiniteColorsList;
-
         private ICommand onAppearingCommand;
 
         private MyColor selectedColor;
@@ -60,19 +57,6 @@ namespace XamarinFormsDemo.ViewModel
                 c2
             };
             this.SelectedColor = this.ColorsList.First();
-
-            this.InfiniteColorsList = new ObservableCollection<MyColor>();
-            var random = new Random();
-            for(var i = 0; i < 500; i++)
-            {
-                var hexadecimalColor = random.Next(100000, 999999);
-                var color = new MyColor
-                {
-                    HexadecimalValue = $"#{hexadecimalColor}",
-                    Name = i.ToString()
-                };
-                InfiniteColorsList.Add(color);
-            }
         }
 
         public ObservableCollection<MyColor> ColorsList
@@ -93,20 +77,7 @@ namespace XamarinFormsDemo.ViewModel
 
         public ICommand GoToInfiniteScrollingViewCommand
             => this.goToInfiniteScrollingViewCommand ?? (this.goToInfiniteScrollingViewCommand = new RelayCommand(this.GoToInfiniteScrollingView));
-
-        public ObservableCollection<MyColor> InfiniteColorsList
-        {
-            get
-            {
-                return this.infiniteColorsList;
-            }
-            set
-            {
-                this.infiniteColorsList = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
+        
         public ICommand OnAppearingCommand
             => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 
@@ -145,6 +116,9 @@ namespace XamarinFormsDemo.ViewModel
 
         private void GoToInfiniteScrollingView()
         {
+            var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(MainViewModel).Name, true);
+            MessengerService.Send<NavigationMessage, InfiniteListViewViewModel>(message);
+
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
         }
 

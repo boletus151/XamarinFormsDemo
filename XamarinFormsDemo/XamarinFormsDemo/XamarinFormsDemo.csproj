@@ -47,9 +47,11 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\MyColor.cs" />
+    <Compile Include="Model\NavigationMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\ExtendedNavigationService.cs" />
+    <Compile Include="ViewModel\InfiniteListViewViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ParentViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
