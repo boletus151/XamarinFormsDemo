@@ -97,14 +97,14 @@ namespace XamarinFormsDemo.CustomControls
         /// <param name="listView">The list view.</param>
         private void OnFullItemsSourceChanged(InfiniteListView<T> listView)
         {
-            var numberOfItems = uint.Parse(listView.PageSize);
-            if(numberOfItems == 0)
+            var numberOfItems = int.Parse(listView.PageSize);
+            if(numberOfItems <= 0)
             {
                 this.observableList.Clear();
             }
             else
             {
-                var items = listView.FullItemsSource.ToList().GetRange(0, (int)numberOfItems);
+                var items = listView.FullItemsSource.ToList().GetRange(0, numberOfItems);
                 foreach (var elem in items)
                 {
                     observableList.Add(elem);
@@ -126,12 +126,11 @@ namespace XamarinFormsDemo.CustomControls
             }
 
             var indexOfItem = this.observableList.IndexOf((T)e.Item);
-            var lastIndex = this.observableList.Count - 1;
             var numberOfItems = uint.Parse(listView.PageSize);
 
             if((indexOfItem > -1) && (e.Item == this.observableList.LastOrDefault()))
             {
-                var items = listView.FullItemsSource.ToList().GetRange(lastIndex + 1, (int)numberOfItems);
+                var items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, (int)numberOfItems);
                 foreach(var elem in items)
                 {
                     observableList.Add(elem);
