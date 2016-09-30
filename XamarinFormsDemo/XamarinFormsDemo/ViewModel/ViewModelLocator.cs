@@ -62,6 +62,7 @@ namespace XamarinFormsDemo.ViewModel
             nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
             nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
             nav.Configure(AppConstants.NavigationPages.InfiniteScrollingPage, typeof(InfiniteScrollingPage));
+            nav.Configure(AppConstants.NavigationPages.CarouselPage, typeof(CarouselPage));
 
             return nav;
         }

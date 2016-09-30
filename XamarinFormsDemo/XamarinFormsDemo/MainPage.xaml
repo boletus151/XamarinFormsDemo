@@ -22,6 +22,7 @@
       <RowDefinition></RowDefinition>
       <RowDefinition></RowDefinition>
       <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
     </Grid.RowDefinitions>
 
     <Label Grid.Row="0"
@@ -48,6 +49,9 @@
     <Button Grid.Row="6"
             Command="{Binding GoToInfiniteScrollingViewCommand}"
             Text="Go to Infinite Scrolling example" />
+    <Button Grid.Row="7"
+            Command="{Binding GoToCarouselViewCommand}"
+            Text="Go to Carousel example" />
   </Grid>
 
 </ContentPage>

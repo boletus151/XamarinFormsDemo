@@ -27,9 +27,13 @@ namespace XamarinFormsDemo.ViewModel
     {
         private ObservableCollection<MyColor> colorsList;
 
+        private ICommand goToCarouselViewCommand;
+
         private ICommand goToControlTemplatePageCommand;
 
         private ICommand goToInfiniteScrollingViewCommand;
+
+        private ObservableCollection<string> imagesList;
 
         private ICommand onAppearingCommand;
 
@@ -40,7 +44,7 @@ namespace XamarinFormsDemo.ViewModel
         private ICommand tryDebugCommand;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
         /// </summary>
         /// <param name="messenger">The messenger.</param>
         /// <param name="navigationService">The navigation service.</param>
@@ -53,10 +57,15 @@ namespace XamarinFormsDemo.ViewModel
 
             this.ColorsList = new ObservableCollection<MyColor>
             {
-                c1,
-                c2
+                c1, c2
             };
             this.SelectedColor = this.ColorsList.First();
+
+            this.ImagesList = new ObservableCollection<string>
+            {
+                @"https://www.bellevuecollege.edu/ps/Images%202/MoE-Banner-12-10.jpg",
+                @"https://content.linkedin.com/content/dam/blog/en-us/corporate/blog/2013/11/Company-Pages_Nominations-Banner.jpg.jpeg"
+            };
         }
 
         public ObservableCollection<MyColor> ColorsList
@@ -72,14 +81,26 @@ namespace XamarinFormsDemo.ViewModel
             }
         }
 
-        public ICommand GoToControlTemplatePageCommand
-            => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
+        public ICommand GoToCarouselViewCommand => this.goToCarouselViewCommand ?? (this.goToCarouselViewCommand = new RelayCommand(this.GoToCarouselView));
 
-        public ICommand GoToInfiniteScrollingViewCommand
-            => this.goToInfiniteScrollingViewCommand ?? (this.goToInfiniteScrollingViewCommand = new RelayCommand(this.GoToInfiniteScrollingView));
-        
-        public ICommand OnAppearingCommand
-            => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
+        public ICommand GoToControlTemplatePageCommand => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
+
+        public ICommand GoToInfiniteScrollingViewCommand => this.goToInfiniteScrollingViewCommand ?? (this.goToInfiniteScrollingViewCommand = new RelayCommand(this.GoToInfiniteScrollingView));
+
+        public ObservableCollection<string> ImagesList
+        {
+            get
+            {
+                return this.imagesList;
+            }
+            set
+            {
+                this.imagesList = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public ICommand OnAppearingCommand => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 
         public MyColor SelectedColor
         {
@@ -109,6 +130,16 @@ namespace XamarinFormsDemo.ViewModel
 
         public ICommand TryDebugCommand => this.tryDebugCommand ?? (this.tryDebugCommand = new RelayCommand(this.TryDebug));
 
+        public object SelectedDot
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        private void GoToCarouselView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
+
         private void GoToControlTemplatePage()
         {
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
@@ -121,7 +152,6 @@ namespace XamarinFormsDemo.ViewModel
 
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
         }
-
 #pragma warning disable 1998
         private async Task OnAppearing()
 #pragma warning restore 1998
