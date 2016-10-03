@@ -1,10 +1,34 @@
-﻿namespace XamarinFormsDemo.CustomControls
+﻿/*--------------------------------------------------------------------------------------------------------------------
+ <copyright file="CarouselLayout" company="CodigoEdulis">
+   Código Edulis 2016
+   http://www.codigoedulis.es
+ </copyright>
+ <summary>
+    This implementation is based on: http://chrisriesgo.com/xamarin-forms-carousel-view-recipe/;
+    because of this, it is under Creative Common By License:
+    
+    You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+    Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+    
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+    
+    Under the following terms:
+    
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+ 
+ </summary>
+--------------------------------------------------------------------------------------------------------------------*/
+
+namespace XamarinFormsDemo.CustomControls
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
-    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     public class CarouselLayout : ScrollView
@@ -111,6 +135,11 @@
             ((CarouselLayout)bindable).UpdateSelectedIndex();
         }
 
+        private static void SelectedIndexPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            ((CarouselLayout)bindable).UpdateSelectedItem();
+        }
+
         private void ItemsSourceChanged()
         {
             this.stackLayoutContainer.Children.Clear();
@@ -132,21 +161,31 @@
             }
         }
 
-        private void ItemsSourceChanging()
-        {
-            if(ItemsSource == null)
-                return;
-            this.selectedIndex = ItemsSource.IndexOf(SelectedItem);
-        }
-
         private void UpdateSelectedIndex()
         {
-            if(SelectedItem == BindingContext)
+            if(this.SelectedIndex > -1)
             {
-                return;
+                if(this.Children != null && this.Children.Any())
+                {
+                    try
+                    {
+                        this.SelectedItem = this.Children[this.SelectedIndex].BindingContext;
+                    }
+                    catch(IndexOutOfRangeException exception)
+                    {
+                        Debug.WriteLine($"Carousel Layout Exception: Index out of range: {exception.Message}.");
+                        this.SelectedItem = null;
+                    }
+                }
+                else
+                {
+                    this.SelectedItem = null;
+                }
             }
-
-            SelectedIndex = Children.Select(c => c.BindingContext).ToList().IndexOf(SelectedItem);
+            else
+            {
+                this.SelectedItem = null;
+            }
         }
 
         private void UpdateSelectedItem()
@@ -156,11 +195,6 @@
 
         public static readonly BindableProperty SelectedIndexProperty = BindableProperty.Create
             (nameof(SelectedIndex), typeof(int), typeof(CarouselLayout), 0, BindingMode.TwoWay, null, SelectedIndexPropertyChanged);
-
-        private static void SelectedIndexPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            ((CarouselLayout)bindable).UpdateSelectedItem();
-        }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create
             (nameof(ItemsSource), typeof(IList), typeof(CarouselLayout), null, BindingMode.Default, null, OnItemsSourcePropertyChanged);

@@ -1,5 +1,5 @@
 ﻿/*--------------------------------------------------------------------------------------------------------------------
- <copyright file="ObjectBindableCollection" company="CodigoEdulis">
+ <copyright file="InfiniteListView" company="CodigoEdulis">
    Código Edulis 2016
    http://www.codigoedulis.es
  </copyright>
