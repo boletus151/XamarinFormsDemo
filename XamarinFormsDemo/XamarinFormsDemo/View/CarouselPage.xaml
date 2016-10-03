@@ -8,7 +8,7 @@
   <ContentPage.Resources>
   </ContentPage.Resources>
 
-  <Grid Margin="10">
+  <Grid Margin="0,10">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
@@ -29,7 +29,7 @@
       <controls:CarouselLayout.ItemTemplate>
         <DataTemplate>
           <Image Source="{Binding}"
-                 Aspect="Fill"></Image>
+                 Aspect="AspectFill"></Image>
         </DataTemplate>
       </controls:CarouselLayout.ItemTemplate>
     </controls:CarouselLayout>
