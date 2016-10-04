@@ -33,8 +33,6 @@ namespace XamarinFormsDemo.ViewModel
 
         private ICommand goToInfiniteScrollingViewCommand;
 
-        private ObservableCollection<string> imagesList;
-
         private ICommand onAppearingCommand;
 
         private MyColor selectedColor;
@@ -42,6 +40,8 @@ namespace XamarinFormsDemo.ViewModel
         private string selectedValue;
 
         private ICommand tryDebugCommand;
+
+        private MyColor selectedDot;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
@@ -52,20 +52,14 @@ namespace XamarinFormsDemo.ViewModel
         public MainViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
             : base(messenger, navigationService, dialogService)
         {
-            var c1 = new MyColor("White", "#FFFFFF");
-            var c2 = new MyColor("Black", "#000000");
+            var c1 = new MyColor("Pink", "#FF69B4", @"http://weknowyourdreams.com/images/pink-color/pink-color-05.jpg");
+            var c2 = new MyColor("Black", "#000000", @"http://www.color-hex.com/palettes/7449.png");
 
             this.ColorsList = new ObservableCollection<MyColor>
             {
                 c1, c2
             };
             this.SelectedColor = this.ColorsList.First();
-
-            this.ImagesList = new ObservableCollection<string>
-            {
-                @"https://www.bellevuecollege.edu/ps/Images%202/MoE-Banner-12-10.jpg",
-                @"https://content.linkedin.com/content/dam/blog/en-us/corporate/blog/2013/11/Company-Pages_Nominations-Banner.jpg.jpeg"
-            };
         }
 
         public ObservableCollection<MyColor> ColorsList
@@ -86,19 +80,6 @@ namespace XamarinFormsDemo.ViewModel
         public ICommand GoToControlTemplatePageCommand => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
 
         public ICommand GoToInfiniteScrollingViewCommand => this.goToInfiniteScrollingViewCommand ?? (this.goToInfiniteScrollingViewCommand = new RelayCommand(this.GoToInfiniteScrollingView));
-
-        public ObservableCollection<string> ImagesList
-        {
-            get
-            {
-                return this.imagesList;
-            }
-            set
-            {
-                this.imagesList = value;
-                this.RaisePropertyChanged();
-            }
-        }
 
         public ICommand OnAppearingCommand => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 
@@ -130,11 +111,16 @@ namespace XamarinFormsDemo.ViewModel
 
         public ICommand TryDebugCommand => this.tryDebugCommand ?? (this.tryDebugCommand = new RelayCommand(this.TryDebug));
 
-        public object SelectedDot
+        public MyColor SelectedDot
         {
             get
             {
-                throw new System.NotImplementedException();
+                return this.selectedDot;
+            }
+            set
+            {
+                this.selectedDot = value;
+                this.RaisePropertyChanged();
             }
         }
 
@@ -152,12 +138,11 @@ namespace XamarinFormsDemo.ViewModel
 
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
         }
-#pragma warning disable 1998
-        private async Task OnAppearing()
-#pragma warning restore 1998
-        {
-            Debug.WriteLine($"　　　 OnAppearing");
 
+        private async Task OnAppearing()
+        {
+            Debug.WriteLine("　　　 OnAppearing");
+            await Task.Delay(1);
             //await this.DialogService.ShowMessage("OnAppearing", string.Empty);
         }
 

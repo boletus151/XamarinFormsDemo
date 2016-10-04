@@ -14,9 +14,28 @@
         {
         }
 
-        public string HexadecimalValue { get; set; }
+        public MyColor(string name, string hexadecimalValue, string url) : this(name, hexadecimalValue)
+        {
+            this.ImageUrl = url;
+        }
 
-        public string Name { get; set; }
+        public string HexadecimalValue
+        {
+            get;
+            set;
+        }
+
+        public string ImageUrl
+        {
+            get;
+            set;
+        }
+
+        public string Name
+        {
+            get;
+            set;
+        }
 
         public bool Equals(MyColor other)
         {

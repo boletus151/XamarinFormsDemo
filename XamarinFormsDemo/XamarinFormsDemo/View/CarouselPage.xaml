@@ -23,13 +23,15 @@
            HorizontalOptions="Center" />
 
     <controls:CarouselLayout Grid.Row="1"
-                             ItemsSource="{Binding ImagesList}"
+                             ItemsSource="{Binding ColorsList}"
                              IndicatorStyle="Dots"
+                             SelectedItem="{Binding SelectedDot, Mode=TwoWay}"
                              x:Name="Carousel">
       <controls:CarouselLayout.ItemTemplate>
         <DataTemplate>
-          <Image Source="{Binding}"
-                 Aspect="AspectFill"></Image>
+          <ffimageloading:CachedImage Source="{Binding ImageUrl}" 
+                                      BindingContext="{Binding}"
+                                      Aspect="AspectFill" />
         </DataTemplate>
       </controls:CarouselLayout.ItemTemplate>
     </controls:CarouselLayout>
