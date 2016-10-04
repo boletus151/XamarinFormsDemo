@@ -8,7 +8,7 @@
 
             public const string ControlTemplatePage = "ControlTemplatePage";
 
-            public const string InfiniteScrollingPage = "InfiniteScrollingPage";
+            public const string InfiniteScrollingPage = "DynamicListViewScrollingPage";
 
             public const string MainPage = "MainPage";
         }

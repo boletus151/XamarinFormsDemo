@@ -2,9 +2,9 @@
 
 namespace XamarinFormsDemo.View
 {
-    public partial class InfiniteScrollingPage : ContentPage
+    public partial class DynamicListViewScrollingPage : ContentPage
     {
-        public InfiniteScrollingPage()
+        public DynamicListViewScrollingPage()
         {
             InitializeComponent();
         }

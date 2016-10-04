@@ -63,8 +63,8 @@
     <Compile Include="View\ControlTemplatePage.xaml.cs">
       <DependentUpon>ControlTemplatePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\InfiniteScrollingPage.xaml.cs">
-      <DependentUpon>InfiniteScrollingPage.xaml</DependentUpon>
+    <Compile Include="View\DynamicListViewScrollingPage.xaml.cs">
+      <DependentUpon>DynamicListViewScrollingPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -127,7 +127,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\InfiniteScrollingPage.xaml">
+    <EmbeddedResource Include="View\DynamicListViewScrollingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
