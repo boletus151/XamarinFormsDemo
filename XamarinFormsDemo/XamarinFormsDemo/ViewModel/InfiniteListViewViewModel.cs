@@ -9,40 +9,40 @@
 
     public class InfiniteListViewViewModel : ParentViewModel
     {
-        private ObservableCollection<MyColor> infiniteColorsList;
-        private ObservableCollection<MyColor> infiniteColorsList2;
+        private ObservableCollection<MyColor> colorsList;
+        private ObservableCollection<MyColor> colorsList2;
 
         public InfiniteListViewViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
             : base(messenger, navigationService, dialogService)
         {
             this.MessengerService.Register<NavigationMessage>(this, this.MessageRecieved);
-            this.InfiniteColorsList = new ObservableCollection<MyColor>();
-            this.InfiniteColorsList2 = new ObservableCollection<MyColor>();
-            this.FillListWithColors(this.InfiniteColorsList);
+            this.ColorsList = new ObservableCollection<MyColor>();
+            this.ColorsList2 = new ObservableCollection<MyColor>();
+            this.FillListWithColors(this.ColorsList);
         }
 
-        public ObservableCollection<MyColor> InfiniteColorsList
+        public ObservableCollection<MyColor> ColorsList
         {
             get
             {
-                return this.infiniteColorsList;
+                return this.colorsList;
             }
             set
             {
-                this.infiniteColorsList = value;
+                this.colorsList = value;
                 this.RaisePropertyChanged();
             }
         }
 
-        public ObservableCollection<MyColor> InfiniteColorsList2
+        public ObservableCollection<MyColor> ColorsList2
         {
             get
             {
-                return this.infiniteColorsList2;
+                return this.colorsList2;
             }
             set
             {
-                this.infiniteColorsList2 = value;
+                this.colorsList2 = value;
                 this.RaisePropertyChanged();
             }
         }
@@ -69,7 +69,7 @@
             {
                 if(message.LoadData)
                 {
-                    this.FillListWithColors(this.InfiniteColorsList2);
+                    this.FillListWithColors(this.ColorsList2);
                 }
             }
         }

@@ -30,8 +30,8 @@
                HorizontalOptions="Center"
                FontSize="15"/>
         <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
-                                         FullItemsSource="{Binding InfiniteColorsList}"
-                                         PageSize="15">
+                                         FullItemsSource="{Binding ColorsList}"
+                                         ItemsPerPage="15">
           <customControls:DynamicListView.ItemTemplate>
             <DataTemplate>
               <ViewCell BindingContext="{Binding}">
@@ -53,8 +53,8 @@
                HorizontalOptions="Center"
                FontSize="15"/>
         <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
-                                         FullItemsSource="{Binding InfiniteColorsList2}"
-                                         PageSize="15">
+                                         FullItemsSource="{Binding ColorsList2}"
+                                         ItemsPerPage="15">
           <customControls:DynamicListView.ItemTemplate>
             <DataTemplate>
               <ViewCell BindingContext="{Binding}">
