@@ -1,5 +1,5 @@
 ﻿/*--------------------------------------------------------------------------------------------------------------------
- <copyright file="InfiniteListView" company="CodigoEdulis">
+ <copyright file="DynamicListView" company="CodigoEdulis">
    Código Edulis 2016
    http://www.codigoedulis.es
  </copyright>
@@ -24,20 +24,19 @@
 
 namespace XamarinFormsDemo.CustomControls
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using Xamarin.Forms;
 
-    public class InfiniteListView<T> : ListView where T : class
+    public class DynamicListView<T> : ListView where T : class
     {
         private readonly ObservableCollection<T> observableList;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InfiniteListView{T}"/> class.
+        ///     Initializes a new instance of the <see cref="DynamicListView{T}" /> class.
         /// </summary>
-        public InfiniteListView()
+        public DynamicListView()
         {
             this.observableList = new ObservableCollection<T>();
             this.ItemsSource = this.observableList;
@@ -45,10 +44,10 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
-        /// Gets or sets the full items source.
+        ///     Gets or sets the full items source.
         /// </summary>
         /// <value>
-        /// The full items source.
+        ///     The full items source.
         /// </value>
         public IList<T> FullItemsSource
         {
@@ -63,54 +62,54 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
-        /// Gets or sets the size of the page, i.e the number of items per load.
+        ///     Gets or sets the size of the page, i.e the number of items per load.
         /// </summary>
         /// <value>
-        /// The size of the page.
+        ///     The size of the page.
         /// </value>
-        public string PageSize
+        public string ItemsPerPage
         {
             get
             {
-                return (string)this.GetValue(PageSizeProperty);
+                return (string)this.GetValue(ItemsPerPageProperty);
             }
             set
             {
-                this.SetValue(PageSizeProperty, value);
+                this.SetValue(ItemsPerPageProperty, value);
             }
         }
 
         /// <summary>
-        /// Called when [full items source changed].
+        ///     Called when [full items source changed].
         /// </summary>
         /// <param name="bindableElement">The bindable element.</param>
         /// <param name="oldvalue">The oldvalue.</param>
         /// <param name="newvalue">The newvalue.</param>
         private static void OnFullItemsSourceChanged(BindableObject bindableElement, object oldvalue, object newvalue)
         {
-            var listView = bindableElement as InfiniteListView<T>;
+            var listView = bindableElement as DynamicListView<T>;
             listView?.OnFullItemsSourceChanged(listView);
         }
 
         /// <summary>
-        /// Called when [full items source changed].
+        ///     Called when [full items source changed].
         /// </summary>
         /// <param name="listView">The list view.</param>
-        private void OnFullItemsSourceChanged(InfiniteListView<T> listView)
+        private void OnFullItemsSourceChanged(DynamicListView<T> listView)
         {
-            var numberOfItems = int.Parse(listView.PageSize);
+            var numberOfItems = int.Parse(listView.ItemsPerPage);
             if(numberOfItems <= 0)
             {
                 this.observableList.Clear();
             }
             else
             {
-                if (numberOfItems > listView.FullItemsSource.Count)
+                if(numberOfItems > listView.FullItemsSource.Count)
                 {
                     numberOfItems = listView.FullItemsSource.Count;
                 }
                 var items = listView.FullItemsSource.ToList().GetRange(0, numberOfItems);
-                foreach (var elem in items)
+                foreach(var elem in items)
                 {
                     observableList.Add(elem);
                 }
@@ -118,38 +117,38 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
-        /// Called when [item appearing].
+        ///     Called when [item appearing].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="ItemVisibilityEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="ItemVisibilityEventArgs" /> instance containing the event data.</param>
         private void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
-            var listView = sender as InfiniteListView<T>;
+            var listView = sender as DynamicListView<T>;
             if(listView?.FullItemsSource == null || (this.observableList.Count == listView.FullItemsSource.Count))
             {
                 return;
             }
 
             var indexOfItem = this.observableList.IndexOf((T)e.Item);
-            var numberOfItems = int.Parse(listView.PageSize);
+            var numberOfItems = int.Parse(listView.ItemsPerPage);
 
             if((indexOfItem > -1) && (e.Item == this.observableList.LastOrDefault()))
             {
                 var observableItemsCount = this.observableList.Count;
                 var fullItemsCount = listView.FullItemsSource.Count;
 
-                if (numberOfItems > listView.FullItemsSource.Count)
+                if(numberOfItems > listView.FullItemsSource.Count)
                 {
                     numberOfItems = listView.FullItemsSource.Count;
                 }
-                
-                if (numberOfItems > fullItemsCount - observableItemsCount)
+
+                if(numberOfItems > fullItemsCount - observableItemsCount)
                 {
                     numberOfItems = fullItemsCount - observableItemsCount;
                 }
 
                 var items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, numberOfItems);
-                foreach (var elem in items)
+                foreach(var elem in items)
                 {
                     observableList.Add(elem);
                 }
@@ -157,15 +156,17 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
-        /// The full items source property
+        ///     The full items source property
         /// </summary>
-        public static BindableProperty FullItemsSourceProperty = BindableProperty.Create(nameof(FullItemsSource),
-             typeof(IList<T>),typeof(InfiniteListView<T>),default(IList<T>),BindingMode.OneWay,null,OnFullItemsSourceChanged);
+        public static BindableProperty FullItemsSourceProperty = BindableProperty.Create
+            (
+                nameof(FullItemsSource), typeof(IList<T>), typeof(DynamicListView<T>), default(IList<T>), BindingMode.OneWay, null,
+                OnFullItemsSourceChanged);
 
         /// <summary>
-        /// The page size property
+        /// The items per page property
         /// </summary>
-        public static BindableProperty PageSizeProperty = BindableProperty.Create
-            (nameof(PageSize), typeof(string), typeof(InfiniteListView<T>), string.Empty);
+        public static BindableProperty ItemsPerPageProperty = BindableProperty.Create
+            (nameof(ItemsPerPage), typeof(string), typeof(DynamicListView<T>), string.Empty);
     }
 }

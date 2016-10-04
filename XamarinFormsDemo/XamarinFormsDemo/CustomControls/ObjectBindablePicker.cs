@@ -32,16 +32,10 @@ namespace XamarinFormsDemo.CustomControls
 
     public class ObjectBindablePicker : Picker
     {
-        #region Constructors
-
         public ObjectBindablePicker()
         {
             this.SelectedIndexChanged += this.OnSelectedIndexChanged;
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the display member. The title that user is going to see in the list
@@ -49,7 +43,11 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The display member.
         /// </value>
-        public string DisplayMember { get; set; }
+        public string DisplayMember
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     Gets or sets the items source.
@@ -57,7 +55,17 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The items source.
         /// </value>
-        public IList ItemsSource { get { return (IList)this.GetValue(ItemsSourceProperty); } set { this.SetValue(ItemsSourceProperty, value); } }
+        public IList ItemsSource
+        {
+            get
+            {
+                return (IList)this.GetValue(ItemsSourceProperty);
+            }
+            set
+            {
+                this.SetValue(ItemsSourceProperty, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the selected item.
@@ -65,7 +73,17 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The selected item.
         /// </value>
-        public object SelectedItem { get { return this.GetValue(SelectedItemProperty); } set { this.SetValue(SelectedItemProperty, value); } }
+        public object SelectedItem
+        {
+            get
+            {
+                return this.GetValue(SelectedItemProperty);
+            }
+            set
+            {
+                this.SetValue(SelectedItemProperty, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the selected value. The value of the property of your model object you want to save i.e in the View
@@ -74,7 +92,17 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The selected value.
         /// </value>
-        public object SelectedValue { get { return this.GetValue(SelectedValueProperty); } set { this.SetValue(SelectedValueProperty, value); } }
+        public object SelectedValue
+        {
+            get
+            {
+                return this.GetValue(SelectedValueProperty);
+            }
+            set
+            {
+                this.SetValue(SelectedValueProperty, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the selected value path. The Property´s Name of uour model object
@@ -84,16 +112,18 @@ namespace XamarinFormsDemo.CustomControls
         /// </value>
         public string SelectedValuePath
         {
-            get { return (string)this.GetValue(SelectedValuePathProperty); }
-            set { this.SetValue(SelectedValuePathProperty, value); }
+            get
+            {
+                return (string)this.GetValue(SelectedValuePathProperty);
+            }
+            set
+            {
+                this.SetValue(SelectedValuePathProperty, value);
+            }
         }
 
-        #endregion
-
-        #region Private Static Methods
-
         /// <summary>
-        /// Called when [items source changed].
+        ///     Called when [items source changed].
         /// </summary>
         /// <param name="bindableObject">The bindable object.</param>
         /// <param name="oldValue">The old value.</param>
@@ -127,9 +157,8 @@ namespace XamarinFormsDemo.CustomControls
                         var prop = type.GetProperty(picker.DisplayMember);
                         picker.Items.Add(prop.GetValue(item).ToString());*/
 
-                    var prop = item.GetType()
-                        .GetRuntimeProperties()
-                        .FirstOrDefault(p => string.Equals(p.Name, picker.DisplayMember, StringComparison.OrdinalIgnoreCase));
+                    var prop = item.GetType().GetRuntimeProperties().FirstOrDefault
+                        (p => string.Equals(p.Name, picker.DisplayMember, StringComparison.OrdinalIgnoreCase));
                     if(prop != null)
                     {
                         picker.Items.Add(prop.GetValue(item).ToString());
@@ -158,10 +187,6 @@ namespace XamarinFormsDemo.CustomControls
             }
         }
 
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
         ///     Called when [selected index changed].
         /// </summary>
@@ -188,17 +213,14 @@ namespace XamarinFormsDemo.CustomControls
                     return;
                 }
 
-                var prop = this.SelectedItem.GetType()
-                    .GetRuntimeProperties()
-                    .FirstOrDefault(p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
+                var prop = this.SelectedItem.GetType().GetRuntimeProperties().FirstOrDefault
+                    (p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
                 if(prop != null)
                 {
                     this.SelectedValue = prop.GetValue(this.SelectedItem);
                 }
             }
         }
-
-        #endregion
 
         public static BindableProperty ItemsSourceProperty = BindableProperty.Create
             (nameof(ItemsSource), typeof(IList), typeof(ObjectBindablePicker), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);

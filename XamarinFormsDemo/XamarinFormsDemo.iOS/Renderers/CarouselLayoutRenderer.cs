@@ -25,7 +25,7 @@ using CustomLayouts.iOS.Renderers;
 using Xamarin.Forms;
 using XamarinFormsDemo.CustomControls;
 
-[assembly: ExportRenderer(typeof(CarouselLayout), typeof(CarouselLayoutRenderer))]
+[assembly: ExportRenderer(typeof(SwipeCarousel), typeof(CarouselLayoutRenderer))]
 
 namespace CustomLayouts.iOS.Renderers
 {
@@ -64,7 +64,7 @@ namespace CustomLayouts.iOS.Renderers
 
         private void ElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == CarouselLayout.SelectedIndexProperty.PropertyName && !Dragging)
+            if(e.PropertyName == SwipeCarousel.SelectedIndexProperty.PropertyName && !Dragging)
             {
                 ScrollToSelection(false);
             }
@@ -73,7 +73,7 @@ namespace CustomLayouts.iOS.Renderers
         private void NativeScrolled(object sender, EventArgs e)
         {
             var center = _native.ContentOffset.X + (_native.Bounds.Width / 2);
-            ((CarouselLayout)Element).SelectedIndex = ((int)center) / ((int)_native.Bounds.Width);
+            ((SwipeCarousel)Element).SelectedIndex = ((int)center) / ((int)_native.Bounds.Width);
         }
 
         private void ScrollToSelection(bool animate)
@@ -83,7 +83,7 @@ namespace CustomLayouts.iOS.Renderers
 
             _native.SetContentOffset
                 (
-                    new CoreGraphics.CGPoint(_native.Bounds.Width * Math.Max(0, ((CarouselLayout)Element).SelectedIndex), _native.ContentOffset.Y),
+                    new CoreGraphics.CGPoint(_native.Bounds.Width * Math.Max(0, ((SwipeCarousel)Element).SelectedIndex), _native.ContentOffset.Y),
                     animate);
         }
     }

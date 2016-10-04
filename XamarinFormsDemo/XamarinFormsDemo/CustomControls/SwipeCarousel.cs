@@ -1,5 +1,5 @@
 ﻿/*--------------------------------------------------------------------------------------------------------------------
- <copyright file="CarouselLayout" company="CodigoEdulis">
+ <copyright file="SwipeCarousel" company="CodigoEdulis">
    Código Edulis 2016
    http://www.codigoedulis.es
  </copyright>
@@ -31,7 +31,7 @@ namespace XamarinFormsDemo.CustomControls
     using System.Linq;
     using Xamarin.Forms;
 
-    public class CarouselLayout : ScrollView
+    public class SwipeCarousel : ScrollView
     {
         public enum IndicatorStyleEnum
         {
@@ -42,24 +42,24 @@ namespace XamarinFormsDemo.CustomControls
             Tabs
         }
 
-        private readonly StackLayout stackLayoutContainer;
+        private readonly StackLayout mainContainer;
 
         private bool _layingOutChildren;
 
         private int selectedIndex;
 
-        public CarouselLayout()
+        public SwipeCarousel()
         {
             Orientation = ScrollOrientation.Horizontal;
 
-            this.stackLayoutContainer = new StackLayout
+            this.mainContainer = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal, Spacing = 0
             };
-            Content = this.stackLayoutContainer;
+            Content = this.mainContainer;
         }
 
-        public IList<View> Children => this.stackLayoutContainer.Children;
+        public IList<View> Children => this.mainContainer.Children;
 
         public IndicatorStyleEnum IndicatorStyle
         {
@@ -127,22 +127,22 @@ namespace XamarinFormsDemo.CustomControls
 
         private static void OnItemsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            ((CarouselLayout)bindable).ItemsSourceChanged();
+            ((SwipeCarousel)bindable).ItemsSourceChanged();
         }
 
         private static void OnSelectedItemPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            ((CarouselLayout)bindable).UpdateSelectedIndex();
+            ((SwipeCarousel)bindable).UpdateSelectedIndex();
         }
 
         private static void SelectedIndexPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            ((CarouselLayout)bindable).UpdateSelectedItem();
+            ((SwipeCarousel)bindable).UpdateSelectedItem();
         }
 
         private void ItemsSourceChanged()
         {
-            this.stackLayoutContainer.Children.Clear();
+            this.mainContainer.Children.Clear();
             foreach(var item in ItemsSource)
             {
                 var view = (View)ItemTemplate.CreateContent();
@@ -151,7 +151,7 @@ namespace XamarinFormsDemo.CustomControls
                 {
                     bindableObject.BindingContext = item;
                 }
-                this.stackLayoutContainer.Children.Add(view);
+                this.mainContainer.Children.Add(view);
             }
 
             if(this.selectedIndex >= 0)
@@ -194,12 +194,12 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         public static readonly BindableProperty SelectedIndexProperty = BindableProperty.Create
-            (nameof(SelectedIndex), typeof(int), typeof(CarouselLayout), 0, BindingMode.TwoWay, null, SelectedIndexPropertyChanged);
+            (nameof(SelectedIndex), typeof(int), typeof(SwipeCarousel), 0, BindingMode.TwoWay, null, SelectedIndexPropertyChanged);
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create
-            (nameof(ItemsSource), typeof(IList), typeof(CarouselLayout), null, BindingMode.Default, null, OnItemsSourcePropertyChanged);
+            (nameof(ItemsSource), typeof(IList), typeof(SwipeCarousel), null, BindingMode.Default, null, OnItemsSourcePropertyChanged);
 
         public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create
-            (nameof(SelectedItem), typeof(object), typeof(CarouselLayout), null, BindingMode.TwoWay, null, OnSelectedItemPropertyChanged);
+            (nameof(SelectedItem), typeof(object), typeof(SwipeCarousel), null, BindingMode.TwoWay, null, OnSelectedItemPropertyChanged);
     }
 }

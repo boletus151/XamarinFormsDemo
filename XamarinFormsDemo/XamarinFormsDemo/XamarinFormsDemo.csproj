@@ -40,11 +40,11 @@
     </Compile>
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Converters\HexadecimalToColorConverter.cs" />
-    <Compile Include="CustomControls\CarouselLayout.cs" />
-    <Compile Include="CustomControls\InfiniteListView.cs" />
-    <Compile Include="CustomControls\ObjectBindableCollection.cs" />
+    <Compile Include="CustomControls\SwipeCarousel.cs" />
+    <Compile Include="CustomControls\DynamicListView.cs" />
+    <Compile Include="CustomControls\ObjectBindableNotifierPicker.cs" />
     <Compile Include="CustomControls\ObjectBindablePicker.cs" />
-    <Compile Include="CustomControls\PagerIndicatorDots.cs" />
+    <Compile Include="CustomControls\PageIndicator.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

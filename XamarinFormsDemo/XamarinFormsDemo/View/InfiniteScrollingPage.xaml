@@ -29,10 +29,10 @@
                VerticalOptions="Center"
                HorizontalOptions="Center"
                FontSize="15"/>
-        <customControls:InfiniteListView x:TypeArguments="myModel:MyColor"
+        <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
                                          FullItemsSource="{Binding InfiniteColorsList}"
                                          PageSize="15">
-          <customControls:InfiniteListView.ItemTemplate>
+          <customControls:DynamicListView.ItemTemplate>
             <DataTemplate>
               <ViewCell BindingContext="{Binding}">
                 <StackLayout Orientation="Horizontal"
@@ -43,8 +43,8 @@
                 </StackLayout>
               </ViewCell>
             </DataTemplate>
-          </customControls:InfiniteListView.ItemTemplate>
-        </customControls:InfiniteListView>
+          </customControls:DynamicListView.ItemTemplate>
+        </customControls:DynamicListView>
       </StackLayout>    
       
       <StackLayout Grid.Row="1" Padding="10">
@@ -52,10 +52,10 @@
                VerticalOptions="Center"
                HorizontalOptions="Center"
                FontSize="15"/>
-        <customControls:InfiniteListView x:TypeArguments="myModel:MyColor"
+        <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
                                          FullItemsSource="{Binding InfiniteColorsList2}"
                                          PageSize="15">
-          <customControls:InfiniteListView.ItemTemplate>
+          <customControls:DynamicListView.ItemTemplate>
             <DataTemplate>
               <ViewCell BindingContext="{Binding}">
                 <StackLayout Orientation="Horizontal"
@@ -66,8 +66,8 @@
                 </StackLayout>
               </ViewCell>
             </DataTemplate>
-          </customControls:InfiniteListView.ItemTemplate>
-        </customControls:InfiniteListView>
+          </customControls:DynamicListView.ItemTemplate>
+        </customControls:DynamicListView>
       </StackLayout>    
     </Grid>
   </StackLayout>  

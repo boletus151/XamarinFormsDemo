@@ -36,10 +36,10 @@
 
     <Label Grid.Row="2"
            Text="This control works if you are loading data with behaviors in OnAppearing event because it implements NotificationEvents for Collection"></Label>
-    <controls:ObjectBindableCollection Grid.Row="3"
+    <controls:ObjectBindableNotifierPicker Grid.Row="3"
                                        ItemsSource="{Binding ColorsList}"
                                        DisplayMember="Name"
-                                       SelectedItem="{Binding SelectedColor, Mode=TwoWay}"></controls:ObjectBindableCollection>
+                                       SelectedItem="{Binding SelectedColor, Mode=TwoWay}"></controls:ObjectBindableNotifierPicker>
     <Button Grid.Row="4"
             Command="{Binding TryDebugCommand}"
             Text="Try Debug" />

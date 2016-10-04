@@ -1,5 +1,5 @@
 ﻿/*--------------------------------------------------------------------------------------------------------------------
-<copyright file="ObjectBindableCollection" company="CodigoEdulis">
+<copyright file="ObjectBindableNotifierPicker" company="CodigoEdulis">
    Código Edulis 2016
    http://www.codigoedulis.es
  </copyright>
@@ -31,18 +31,12 @@ namespace XamarinFormsDemo.CustomControls
     using System.Reflection;
     using Xamarin.Forms;
 
-    public class ObjectBindableCollection : Picker
+    public class ObjectBindableNotifierPicker : Picker
     {
-        #region Constructors
-
-        public ObjectBindableCollection()
+        public ObjectBindableNotifierPicker()
         {
             this.SelectedIndexChanged += this.OnSelectedIndexChanged;
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the display member. The title that user is going to see in the list
@@ -50,7 +44,11 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The display member.
         /// </value>
-        public string DisplayMember { get; set; }
+        public string DisplayMember
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     Gets or sets the items source.
@@ -58,7 +56,17 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The items source.
         /// </value>
-        public IList ItemsSource { get { return (IList)this.GetValue(ItemsSourceProperty); } set { this.SetValue(ItemsSourceProperty, value); } }
+        public IList ItemsSource
+        {
+            get
+            {
+                return (IList)this.GetValue(ItemsSourceProperty);
+            }
+            set
+            {
+                this.SetValue(ItemsSourceProperty, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the selected item.
@@ -66,7 +74,17 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The selected item.
         /// </value>
-        public object SelectedItem { get { return this.GetValue(SelectedItemProperty); } set { this.SetValue(SelectedItemProperty, value); } }
+        public object SelectedItem
+        {
+            get
+            {
+                return this.GetValue(SelectedItemProperty);
+            }
+            set
+            {
+                this.SetValue(SelectedItemProperty, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the selected value. The value of the property of your model object you want to save i.e in the View
@@ -75,7 +93,17 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The selected value.
         /// </value>
-        public object SelectedValue { get { return this.GetValue(SelectedValueProperty); } set { this.SetValue(SelectedValueProperty, value); } }
+        public object SelectedValue
+        {
+            get
+            {
+                return this.GetValue(SelectedValueProperty);
+            }
+            set
+            {
+                this.SetValue(SelectedValueProperty, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the selected value path. The Property´s Name of uour model object
@@ -85,15 +113,17 @@ namespace XamarinFormsDemo.CustomControls
         /// </value>
         public string SelectedValuePath
         {
-            get { return (string)this.GetValue(SelectedValuePathProperty); }
-            set { this.SetValue(SelectedValuePathProperty, value); }
+            get
+            {
+                return (string)this.GetValue(SelectedValuePathProperty);
+            }
+            set
+            {
+                this.SetValue(SelectedValuePathProperty, value);
+            }
         }
 
-        #endregion
-
-        #region Private Static Methods
-
-        private static NotifyCollectionChangedEventHandler NotifyCollectionOnCollectionChanged(ObjectBindableCollection picker)
+        private static NotifyCollectionChangedEventHandler NotifyCollectionOnCollectionChanged(ObjectBindableNotifierPicker picker)
         {
             return (sender, args) =>
             {
@@ -127,7 +157,7 @@ namespace XamarinFormsDemo.CustomControls
         /// <param name="newvalue">The new value.</param>
         private static void OnItemsSourceChanged(BindableObject bindableObject, object oldvalue, object newvalue)
         {
-            var picker = bindableObject as ObjectBindableCollection;
+            var picker = bindableObject as ObjectBindableNotifierPicker;
 
             if(picker == null)
             {
@@ -157,7 +187,7 @@ namespace XamarinFormsDemo.CustomControls
         /// <param name="newvalue">The newvalue.</param>
         private static void OnSelectedItemChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            var picker = bindable as ObjectBindableCollection;
+            var picker = bindable as ObjectBindableNotifierPicker;
 
             if(picker?.ItemsSource == null)
             {
@@ -168,10 +198,6 @@ namespace XamarinFormsDemo.CustomControls
                 picker.SelectedIndex = picker.ItemsSource.IndexOf(picker.SelectedItem);
             }
         }
-
-        #endregion
-
-        #region Private Methods
 
         /// <summary>
         ///     Called when [selected index changed].
@@ -186,7 +212,7 @@ namespace XamarinFormsDemo.CustomControls
             }
             else
             {
-                var picker = sender as ObjectBindableCollection;
+                var picker = sender as ObjectBindableNotifierPicker;
                 if(picker == null)
                 {
                     return;
@@ -199,9 +225,8 @@ namespace XamarinFormsDemo.CustomControls
                     return;
                 }
 
-                var prop = this.SelectedItem.GetType()
-                    .GetRuntimeProperties()
-                    .FirstOrDefault(p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
+                var prop = this.SelectedItem.GetType().GetRuntimeProperties().FirstOrDefault
+                    (p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
                 if(prop != null)
                 {
                     this.SelectedValue = prop.GetValue(this.SelectedItem);
@@ -224,9 +249,8 @@ namespace XamarinFormsDemo.CustomControls
                     var prop = type.GetProperty(picker.DisplayMember);
                     picker.Items.Add(prop.GetValue(item).ToString());*/
 
-                    var prop = item.GetType()
-                        .GetRuntimeProperties()
-                        .FirstOrDefault(p => string.Equals(p.Name, this.DisplayMember, StringComparison.OrdinalIgnoreCase));
+                    var prop = item.GetType().GetRuntimeProperties().FirstOrDefault
+                        (p => string.Equals(p.Name, this.DisplayMember, StringComparison.OrdinalIgnoreCase));
                     if(prop != null)
                     {
                         this.Items.Add(prop.GetValue(item).ToString());
@@ -235,18 +259,16 @@ namespace XamarinFormsDemo.CustomControls
             }
         }
 
-        #endregion
-
         public static BindableProperty ItemsSourceProperty = BindableProperty.Create
-            (nameof(ItemsSource), typeof(IList), typeof(ObjectBindableCollection), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
+            (nameof(ItemsSource), typeof(IList), typeof(ObjectBindableNotifierPicker), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
 
         public static BindableProperty SelectedItemProperty = BindableProperty.Create
-            (nameof(SelectedItem), typeof(object), typeof(ObjectBindableCollection), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
+            (nameof(SelectedItem), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
 
         public static BindableProperty SelectedValueProperty = BindableProperty.Create
-            (nameof(SelectedValueProperty), typeof(object), typeof(ObjectBindableCollection), default(object), BindingMode.TwoWay);
+            (nameof(SelectedValueProperty), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay);
 
         public static BindableProperty SelectedValuePathProperty = BindableProperty.Create
-            (nameof(SelectedValuePathProperty), typeof(string), typeof(ObjectBindableCollection), string.Empty);
+            (nameof(SelectedValuePathProperty), typeof(string), typeof(ObjectBindableNotifierPicker), string.Empty);
     }
 }

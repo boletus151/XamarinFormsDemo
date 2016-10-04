@@ -18,28 +18,28 @@
     </Grid.ColumnDefinitions>
 
     <Label Grid.Row="0"
-           Text="Carousel Example"
+           Text="swipeCarousel Example"
            VerticalOptions="Center"
            HorizontalOptions="Center" />
 
-    <controls:CarouselLayout Grid.Row="1"
+    <controls:SwipeCarousel Grid.Row="1"
                              ItemsSource="{Binding ColorsList}"
                              IndicatorStyle="Dots"
                              SelectedItem="{Binding SelectedDot, Mode=TwoWay}"
-                             x:Name="Carousel">
-      <controls:CarouselLayout.ItemTemplate>
+                             x:Name="swipeCarousel">
+      <controls:SwipeCarousel.ItemTemplate>
         <DataTemplate>
           <ffimageloading:CachedImage Source="{Binding ImageUrl}" 
                                       BindingContext="{Binding}"
                                       Aspect="AspectFill" />
         </DataTemplate>
-      </controls:CarouselLayout.ItemTemplate>
-    </controls:CarouselLayout>
-    <controls:PagerIndicatorDots Grid.Row="1"
+      </controls:SwipeCarousel.ItemTemplate>
+    </controls:SwipeCarousel>
+    <controls:PageIndicator Grid.Row="1"
                                  DotColor="Red"
                                  DotSize="20"
-                                 ItemsSource="{Binding Source={x:Reference Carousel}, Path=ItemsSource}"
-                                 SelectedItem="{Binding Source={x:Reference Carousel}, Path=SelectedItem}"></controls:PagerIndicatorDots>
+                                 ItemsSource="{Binding Source={x:Reference swipeCarousel}, Path=ItemsSource}"
+                                 SelectedItem="{Binding Source={x:Reference swipeCarousel}, Path=SelectedItem}"></controls:PageIndicator>
   </Grid>
 
 

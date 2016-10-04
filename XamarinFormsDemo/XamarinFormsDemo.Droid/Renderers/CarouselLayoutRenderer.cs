@@ -26,7 +26,7 @@ using Xamarin.Forms;
 using XamarinFormsDemo.CustomControls;
 using XamarinFormsDemo.Droid.Renderers;
 
-[assembly: ExportRenderer(typeof(CarouselLayout), typeof(CarouselLayoutRenderer))]
+[assembly: ExportRenderer(typeof(SwipeCarousel), typeof(CarouselLayoutRenderer))]
 
 namespace XamarinFormsDemo.Droid.Renderers
 {
@@ -63,7 +63,7 @@ namespace XamarinFormsDemo.Droid.Renderers
                 return;
             }
             this._initialized = true;
-            var carouselLayout = (CarouselLayout)this.Element;
+            var carouselLayout = (SwipeCarousel)this.Element;
             this._scrollView.ScrollTo(carouselLayout.SelectedIndex * this.Width, 0);
         }
 
@@ -108,9 +108,9 @@ namespace XamarinFormsDemo.Droid.Renderers
                 this._scrollView.HorizontalScrollBarEnabled = false;
                 this._scrollView.Touch += this.HScrollViewTouch;
             }
-            if(e.PropertyName == CarouselLayout.SelectedIndexProperty.PropertyName && !this._motionDown)
+            if(e.PropertyName == SwipeCarousel.SelectedIndexProperty.PropertyName && !this._motionDown)
             {
-                this.ScrollToIndex(((CarouselLayout)this.Element).SelectedIndex);
+                this.ScrollToIndex(((SwipeCarousel)this.Element).SelectedIndex);
             }
         }
 
@@ -166,7 +166,7 @@ namespace XamarinFormsDemo.Droid.Renderers
         private void UpdateSelectedIndex()
         {
             var center = this._scrollView.ScrollX + (this._scrollView.Width / 2);
-            var carouselLayout = (CarouselLayout)this.Element;
+            var carouselLayout = (SwipeCarousel)this.Element;
             carouselLayout.SelectedIndex = (center / this._scrollView.Width);
         }
     }

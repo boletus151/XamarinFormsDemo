@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XamarinFormsDemo.Converters
+﻿namespace XamarinFormsDemo.Converters
 {
+    using System;
     using System.Globalization;
-    using Model;
     using Xamarin.Forms;
 
     public class HexadecimalToColorConverter : IValueConverter

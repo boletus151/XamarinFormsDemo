@@ -29,18 +29,9 @@ namespace XamarinFormsDemo.CustomControls
     using System.Linq;
     using Xamarin.Forms;
 
-    public interface ITabProvider
+    public class PageIndicator : StackLayout
     {
-        string ImageSource
-        {
-            get;
-            set;
-        }
-    }
-
-    public class PagerIndicatorDots : StackLayout
-    {
-        public PagerIndicatorDots()
+        public PageIndicator()
         {
             this.HorizontalOptions = LayoutOptions.CenterAndExpand;
             this.VerticalOptions = LayoutOptions.End;
@@ -86,7 +77,7 @@ namespace XamarinFormsDemo.CustomControls
 
         private static void ItemsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            ((PagerIndicatorDots)bindable).ItemsSourceChanged();
+            ((PageIndicator)bindable).ItemsSourceChanged();
         }
 
         private static void SelectDot(Button dot)
@@ -96,7 +87,7 @@ namespace XamarinFormsDemo.CustomControls
 
         private static void SelectedItemPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            ((PagerIndicatorDots)bindable).SelectedItemChanged();
+            ((PageIndicator)bindable).SelectedItemChanged();
         }
 
         private static void UnselectDot(Button dot)
@@ -109,10 +100,7 @@ namespace XamarinFormsDemo.CustomControls
             //Make one button and add it to the dotLayout
             var dot = new Button
             {
-                BorderRadius = Convert.ToInt32(DotSize/2),
-                HeightRequest = DotSize,
-                WidthRequest = DotSize,
-                BackgroundColor = DotColor
+                BorderRadius = Convert.ToInt32(DotSize / 2), HeightRequest = DotSize, WidthRequest = DotSize, BackgroundColor = DotColor
             };
             this.Children.Add(dot);
         }
@@ -141,7 +129,7 @@ namespace XamarinFormsDemo.CustomControls
                 }
             }
         }
-        
+
         private void SelectedItemChanged()
         {
             var selectedIndex = this.ItemsSource.IndexOf(this.SelectedItem);
@@ -159,9 +147,9 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         public static BindableProperty ItemsSourceProperty = BindableProperty.Create
-            (nameof(ItemsSource), typeof(IList), typeof(PagerIndicatorDots), null, BindingMode.OneWay, null, ItemsSourcePropertyChanged);
+            (nameof(ItemsSource), typeof(IList), typeof(PageIndicator), null, BindingMode.OneWay, null, ItemsSourcePropertyChanged);
 
         public static BindableProperty SelectedItemProperty = BindableProperty.Create
-            (nameof(SelectedItem), typeof(object), typeof(PagerIndicatorDots), null, BindingMode.TwoWay, null, SelectedItemPropertyChanged);
+            (nameof(SelectedItem), typeof(object), typeof(PageIndicator), null, BindingMode.TwoWay, null, SelectedItemPropertyChanged);
     }
 }
