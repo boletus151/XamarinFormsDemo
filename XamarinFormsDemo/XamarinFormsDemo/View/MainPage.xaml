@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinFormsDemo.MainPage"
+             xmlns:b="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
+             BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
+  <b:Interaction.Behaviors>
+    <b:BehaviorCollection>
+      <b:EventToCommand
+        EventName="Appearing"
+        Command="{Binding OnAppearingCommand}"/>
+    </b:BehaviorCollection>
+  </b:Interaction.Behaviors>
+
+  <StackLayout>
+    <Label Text="Xamarin Forms Demo App"
+           Style="{StaticResource HeaderTitleStyle}"
+           Margin="0,10"/>
+    <Grid HorizontalOptions="Center"
+          VerticalOptions="Center">
+      <Grid.RowDefinitions>
+        <RowDefinition></RowDefinition>
+        <RowDefinition></RowDefinition>
+        <RowDefinition></RowDefinition>
+        <RowDefinition></RowDefinition>
+        <RowDefinition></RowDefinition>
+      </Grid.RowDefinitions>
+
+      
+      <Button Grid.Row="0"
+              Text="OnAppearing Event writes log on output."
+              IsEnabled="False"/>
+      <Button Grid.Row="1"
+              Command="{Binding GoToControlTemplatePageCommand}"
+              Text="Go to Control Template Example" />
+      <Button Grid.Row="2"
+              Command="{Binding GoToObjectBindablePickerViewCommand}"
+              Text="Go to Object Bindable Picker Example" />
+      <Button Grid.Row="3"
+              Command="{Binding GoToInfiniteScrollingViewCommand}"
+              Text="Go to Infinite Scrolling Example" />
+      <Button Grid.Row="4"
+              Command="{Binding GoToCarouselViewCommand}"
+              Text="Go to Carousel Example" />
+    </Grid>
+  </StackLayout>
+
+</ContentPage>

@@ -21,70 +21,71 @@
  
  </summary>
 --------------------------------------------------------------------------------------------------------------------*/
-using CustomLayouts.iOS.Renderers;
+
 using Xamarin.Forms;
 using XamarinFormsDemo.CustomControls;
+using XamarinFormsDemo.iOS.Renderers;
 
 [assembly: ExportRenderer(typeof(SwipeCarousel), typeof(CarouselLayoutRenderer))]
 
-namespace CustomLayouts.iOS.Renderers
+namespace XamarinFormsDemo.iOS.Renderers
 {
     using System;
     using System.ComponentModel;
     using UIKit;
     using Xamarin.Forms.Platform.iOS;
+    using CustomControls;
 
     public class CarouselLayoutRenderer : ScrollViewRenderer
     {
-        private UIScrollView _native;
+        UIScrollView _native;
 
         public CarouselLayoutRenderer()
         {
-            PagingEnabled = true;
-            ShowsHorizontalScrollIndicator = false;
-        }
-
-        public override void Draw(CoreGraphics.CGRect rect)
-        {
-            base.Draw(rect);
-            ScrollToSelection(false);
+            this.PagingEnabled = true;
+            this.ShowsHorizontalScrollIndicator = false;
         }
 
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
             base.OnElementChanged(e);
 
-            if(e.OldElement != null)
-                return;
+            if (e.OldElement != null) return;
 
-            _native = (UIScrollView)NativeView;
-            _native.Scrolled += NativeScrolled;
+            this._native = (UIScrollView)this.NativeView;
+            this._native.Scrolled += this.NativeScrolled;
             e.NewElement.PropertyChanged += ElementPropertyChanged;
         }
 
-        private void ElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        void NativeScrolled(object sender, EventArgs e)
         {
-            if(e.PropertyName == SwipeCarousel.SelectedIndexProperty.PropertyName && !Dragging)
+            var center = this._native.ContentOffset.X + (this._native.Bounds.Width / 2);
+            ((XamarinFormsDemo.CustomControls.SwipeCarousel)this.Element).SelectedIndex = ((int)center) / ((int)this._native.Bounds.Width);
+        }
+
+        void ElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == SwipeCarousel.SelectedIndexProperty.PropertyName && !this.Dragging)
             {
-                ScrollToSelection(false);
+                this.ScrollToSelection(false);
             }
         }
 
-        private void NativeScrolled(object sender, EventArgs e)
+        void ScrollToSelection(bool animate)
         {
-            var center = _native.ContentOffset.X + (_native.Bounds.Width / 2);
-            ((SwipeCarousel)Element).SelectedIndex = ((int)center) / ((int)_native.Bounds.Width);
+            if (this.Element == null) return;
+
+            this._native.SetContentOffset(new CoreGraphics.CGPoint
+                (this._native.Bounds.Width *
+                    Math.Max(0, ((SwipeCarousel)this.Element).SelectedIndex),
+                    this._native.ContentOffset.Y),
+                animate);
         }
 
-        private void ScrollToSelection(bool animate)
+        public override void Draw(CoreGraphics.CGRect rect)
         {
-            if(Element == null)
-                return;
-
-            _native.SetContentOffset
-                (
-                    new CoreGraphics.CGPoint(_native.Bounds.Width * Math.Max(0, ((SwipeCarousel)Element).SelectedIndex), _native.ContentOffset.Y),
-                    animate);
+            base.Draw(rect);
+            this.ScrollToSelection(false);
         }
     }
 }

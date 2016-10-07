@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Xamarin_Forms_Demo.Xamarin_Forms_Demo" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="XamarinFormsDemo.XamarinFormsDemo" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:label="$safeprojectname$"></application>
+	<application android:label="XamarinFormsDemo"></application>
 </manifest>

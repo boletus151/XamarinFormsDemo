@@ -4,6 +4,8 @@
     {
         public static class NavigationPages
         {
+            public const string ObjectBindablePickerPage = "ObjectBindablePickerPage";
+
             public const string CarouselPage = "CarouselPage";
 
             public const string ControlTemplatePage = "ControlTemplatePage";

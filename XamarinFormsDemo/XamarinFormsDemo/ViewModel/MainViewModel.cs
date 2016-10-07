@@ -33,15 +33,15 @@ namespace XamarinFormsDemo.ViewModel
 
         private ICommand goToInfiniteScrollingViewCommand;
 
+        private ICommand goToObjectBindablePickerViewCommand;
+
         private ICommand onAppearingCommand;
 
         private MyColor selectedColor;
 
-        private string selectedValue;
-
-        private ICommand tryDebugCommand;
-
         private MyColor selectedDot;
+
+        private string selectedValue;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
@@ -75,13 +75,22 @@ namespace XamarinFormsDemo.ViewModel
             }
         }
 
-        public ICommand GoToCarouselViewCommand => this.goToCarouselViewCommand ?? (this.goToCarouselViewCommand = new RelayCommand(this.GoToCarouselView));
+        public ICommand GoToCarouselViewCommand
+            => this.goToCarouselViewCommand ?? (this.goToCarouselViewCommand = new RelayCommand(this.GoToCarouselView));
 
-        public ICommand GoToControlTemplatePageCommand => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
+        public ICommand GoToControlTemplatePageCommand
+            => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
 
-        public ICommand GoToInfiniteScrollingViewCommand => this.goToInfiniteScrollingViewCommand ?? (this.goToInfiniteScrollingViewCommand = new RelayCommand(this.GoToInfiniteScrollingView));
+        public ICommand GoToInfiniteScrollingViewCommand
+            => this.goToInfiniteScrollingViewCommand ?? (this.goToInfiniteScrollingViewCommand = new RelayCommand(this.GoToInfiniteScrollingView));
 
-        public ICommand OnAppearingCommand => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
+        public object GoToObjectBindablePickerViewCommand
+            =>
+                this.goToObjectBindablePickerViewCommand ??
+                    (this.goToObjectBindablePickerViewCommand = new RelayCommand(this.GoToObjectBindablePickerView));
+
+        public ICommand OnAppearingCommand
+            => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 
         public MyColor SelectedColor
         {
@@ -92,6 +101,19 @@ namespace XamarinFormsDemo.ViewModel
             set
             {
                 this.selectedColor = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public MyColor SelectedDot
+        {
+            get
+            {
+                return this.selectedDot;
+            }
+            set
+            {
+                this.selectedDot = value;
                 this.RaisePropertyChanged();
             }
         }
@@ -109,21 +131,6 @@ namespace XamarinFormsDemo.ViewModel
             }
         }
 
-        public ICommand TryDebugCommand => this.tryDebugCommand ?? (this.tryDebugCommand = new RelayCommand(this.TryDebug));
-
-        public MyColor SelectedDot
-        {
-            get
-            {
-                return this.selectedDot;
-            }
-            set
-            {
-                this.selectedDot = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
         private void GoToCarouselView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
 
         private void GoToControlTemplatePage()
@@ -134,9 +141,14 @@ namespace XamarinFormsDemo.ViewModel
         private void GoToInfiniteScrollingView()
         {
             var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(MainViewModel).Name, true);
-            MessengerService.Send<NavigationMessage, InfiniteListViewViewModel>(message);
+            MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
 
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
+        }
+
+        private void GoToObjectBindablePickerView()
+        {
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
         }
 
         private async Task OnAppearing()
@@ -144,11 +156,6 @@ namespace XamarinFormsDemo.ViewModel
             Debug.WriteLine("　　　 OnAppearing");
             await Task.Delay(1);
             //await this.DialogService.ShowMessage("OnAppearing", string.Empty);
-        }
-
-        private void TryDebug()
-        {
-            Debug.WriteLine($"　　　The Selected Item is: {this.SelectedColor}");
         }
     }
 }

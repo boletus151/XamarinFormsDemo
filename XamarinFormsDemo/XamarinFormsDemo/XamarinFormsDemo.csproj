@@ -45,7 +45,7 @@
     <Compile Include="CustomControls\ObjectBindableNotifierPicker.cs" />
     <Compile Include="CustomControls\ObjectBindablePicker.cs" />
     <Compile Include="CustomControls\PageIndicator.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\MyColor.cs" />
@@ -53,7 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\ExtendedNavigationService.cs" />
-    <Compile Include="ViewModel\InfiniteListViewViewModel.cs" />
+    <Compile Include="ViewModel\DynamicListViewScrollingViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ParentViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -66,9 +66,12 @@
     <Compile Include="View\DynamicListViewScrollingPage.xaml.cs">
       <DependentUpon>DynamicListViewScrollingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ObjectBindablePickerPage.xaml.cs">
+      <DependentUpon>ObjectBindablePickerPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainPage.xaml">
+    <EmbeddedResource Include="View\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -140,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\CarouselPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\ObjectBindablePickerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

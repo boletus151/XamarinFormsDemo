@@ -36,23 +36,12 @@ namespace XamarinFormsDemo.ViewModel
             SetLocatorProvider();
         }
 
+        public DynamicListViewScrollingViewModel DynamicList => ServiceLocator.Current.GetInstance<DynamicListViewScrollingViewModel>();
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
-
-        public InfiniteListViewViewModel InfiniteList => ServiceLocator.Current.GetInstance<InfiniteListViewViewModel>();
 
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
-        }
-
-        public static void SetLocatorProvider()
-        {
-            if (!ServiceLocator.IsLocationProviderSet)
-            {
-                ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-                RegisterInIocContainer();
-            }
-
         }
 
         public static ExtendedNavigationService ConfigureNavigationPages()
@@ -63,6 +52,7 @@ namespace XamarinFormsDemo.ViewModel
             nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
             nav.Configure(AppConstants.NavigationPages.InfiniteScrollingPage, typeof(DynamicListViewScrollingPage));
             nav.Configure(AppConstants.NavigationPages.CarouselPage, typeof(CarouselPage));
+            nav.Configure(AppConstants.NavigationPages.ObjectBindablePickerPage, typeof(ObjectBindablePickerPage));
 
             return nav;
         }
@@ -72,11 +62,20 @@ namespace XamarinFormsDemo.ViewModel
             SimpleIoc.Default.Register<IMessenger, Messenger>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             var nav = ConfigureNavigationPages();
-            SimpleIoc.Default.Register<INavigationService>(()=>nav);
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
 
             SimpleIoc.Default.Register<ParentViewModel>(true);
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<InfiniteListViewViewModel>(true);
+            SimpleIoc.Default.Register<DynamicListViewScrollingViewModel>(true);
+        }
+
+        public static void SetLocatorProvider()
+        {
+            if(!ServiceLocator.IsLocationProviderSet)
+            {
+                ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+                RegisterInIocContainer();
+            }
         }
     }
 }

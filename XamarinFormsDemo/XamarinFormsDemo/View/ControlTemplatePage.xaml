@@ -1,36 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinFormsDemo.View.ControlTemplatePage"
              xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
              BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
-  <ContentPage.Resources>
-    <ResourceDictionary>
+    <ContentPage.Resources>
+        <ResourceDictionary>
 
-      <ControlTemplate x:Key="MyControlTemplate">
-        <StackLayout>
-          <ContentPresenter />
-          <StackLayout Padding="10,30,10,0">
-            <Label Text="Este es el contenido que queremos que cambie, nuestra ControlTemplate"></Label>
-            <controls:ObjectBindablePicker ItemsSource="{TemplateBinding BindingContext.ColorsList}"
-                                           DisplayMember="Name"
-                                           SelectedValue="{TemplateBinding BindingContext.SelectedValue}"
-                                           SelectedValuePath="Name"
-                                           SelectedItem="{TemplateBinding BindingContext.SelectedColor, Mode=TwoWay}"></controls:ObjectBindablePicker>
-          </StackLayout>
+            <ControlTemplate x:Key="MyControlTemplate">
+                <StackLayout>
+                    <ContentPresenter />
+                    <StackLayout Padding="10,30,10,0">
+                        <Label Text="Este es el contenido que queremos que cambie, nuestra ControlTemplate" />
+                        <controls:ObjectBindablePicker ItemsSource="{TemplateBinding BindingContext.ColorsList}"
+                                                       DisplayMember="Name"
+                                                       SelectedValue="{TemplateBinding BindingContext.SelectedValue}"
+                                                       SelectedValuePath="Name"
+                                                       SelectedItem="{TemplateBinding BindingContext.SelectedColor, Mode=TwoWay}" />
+                    </StackLayout>
+                </StackLayout>
+            </ControlTemplate>
+
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentView ControlTemplate="{StaticResource MyControlTemplate}"
+                 BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
+        <StackLayout
+            Margin="0,10">
+            <Label Text="Este es el elemento que permanecerá fijo siempre" />
+            <Button Text="Cambiar Template de la lista" Clicked="Button_OnClicked" />
         </StackLayout>
-      </ControlTemplate>
-
-
-    </ResourceDictionary>
-  </ContentPage.Resources>
-
-  <ContentView ControlTemplate="{StaticResource MyControlTemplate}"
-               BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
-    <StackLayout>
-      <Label Text="Este es el elemento que permanecerá fijo siempre"></Label>
-      <Button Text="Cambiar Template de la lista" Clicked="Button_OnClicked"></Button>
-    </StackLayout>
-  </ContentView>
+    </ContentView>
 
 </ContentPage>

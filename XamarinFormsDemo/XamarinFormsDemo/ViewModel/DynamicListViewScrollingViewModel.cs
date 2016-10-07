@@ -7,12 +7,13 @@
     using GalaSoft.MvvmLight.Views;
     using Model;
 
-    public class InfiniteListViewViewModel : ParentViewModel
+    public class DynamicListViewScrollingViewModel : ParentViewModel
     {
         private ObservableCollection<MyColor> colorsList;
+
         private ObservableCollection<MyColor> colorsList2;
 
-        public InfiniteListViewViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
+        public DynamicListViewScrollingViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
             : base(messenger, navigationService, dialogService)
         {
             this.MessengerService.Register<NavigationMessage>(this, this.MessageRecieved);
@@ -55,8 +56,7 @@
                 var hexadecimalColor = random.Next(100000, 999999);
                 var color = new MyColor
                 {
-                    HexadecimalValue = $"#{hexadecimalColor}",
-                    Name = i.ToString()
+                    HexadecimalValue = $"#{hexadecimalColor}", Name = i.ToString()
                 };
                 list.Add(color);
             }

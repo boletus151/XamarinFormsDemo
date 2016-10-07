@@ -1,76 +1,67 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:customControls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
              xmlns:myModel="clr-namespace:XamarinFormsDemo.Model;assembly=XamarinFormsDemo"
              x:Class="XamarinFormsDemo.View.DynamicListViewScrollingPage"
-             BindingContext="{Binding Source={StaticResource Locator}, Path=InfiniteList}">
+             BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicList}">
 
-  <StackLayout>
-    <Label Text="Infinite srolling list"
-           VerticalOptions="Center"
-           HorizontalOptions="Center"
-           FontSize="15"/>
+    <StackLayout>
+        <Label Text="Dynamic Listview Scrolling Example"
+               Style="{StaticResource MainTitleStyle}"
+               Margin="0,10" />
 
-    <Label Text="My Colors List"
-           VerticalOptions="Center"
-           HorizontalOptions="Center"
-           FontSize="20" 
-           FontAttributes="Bold"/>
+        <Label Text="My Colors List"
+               Style="{StaticResource MainTitleStyle}" />
 
-    <Grid>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="50*"></RowDefinition>
-        <RowDefinition Height="50*"></RowDefinition>
-      </Grid.RowDefinitions>
-      
-      <StackLayout Grid.Row="0" Padding="10">
-        <Label Text="My color list loaded from constructor"
-               VerticalOptions="Center"
-               HorizontalOptions="Center"
-               FontSize="15"/>
-        <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
-                                         FullItemsSource="{Binding ColorsList}"
-                                         ItemsPerPage="15">
-          <customControls:DynamicListView.ItemTemplate>
-            <DataTemplate>
-              <ViewCell BindingContext="{Binding}">
-                <StackLayout Orientation="Horizontal"
-                             Padding="5">
-                  <Label Text="{Binding HexadecimalValue}" />
-                  <Label Text="{Binding Name}"
-                         TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />
-                </StackLayout>
-              </ViewCell>
-            </DataTemplate>
-          </customControls:DynamicListView.ItemTemplate>
-        </customControls:DynamicListView>
-      </StackLayout>    
-      
-      <StackLayout Grid.Row="1" Padding="10">
-        <Label Text="My color list loaded with navigation message"
-               VerticalOptions="Center"
-               HorizontalOptions="Center"
-               FontSize="15"/>
-        <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
-                                         FullItemsSource="{Binding ColorsList2}"
-                                         ItemsPerPage="15">
-          <customControls:DynamicListView.ItemTemplate>
-            <DataTemplate>
-              <ViewCell BindingContext="{Binding}">
-                <StackLayout Orientation="Horizontal"
-                             Padding="5">
-                  <Label Text="{Binding HexadecimalValue}" />
-                  <Label Text="{Binding Name}"
-                         TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />
-                </StackLayout>
-              </ViewCell>
-            </DataTemplate>
-          </customControls:DynamicListView.ItemTemplate>
-        </customControls:DynamicListView>
-      </StackLayout>    
-    </Grid>
-  </StackLayout>  
-  
-  
+        <Grid HorizontalOptions="Center"
+              VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="50*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0">
+                <Label Text="My color list loaded from constructor"
+                       Style="{StaticResource SubTilteStyle}"/>
+                <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
+                                                FullItemsSource="{Binding ColorsList}"
+                                                ItemsPerPage="15">
+                    <customControls:DynamicListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell BindingContext="{Binding}">
+                                <StackLayout Orientation="Horizontal"
+                                             Padding="5">
+                                    <Label Text="{Binding HexadecimalValue}" />
+                                    <Label Text="{Binding Name}"
+                                           TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </customControls:DynamicListView.ItemTemplate>
+                </customControls:DynamicListView>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1">
+                <Label Text="My color list loaded with navigation message"
+                       Style="{StaticResource SubTilteStyle}" />
+                <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
+                                                FullItemsSource="{Binding ColorsList2}"
+                                                ItemsPerPage="15">
+                    <customControls:DynamicListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell BindingContext="{Binding}">
+                                <StackLayout Orientation="Horizontal"
+                                             Padding="5">
+                                    <Label Text="{Binding HexadecimalValue}" />
+                                    <Label Text="{Binding Name}"
+                                           TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </customControls:DynamicListView.ItemTemplate>
+                </customControls:DynamicListView>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
 </ContentPage>

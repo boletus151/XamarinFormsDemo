@@ -20,9 +20,9 @@ namespace XamarinFormsDemo.ViewModel
     {
         protected IDialogService DialogService;
 
-        protected INavigationService NavigationService;
-
         protected IMessenger MessengerService;
+
+        protected INavigationService NavigationService;
 
         public ParentViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
             : base(messenger)
