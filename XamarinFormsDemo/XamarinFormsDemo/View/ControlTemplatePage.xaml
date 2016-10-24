@@ -14,7 +14,7 @@
                     <StackLayout Padding="10,30,10,0">
                         <Label Text="Este es el contenido que queremos que cambie, nuestra ControlTemplate" />
                         <controls:ObjectBindablePicker ItemsSource="{TemplateBinding BindingContext.ColorsList}"
-                                                       DisplayMember="Name"
+                                                       DisplayName="Name"
                                                        SelectedValue="{TemplateBinding BindingContext.SelectedValue}"
                                                        SelectedValuePath="Name"
                                                        SelectedItem="{TemplateBinding BindingContext.SelectedColor, Mode=TwoWay}" />

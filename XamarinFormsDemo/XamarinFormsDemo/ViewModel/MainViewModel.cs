@@ -31,9 +31,11 @@ namespace XamarinFormsDemo.ViewModel
 
         private ICommand goToControlTemplatePageCommand;
 
-        private ICommand goToInfiniteScrollingViewCommand;
+        private ICommand goToDynamicListViewScrollingCommand;
 
         private ICommand goToObjectBindablePickerViewCommand;
+
+        private ICommand goToToolbarWithPickerViewCommand;
 
         private ICommand onAppearingCommand;
 
@@ -81,13 +83,16 @@ namespace XamarinFormsDemo.ViewModel
         public ICommand GoToControlTemplatePageCommand
             => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
 
-        public ICommand GoToInfiniteScrollingViewCommand
-            => this.goToInfiniteScrollingViewCommand ?? (this.goToInfiniteScrollingViewCommand = new RelayCommand(this.GoToInfiniteScrollingView));
+        public ICommand GoToDynamicListViewScrollingCommand
+            => this.goToDynamicListViewScrollingCommand ?? (this.goToDynamicListViewScrollingCommand = new RelayCommand(this.GoToInfiniteScrollingView));
 
         public object GoToObjectBindablePickerViewCommand
             =>
                 this.goToObjectBindablePickerViewCommand ??
                     (this.goToObjectBindablePickerViewCommand = new RelayCommand(this.GoToObjectBindablePickerView));
+
+        public ICommand GoToToolbarWithPickerViewCommand
+            => this.goToToolbarWithPickerViewCommand ?? (this.goToToolbarWithPickerViewCommand = new RelayCommand(this.GoToToolbarWithPickerView));
 
         public ICommand OnAppearingCommand
             => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
@@ -132,11 +137,7 @@ namespace XamarinFormsDemo.ViewModel
         }
 
         private void GoToCarouselView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
-
-        private void GoToControlTemplatePage()
-        {
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
-        }
+        private void GoToControlTemplatePage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
 
         private void GoToInfiniteScrollingView()
         {
@@ -146,10 +147,9 @@ namespace XamarinFormsDemo.ViewModel
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
         }
 
-        private void GoToObjectBindablePickerView()
-        {
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
-        }
+        private void GoToObjectBindablePickerView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
+
+        private void GoToToolbarWithPickerView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ToolbarWithPickerPage);
 
         private async Task OnAppearing()
         {

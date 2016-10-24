@@ -38,18 +38,6 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
-        ///     Gets or sets the display member. The title that user is going to see in the list
-        /// </summary>
-        /// <value>
-        ///     The display member.
-        /// </value>
-        public string DisplayMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         ///     Gets or sets the items source.
         /// </summary>
         /// <value>
@@ -123,6 +111,24 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
+        /// Gets or sets the display name.
+        /// </summary>
+        /// <value>
+        /// The display name.
+        /// </value>
+        public string DisplayName
+        {
+            get
+            {
+                return (string)this.GetValue(DisplayNameProperty);
+            }
+            set
+            {
+                this.SetValue(DisplayNameProperty, value);
+            }
+        }
+
+        /// <summary>
         ///     Called when [items source changed].
         /// </summary>
         /// <param name="bindableObject">The bindable object.</param>
@@ -132,7 +138,7 @@ namespace XamarinFormsDemo.CustomControls
         {
             var picker = bindableObject as ObjectBindablePicker;
 
-            if(picker == null)
+            if (picker == null)
             {
                 return;
             }
@@ -140,13 +146,13 @@ namespace XamarinFormsDemo.CustomControls
             picker.Items.Clear();
 
             var list = newValue as IList;
-            if(list == null)
+            if (list == null)
             {
                 return;
             }
-            foreach(var item in list)
+            foreach (var item in list)
             {
-                if(string.IsNullOrEmpty(picker.DisplayMember))
+                if (string.IsNullOrEmpty(picker.DisplayName))
                 {
                     picker.Items.Add(item.ToString());
                 }
@@ -154,12 +160,12 @@ namespace XamarinFormsDemo.CustomControls
                 {
                     // for PCL
                     /*var type = item.GetType();
-                        var prop = type.GetProperty(picker.DisplayMember);
+                        var prop = type.GetProperty(picker.DisplayName);
                         picker.Items.Add(prop.GetValue(item).ToString());*/
 
                     var prop = item.GetType().GetRuntimeProperties().FirstOrDefault
-                        (p => string.Equals(p.Name, picker.DisplayMember, StringComparison.OrdinalIgnoreCase));
-                    if(prop != null)
+                        (p => string.Equals(p.Name, picker.DisplayName, StringComparison.OrdinalIgnoreCase));
+                    if (prop != null)
                     {
                         picker.Items.Add(prop.GetValue(item).ToString());
                     }
@@ -177,11 +183,11 @@ namespace XamarinFormsDemo.CustomControls
         {
             var picker = bindable as ObjectBindablePicker;
 
-            if(picker?.ItemsSource == null)
+            if (picker?.ItemsSource == null)
             {
                 return;
             }
-            if(picker.ItemsSource.Contains(picker.SelectedItem))
+            if (picker.ItemsSource.Contains(picker.SelectedItem))
             {
                 picker.SelectedIndex = picker.ItemsSource.IndexOf(picker.SelectedItem);
             }
@@ -194,28 +200,28 @@ namespace XamarinFormsDemo.CustomControls
         /// <param name="eventArgs">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void OnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            if(this.SelectedIndex < 0 || this.SelectedIndex > this.Items.Count - 1)
+            if (this.SelectedIndex < 0 || this.SelectedIndex > this.Items.Count - 1)
             {
                 this.SelectedItem = null;
             }
             else
             {
                 var picker = sender as ObjectBindablePicker;
-                if(picker == null)
+                if (picker == null)
                 {
                     return;
                 }
 
                 this.SelectedItem = this.ItemsSource[this.SelectedIndex];
 
-                if(string.IsNullOrEmpty(this.SelectedValuePath))
+                if (string.IsNullOrEmpty(this.SelectedValuePath))
                 {
                     return;
                 }
 
                 var prop = this.SelectedItem.GetType().GetRuntimeProperties().FirstOrDefault
                     (p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
-                if(prop != null)
+                if (prop != null)
                 {
                     this.SelectedValue = prop.GetValue(this.SelectedItem);
                 }
@@ -229,9 +235,21 @@ namespace XamarinFormsDemo.CustomControls
             (nameof(SelectedItem), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
 
         public static BindableProperty SelectedValueProperty = BindableProperty.Create
-            (nameof(SelectedValueProperty), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.OneWayToSource);
+            (nameof(SelectedValue), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.OneWayToSource);
 
         public static BindableProperty SelectedValuePathProperty = BindableProperty.Create
-            (nameof(SelectedValuePathProperty), typeof(string), typeof(ObjectBindablePicker), string.Empty);
+            (nameof(SelectedValuePath), typeof(string), typeof(ObjectBindablePicker), string.Empty);
+
+        public static BindableProperty DisplayNameProperty = BindableProperty.Create
+            (nameof(DisplayName), typeof(string), typeof(ObjectBindablePicker), string.Empty, BindingMode.Default, null, OnDisplayNameChanged);
+
+        private static void OnDisplayNameChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var picker = (ObjectBindablePicker)bindable;
+            if (picker?.ItemsSource != null)
+            {
+                OnItemsSourceChanged(picker, picker.ItemsSource, null);
+            }
+        }
     }
 }

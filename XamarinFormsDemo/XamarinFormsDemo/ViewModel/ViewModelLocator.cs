@@ -53,6 +53,7 @@ namespace XamarinFormsDemo.ViewModel
             nav.Configure(AppConstants.NavigationPages.InfiniteScrollingPage, typeof(DynamicListViewScrollingPage));
             nav.Configure(AppConstants.NavigationPages.CarouselPage, typeof(CarouselPage));
             nav.Configure(AppConstants.NavigationPages.ObjectBindablePickerPage, typeof(ObjectBindablePickerPage));
+            nav.Configure(AppConstants.NavigationPages.ToolbarWithPickerPage, typeof(ToolbarWithPickerPage));
 
             return nav;
         }

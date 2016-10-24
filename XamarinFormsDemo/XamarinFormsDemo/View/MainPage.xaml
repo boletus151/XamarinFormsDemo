@@ -24,9 +24,10 @@
         <RowDefinition></RowDefinition>
         <RowDefinition></RowDefinition>
         <RowDefinition></RowDefinition>
+        <RowDefinition></RowDefinition>
       </Grid.RowDefinitions>
 
-      
+
       <Button Grid.Row="0"
               Text="OnAppearing Event writes log on output."
               IsEnabled="False"/>
@@ -37,11 +38,15 @@
               Command="{Binding GoToObjectBindablePickerViewCommand}"
               Text="Go to Object Bindable Picker Example" />
       <Button Grid.Row="3"
-              Command="{Binding GoToInfiniteScrollingViewCommand}"
-              Text="Go to Infinite Scrolling Example" />
+              Command="{Binding GoToDynamicListViewScrollingCommand}"
+              Text="Go to Dynamic List Scrolling Example" />
       <Button Grid.Row="4"
               Command="{Binding GoToCarouselViewCommand}"
               Text="Go to Carousel Example" />
+      <Button Grid.Row="5"
+              IsVisible="False"
+              Command="{Binding GoToToolbarWithPickerViewCommand}"
+              Text="Go to ToolbarWithPicker Example" />
     </Grid>
   </StackLayout>
 

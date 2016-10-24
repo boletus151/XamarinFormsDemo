@@ -25,7 +25,7 @@
                    Style="{StaticResource NormalTextStyle}" />
             <customControls:ObjectBindablePicker Grid.Row="1"
                                                  ItemsSource="{Binding ColorsList}"
-                                                 DisplayMember="Name"
+                                                 DisplayName="Name"
                                                  SelectedValue="{Binding SelectedValue}"
                                                  SelectedValuePath="Name"
                                                  SelectedItem="{Binding SelectedColor, Mode=TwoWay}" />
@@ -35,7 +35,7 @@
                    Style="{StaticResource NormalTextStyle}" />
             <customControls:ObjectBindableNotifierPicker Grid.Row="4"
                                                          ItemsSource="{Binding ColorsList}"
-                                                         DisplayMember="Name"
+                                                         DisplayName="Name"
                                                          SelectedItem="{Binding SelectedColor, Mode=TwoWay}" />
 
         </Grid>

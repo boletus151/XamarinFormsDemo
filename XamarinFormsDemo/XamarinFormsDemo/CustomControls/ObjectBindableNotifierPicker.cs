@@ -39,15 +39,21 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
-        ///     Gets or sets the display member. The title that user is going to see in the list
+        /// Gets or sets the display name.
         /// </summary>
         /// <value>
-        ///     The display member.
+        /// The display name.
         /// </value>
-        public string DisplayMember
+        public string DisplayName
         {
-            get;
-            set;
+            get
+            {
+                return (string)this.GetValue(DisplayNameProperty);
+            }
+            set
+            {
+                this.SetValue(DisplayNameProperty, value);
+            }
         }
 
         /// <summary>
@@ -149,6 +155,15 @@ namespace XamarinFormsDemo.CustomControls
             };
         }
 
+        private static void OnDisplayNameChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var picker = (ObjectBindableNotifierPicker)bindable;
+            if(picker?.ItemsSource != null)
+            {
+                OnItemsSourceChanged(picker, picker.ItemsSource, null);
+            }
+        }
+
         /// <summary>
         ///     Called when [items source changed].
         /// </summary>
@@ -238,7 +253,7 @@ namespace XamarinFormsDemo.CustomControls
         {
             foreach(var item in newvalue)
             {
-                if(string.IsNullOrEmpty(this.DisplayMember))
+                if(string.IsNullOrEmpty(this.DisplayName))
                 {
                     this.Items.Add(item.ToString());
                 }
@@ -246,11 +261,11 @@ namespace XamarinFormsDemo.CustomControls
                 {
                     // for PCL
                     /*var type = item.GetType();
-                    var prop = type.GetProperty(picker.DisplayMember);
+                    var prop = type.GetProperty(picker.Display);
                     picker.Items.Add(prop.GetValue(item).ToString());*/
 
                     var prop = item.GetType().GetRuntimeProperties().FirstOrDefault
-                        (p => string.Equals(p.Name, this.DisplayMember, StringComparison.OrdinalIgnoreCase));
+                        (p => string.Equals(p.Name, this.DisplayName, StringComparison.OrdinalIgnoreCase));
                     if(prop != null)
                     {
                         this.Items.Add(prop.GetValue(item).ToString());
@@ -259,16 +274,20 @@ namespace XamarinFormsDemo.CustomControls
             }
         }
 
+        public static BindableProperty DisplayNameProperty = BindableProperty.Create
+            (nameof(DisplayName), typeof(string), typeof(ObjectBindablePicker), string.Empty, BindingMode.Default, null, OnDisplayNameChanged);
+
         public static BindableProperty ItemsSourceProperty = BindableProperty.Create
             (nameof(ItemsSource), typeof(IList), typeof(ObjectBindableNotifierPicker), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
 
         public static BindableProperty SelectedItemProperty = BindableProperty.Create
-            (nameof(SelectedItem), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
+            (nameof(SelectedItem), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay, null,
+                OnSelectedItemChanged);
 
         public static BindableProperty SelectedValueProperty = BindableProperty.Create
-            (nameof(SelectedValueProperty), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay);
+            (nameof(SelectedValue), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay);
 
         public static BindableProperty SelectedValuePathProperty = BindableProperty.Create
-            (nameof(SelectedValuePathProperty), typeof(string), typeof(ObjectBindableNotifierPicker), string.Empty);
+            (nameof(SelectedValuePath), typeof(string), typeof(ObjectBindableNotifierPicker), string.Empty);
     }
 }

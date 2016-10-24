@@ -45,6 +45,9 @@
     <Compile Include="CustomControls\ObjectBindableNotifierPicker.cs" />
     <Compile Include="CustomControls\ObjectBindablePicker.cs" />
     <Compile Include="CustomControls\PageIndicator.cs" />
+    <Compile Include="CustomControls\ToolbarWithPicker.xaml.cs">
+      <DependentUpon>ToolbarWithPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -68,6 +71,9 @@
     </Compile>
     <Compile Include="View\ObjectBindablePickerPage.xaml.cs">
       <DependentUpon>ObjectBindablePickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolbarWithPickerPage.xaml.cs">
+      <DependentUpon>ToolbarWithPickerPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +155,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\ObjectBindablePickerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomControls\ToolbarWithPicker.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\ToolbarWithPickerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

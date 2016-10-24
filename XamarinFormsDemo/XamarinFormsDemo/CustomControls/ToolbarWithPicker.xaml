@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
+             x:Class="XamarinFormsDemo.CustomControls.ToolbarWithPicker"
+             x:Name="control">
+  <ContentView.Content>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+        <ColumnDefinition Width="Auto"></ColumnDefinition>
+        <ColumnDefinition Width="Auto"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+
+      <customControls:ObjectBindablePicker Grid.Column="0"
+                                           x:Name="BindablePicker"
+                                           ItemsSource="{Binding Source={x:Reference control}, Path=ItemsSource}"
+                                           SelectedItem="{Binding Source={x:Reference control}, Path=SelectedItem}"
+                                           DisplayName="{Binding Source={x:Reference control}, Path=DisplayMember}"/>
+      <Button Grid.Column="2"
+              x:Name="Button"
+              Image="{Binding Source={x:Reference control}, Path=Icon}" />
+
+    </Grid>
+  </ContentView.Content>
+</ContentView>

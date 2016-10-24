@@ -13,6 +13,8 @@
             public const string InfiniteScrollingPage = "DynamicListViewScrollingPage";
 
             public const string MainPage = "MainPage";
+
+            public const string ToolbarWithPickerPage = "ToolbarWithPickerPage";
         }
     }
 }
