@@ -5,7 +5,7 @@
              x:Class="XamarinFormsDemo.View.CarouselPage"
              xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
+             BindingContext="{Binding Source={StaticResource Locator}, Path=Carousel}">
     <ContentPage.Resources>
     </ContentPage.Resources>
 

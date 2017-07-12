@@ -38,6 +38,8 @@ namespace XamarinFormsDemo.ViewModel
 
         public DynamicListViewScrollingViewModel DynamicList => ServiceLocator.Current.GetInstance<DynamicListViewScrollingViewModel>();
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public CarouselViewModel Carousel => ServiceLocator.Current.GetInstance<CarouselViewModel>();
+        public PickersViewModel Pickers => ServiceLocator.Current.GetInstance<PickersViewModel>();
 
         public static void Cleanup()
         {
@@ -65,9 +67,11 @@ namespace XamarinFormsDemo.ViewModel
             var nav = ConfigureNavigationPages();
             SimpleIoc.Default.Register<INavigationService>(() => nav);
 
-            SimpleIoc.Default.Register<ParentViewModel>(true);
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CarouselViewModel>();
             SimpleIoc.Default.Register<DynamicListViewScrollingViewModel>(true);
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<ParentViewModel>(true);
+            SimpleIoc.Default.Register<PickersViewModel>();
         }
 
         public static void SetLocatorProvider()
