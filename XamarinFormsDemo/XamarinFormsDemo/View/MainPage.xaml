@@ -4,50 +4,32 @@
              x:Class="XamarinFormsDemo.MainPage"
              xmlns:b="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
              BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
-  <b:Interaction.Behaviors>
-    <b:BehaviorCollection>
-      <b:EventToCommand
-        EventName="Appearing"
-        Command="{Binding OnAppearingCommand}"/>
-    </b:BehaviorCollection>
-  </b:Interaction.Behaviors>
+    <b:Interaction.Behaviors>
+        <b:BehaviorCollection>
+            <b:EventToCommand EventName="Appearing"
+                              Command="{Binding OnAppearingCommand}" />
+        </b:BehaviorCollection>
+    </b:Interaction.Behaviors>
 
-  <StackLayout>
-    <Label Text="Xamarin Forms Demo App"
-           Style="{StaticResource HeaderTitleStyle}"
-           Margin="0,10"/>
-    <Grid HorizontalOptions="Center"
-          VerticalOptions="Center">
-      <Grid.RowDefinitions>
-        <RowDefinition></RowDefinition>
-        <RowDefinition></RowDefinition>
-        <RowDefinition></RowDefinition>
-        <RowDefinition></RowDefinition>
-        <RowDefinition></RowDefinition>
-        <RowDefinition></RowDefinition>
-      </Grid.RowDefinitions>
+    <StackLayout>
+        <Label Text="Xamarin Forms Demo App"
+               Style="{StaticResource HeaderTitleStyle}"
+               Margin="0,10" />
 
-
-      <Button Grid.Row="0"
-              Text="OnAppearing Event writes log on output."
-              IsEnabled="False"/>
-      <Button Grid.Row="1"
-              Command="{Binding GoToControlTemplatePageCommand}"
-              Text="Go to Control Template Example" />
-      <Button Grid.Row="2"
-              Command="{Binding GoToObjectBindablePickerViewCommand}"
-              Text="Go to Object Bindable Picker Example" />
-      <Button Grid.Row="3"
-              Command="{Binding GoToDynamicListViewScrollingCommand}"
-              Text="Go to Dynamic List Scrolling Example" />
-      <Button Grid.Row="4"
-              Command="{Binding GoToCarouselViewCommand}"
-              Text="Go to Carousel Example" />
-      <Button Grid.Row="5"
-              IsVisible="False"
-              Command="{Binding GoToToolbarWithPickerViewCommand}"
-              Text="Go to ToolbarWithPicker Example" />
-    </Grid>
-  </StackLayout>
+        <Button Text="OnAppearing Event writes log on output."
+                IsEnabled="False" />
+        <Button Command="{Binding GoToControlTemplatePageCommand}"
+                Text="Go to Control Template Example" />
+        <Button Command="{Binding GoToPickersViewCommand}"
+                Text="Go to Object Bindable Picker Example" />
+        <Button Command="{Binding GoToDynamicListViewScrollingCommand}"
+                Text="Go to Dynamic List Scrolling Example" />
+        <Button Command="{Binding GoToCarouselViewCommand}"
+                Text="Go to Carousel Example" />
+        <Button IsVisible="False"
+                Command="{Binding GoToToolbarWithPickerViewCommand}"
+                Text="Go to ToolbarWithPicker Example" />
+        
+    </StackLayout>
 
 </ContentPage>

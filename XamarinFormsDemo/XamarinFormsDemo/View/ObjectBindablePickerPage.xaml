@@ -31,12 +31,12 @@
                                                  SelectedItem="{Binding SelectedColor, Mode=TwoWay}" />
 
             <Label Grid.Row="3"
-                   Text="This control works if you are loading data with behaviors in OnAppearing event because it implements NotificationEvents for Collection"
+                   Text="This control works if you are loading data with behaviors in OnAppearing event or passing messages because it implements NotificationEvents for Collection"
                    Style="{StaticResource NormalTextStyle}" />
             <customControls:ObjectBindableNotifierPicker Grid.Row="4"
-                                                         ItemsSource="{Binding ColorsList}"
+                                                         OriginalItemsSource="{Binding ColorsListAsync}"
                                                          DisplayName="Name"
-                                                         SelectedItem="{Binding SelectedColor, Mode=TwoWay}" />
+                                                         SelectedObject="{Binding SelectedColorAsync, Mode=TwoWay}" />
 
         </Grid>
     </StackLayout>

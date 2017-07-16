@@ -1,26 +1,26 @@
-﻿/*--------------------------------------------------------------------------------------------------------------------
-<copyright file="ObjectBindableNotifierPicker" company="CodigoEdulis">
-   Código Edulis 2016
-   http://www.codigoedulis.es
- </copyright>
- <summary>
-    This implementation is a group of the offers of several persons along the network;
-    because of this, it is under Creative Common By License:
-    
-    You are free to:
-
-    Share — copy and redistribute the material in any medium or format
-    Adapt — remix, transform, and build upon the material for any purpose, even commercially.
-    
-    The licensor cannot revoke these freedoms as long as you follow the license terms.
-    
-    Under the following terms:
-    
-    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
- 
- </summary>
- --------------------------------------------------------------------------------------------------------------------*/
+﻿// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="ObjectBindablePicker" company="CodigoEdulis">
+//    Código Edulis 2017
+//    http://www.codigoedulis.es
+//  </copyright>
+//  <summary>
+//     This implementation is a group of the offers of several persons along the network;
+//     because of this, it is under Creative Common By License:
+//     
+//     You are free to:
+// 
+//     Share — copy and redistribute the material in any medium or format
+//     Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+//     
+//     The licensor cannot revoke these freedoms as long as you follow the license terms.
+//     
+//     Under the following terms:
+//     
+//     Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+//     No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+//  
+//  </summary>
+//  --------------------------------------------------------------------------------------------------------------------
 
 namespace XamarinFormsDemo.CustomControls
 {
@@ -29,6 +29,7 @@ namespace XamarinFormsDemo.CustomControls
     using System.Collections.Specialized;
     using System.Linq;
     using System.Reflection;
+
     using Xamarin.Forms;
 
     public class ObjectBindableNotifierPicker : Picker
@@ -39,10 +40,10 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
-        /// Gets or sets the display name.
+        ///     Gets or sets the display name.
         /// </summary>
         /// <value>
-        /// The display name.
+        ///     The display name.
         /// </value>
         public string DisplayName
         {
@@ -50,6 +51,7 @@ namespace XamarinFormsDemo.CustomControls
             {
                 return (string)this.GetValue(DisplayNameProperty);
             }
+
             set
             {
                 this.SetValue(DisplayNameProperty, value);
@@ -62,15 +64,16 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The items source.
         /// </value>
-        public IList ItemsSource
+        public IList OriginalItemsSource
         {
             get
             {
-                return (IList)this.GetValue(ItemsSourceProperty);
+                return (IList)this.GetValue(OriginalItemsSourceProperty);
             }
+
             set
             {
-                this.SetValue(ItemsSourceProperty, value);
+                this.SetValue(OriginalItemsSourceProperty, value);
             }
         }
 
@@ -80,15 +83,16 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The selected item.
         /// </value>
-        public object SelectedItem
+        public object SelectedObject
         {
             get
             {
-                return this.GetValue(SelectedItemProperty);
+                return this.GetValue(SelectedObjectProperty);
             }
+
             set
             {
-                this.SetValue(SelectedItemProperty, value);
+                this.SetValue(SelectedObjectProperty, value);
             }
         }
 
@@ -105,6 +109,7 @@ namespace XamarinFormsDemo.CustomControls
             {
                 return this.GetValue(SelectedValueProperty);
             }
+
             set
             {
                 this.SetValue(SelectedValueProperty, value);
@@ -123,6 +128,7 @@ namespace XamarinFormsDemo.CustomControls
             {
                 return (string)this.GetValue(SelectedValuePathProperty);
             }
+
             set
             {
                 this.SetValue(SelectedValuePathProperty, value);
@@ -132,36 +138,28 @@ namespace XamarinFormsDemo.CustomControls
         private static NotifyCollectionChangedEventHandler NotifyCollectionOnCollectionChanged(ObjectBindableNotifierPicker picker)
         {
             return (sender, args) =>
-            {
-                if(args.Action == NotifyCollectionChangedAction.Reset)
                 {
-                    picker.Items.Clear();
-                    return;
-                }
-
-                if(args.NewItems == null)
-                {
-                    return;
-                }
-
-                if(args.OldItems != null)
-                {
-                    foreach(var oldItem in args.OldItems)
+                    if(args.Action == NotifyCollectionChangedAction.Reset)
                     {
-                        picker.Items.Remove((oldItem ?? "").ToString());
+                        picker.Items.Clear();
+                        return;
                     }
-                }
-                picker.RefreshItems(args.NewItems);
-            };
-        }
 
-        private static void OnDisplayNameChanged(BindableObject bindable, object oldvalue, object newvalue)
-        {
-            var picker = (ObjectBindableNotifierPicker)bindable;
-            if(picker?.ItemsSource != null)
-            {
-                OnItemsSourceChanged(picker, picker.ItemsSource, null);
-            }
+                    if(args.NewItems == null)
+                    {
+                        return;
+                    }
+
+                    if(args.OldItems != null)
+                    {
+                        foreach(var oldItem in args.OldItems)
+                        {
+                            picker.Items.Remove((oldItem ?? "").ToString());
+                        }
+                    }
+
+                    picker.RefreshItems(args.NewItems);
+                };
         }
 
         /// <summary>
@@ -191,6 +189,7 @@ namespace XamarinFormsDemo.CustomControls
             {
                 notifyCollection.CollectionChanged += NotifyCollectionOnCollectionChanged(picker);
             }
+
             picker.RefreshItems(newvalue as IList);
         }
 
@@ -204,13 +203,14 @@ namespace XamarinFormsDemo.CustomControls
         {
             var picker = bindable as ObjectBindableNotifierPicker;
 
-            if(picker?.ItemsSource == null)
+            if(picker?.OriginalItemsSource == null)
             {
                 return;
             }
-            if(picker.ItemsSource.Contains(picker.SelectedItem))
+
+            if(picker.OriginalItemsSource.Contains(picker.SelectedObject))
             {
-                picker.SelectedIndex = picker.ItemsSource.IndexOf(picker.SelectedItem);
+                picker.SelectedIndex = picker.OriginalItemsSource.IndexOf(picker.SelectedObject);
             }
         }
 
@@ -223,7 +223,7 @@ namespace XamarinFormsDemo.CustomControls
         {
             if(this.SelectedIndex < 0 || this.SelectedIndex > this.Items.Count - 1)
             {
-                this.SelectedItem = null;
+                this.SelectedObject = null;
             }
             else
             {
@@ -233,18 +233,17 @@ namespace XamarinFormsDemo.CustomControls
                     return;
                 }
 
-                this.SelectedItem = this.ItemsSource[this.SelectedIndex];
+                this.SelectedObject = this.OriginalItemsSource[this.SelectedIndex];
 
                 if(string.IsNullOrEmpty(this.SelectedValuePath))
                 {
                     return;
                 }
 
-                var prop = this.SelectedItem.GetType().GetRuntimeProperties().FirstOrDefault
-                    (p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
+                var prop = this.SelectedObject.GetType().GetRuntimeProperties().FirstOrDefault(p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
                 if(prop != null)
                 {
-                    this.SelectedValue = prop.GetValue(this.SelectedItem);
+                    this.SelectedValue = prop.GetValue(this.SelectedObject);
                 }
             }
         }
@@ -263,9 +262,7 @@ namespace XamarinFormsDemo.CustomControls
                     /*var type = item.GetType();
                     var prop = type.GetProperty(picker.Display);
                     picker.Items.Add(prop.GetValue(item).ToString());*/
-
-                    var prop = item.GetType().GetRuntimeProperties().FirstOrDefault
-                        (p => string.Equals(p.Name, this.DisplayName, StringComparison.OrdinalIgnoreCase));
+                    var prop = item.GetType().GetRuntimeProperties().FirstOrDefault(p => string.Equals(p.Name, this.DisplayName, StringComparison.OrdinalIgnoreCase));
                     if(prop != null)
                     {
                         this.Items.Add(prop.GetValue(item).ToString());
@@ -274,20 +271,10 @@ namespace XamarinFormsDemo.CustomControls
             }
         }
 
-        public static BindableProperty DisplayNameProperty = BindableProperty.Create
-            (nameof(DisplayName), typeof(string), typeof(ObjectBindablePicker), string.Empty, BindingMode.Default, null, OnDisplayNameChanged);
-
-        public static BindableProperty ItemsSourceProperty = BindableProperty.Create
-            (nameof(ItemsSource), typeof(IList), typeof(ObjectBindableNotifierPicker), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
-
-        public static BindableProperty SelectedItemProperty = BindableProperty.Create
-            (nameof(SelectedItem), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay, null,
-                OnSelectedItemChanged);
-
-        public static BindableProperty SelectedValueProperty = BindableProperty.Create
-            (nameof(SelectedValue), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay);
-
-        public static BindableProperty SelectedValuePathProperty = BindableProperty.Create
-            (nameof(SelectedValuePath), typeof(string), typeof(ObjectBindableNotifierPicker), string.Empty);
+        public static BindableProperty DisplayNameProperty = BindableProperty.Create(nameof(DisplayName), typeof(string), typeof(ObjectBindablePicker), string.Empty, BindingMode.Default);
+        public static BindableProperty OriginalItemsSourceProperty = BindableProperty.Create(nameof(OriginalItemsSource), typeof(IList), typeof(ObjectBindableNotifierPicker), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
+        public static BindableProperty SelectedObjectProperty = BindableProperty.Create(nameof(SelectedObject), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
+        public static BindableProperty SelectedValueProperty = BindableProperty.Create(nameof(SelectedValue), typeof(object), typeof(ObjectBindableNotifierPicker), default(object), BindingMode.TwoWay);
+        public static BindableProperty SelectedValuePathProperty = BindableProperty.Create(nameof(SelectedValuePath), typeof(string), typeof(ObjectBindableNotifierPicker), string.Empty);
     }
 }

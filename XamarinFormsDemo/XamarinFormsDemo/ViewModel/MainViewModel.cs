@@ -1,15 +1,15 @@
 namespace XamarinFormsDemo.ViewModel
 {
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Windows.Input;
     using Constants;
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;
     using Model;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
 
     /// <summary>
     ///     This class contains properties that the main View can data bind to.
@@ -33,7 +33,7 @@ namespace XamarinFormsDemo.ViewModel
 
         private ICommand goToDynamicListViewScrollingCommand;
 
-        private ICommand goToObjectBindablePickerViewCommand;
+        private ICommand goToPickersViewCommand;
 
         private ICommand goToToolbarWithPickerViewCommand;
 
@@ -86,10 +86,10 @@ namespace XamarinFormsDemo.ViewModel
         public ICommand GoToDynamicListViewScrollingCommand
             => this.goToDynamicListViewScrollingCommand ?? (this.goToDynamicListViewScrollingCommand = new RelayCommand(this.GoToInfiniteScrollingView));
 
-        public object GoToObjectBindablePickerViewCommand
+        public ICommand GoToPickersViewCommand
             =>
-                this.goToObjectBindablePickerViewCommand ??
-                    (this.goToObjectBindablePickerViewCommand = new RelayCommand(this.GoToObjectBindablePickerView));
+                this.goToPickersViewCommand ??
+                    (this.goToPickersViewCommand = new RelayCommand(this.GoToPickersView));
 
         public ICommand GoToToolbarWithPickerViewCommand
             => this.goToToolbarWithPickerViewCommand ?? (this.goToToolbarWithPickerViewCommand = new RelayCommand(this.GoToToolbarWithPickerView));
@@ -137,6 +137,7 @@ namespace XamarinFormsDemo.ViewModel
         }
 
         private void GoToCarouselView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
+
         private void GoToControlTemplatePage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
 
         private void GoToInfiniteScrollingView()
@@ -147,7 +148,12 @@ namespace XamarinFormsDemo.ViewModel
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
         }
 
-        private void GoToObjectBindablePickerView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
+        private void GoToPickersView()
+        {
+            var message = new LoadDataNavigationMessage(this.GetType().Name, nameof(PickersViewModel), true);
+            this.MessengerService.Send<NavigationMessage, PickersViewModel>(message);
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
+        }
 
         private void GoToToolbarWithPickerView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ToolbarWithPickerPage);
 

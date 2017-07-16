@@ -71,7 +71,7 @@ namespace XamarinFormsDemo.ViewModel
             SimpleIoc.Default.Register<DynamicListViewScrollingViewModel>(true);
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ParentViewModel>(true);
-            SimpleIoc.Default.Register<PickersViewModel>();
+            SimpleIoc.Default.Register<PickersViewModel>(true);
         }
 
         public static void SetLocatorProvider()
