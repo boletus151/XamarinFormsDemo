@@ -5,39 +5,48 @@
              xmlns:customControls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
              x:Class="XamarinFormsDemo.View.ObjectBindablePickerPage"
              BindingContext="{Binding Source={StaticResource Locator}, Path=Pickers}">
-    <StackLayout>
+
+    <StackLayout Margin="20,20">
         <Label Text="Object Bindable Picker Example"
                Style="{StaticResource MainTitleStyle}"
                Margin="0,10" />
-        <Grid HorizontalOptions="Center"
-              VerticalOptions="Center"
-              Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
 
-            <Label Grid.Row="0"
-                   Text="This control does not works if you are loading data with behaviors in OnAppearing event"
+        <StackLayout Margin="0,10">
+            <Label Text="This control does not works if you are loading data with behaviors in OnAppearing event"
                    Style="{StaticResource NormalTextStyle}" />
-            <customControls:ObjectBindablePicker Grid.Row="1"
-                                                 ItemsSource="{Binding ColorsList}"
+            <customControls:ObjectBindablePicker OriginalItemsSource="{Binding ColorsList}"
                                                  DisplayName="Name"
                                                  SelectedValue="{Binding SelectedValue}"
                                                  SelectedValuePath="Name"
-                                                 SelectedItem="{Binding SelectedColor, Mode=TwoWay}" />
+                                                 SelectedObject="{Binding SelectedColor, Mode=TwoWay}" />
+        </StackLayout>
 
-            <Label Grid.Row="3"
-                   Text="This control works if you are loading data with behaviors in OnAppearing event or passing messages because it implements NotificationEvents for Collection"
+        <StackLayout Margin="0,10">
+            <Label Text="This control does not works if you are loading data with behaviors in OnAppearing event"
                    Style="{StaticResource NormalTextStyle}" />
-            <customControls:ObjectBindableNotifierPicker Grid.Row="4"
-                                                         OriginalItemsSource="{Binding ColorsListAsync}"
+            <customControls:ObjectBindableNotifierPicker OriginalItemsSource="{Binding ColorsList2}"
                                                          DisplayName="Name"
-                                                         SelectedObject="{Binding SelectedColorAsync, Mode=TwoWay}" />
+                                                         SelectedObject="{Binding SelectedColor2, Mode=TwoWay}" />
+        </StackLayout>
 
-        </Grid>
+        <StackLayout Margin="0,20">
+            <Label Text="This control works if you are loading data with behaviors in OnAppearing event or passing messages because it implements NotificationEvents for Collection"
+                   Style="{StaticResource NormalTextStyle}" />
+
+            <ActivityIndicator IsEnabled="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Margin="10"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Color="Red"
+                               WidthRequest="50"
+                               HeightRequest="50" />
+
+            <customControls:ObjectBindableNotifierPicker OriginalItemsSource="{Binding ColorsListAsync}"
+                                                         DisplayName="Name"
+                                                         SelectedObject="{Binding SelectedColorAsync, Mode=TwoWay}"
+                                                         IsVisible="{Binding IsBusy, Converter={StaticResource BoolToNegationConverter}}" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>

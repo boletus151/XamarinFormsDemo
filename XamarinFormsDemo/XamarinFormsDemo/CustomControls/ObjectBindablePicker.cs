@@ -1,26 +1,26 @@
-﻿/*--------------------------------------------------------------------------------------------------------------------
-<copyright file="ObjectBindablePicker" company="CodigoEdulis">
-   Código Edulis 2016
-   http://www.codigoedulis.es
- </copyright>
- <summary>
-    This implementation is a group of the offers of several persons along the network;
-    because of this, it is under Creative Common By License:
-    
-    You are free to:
-
-    Share — copy and redistribute the material in any medium or format
-    Adapt — remix, transform, and build upon the material for any purpose, even commercially.
-    
-    The licensor cannot revoke these freedoms as long as you follow the license terms.
-    
-    Under the following terms:
-    
-    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
- 
- </summary>
- --------------------------------------------------------------------------------------------------------------------*/
+﻿// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="ObjectBindablePicker.cs" company="CodigoEdulis">
+//    Código Edulis 2017
+//    http://www.codigoedulis.es
+//  </copyright>
+//  <summary>
+//     This implementation is a group of the offers of several persons along the network;
+//     because of this, it is under Creative Common By License:
+//     
+//     You are free to:
+// 
+//     Share — copy and redistribute the material in any medium or format
+//     Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+//     
+//     The licensor cannot revoke these freedoms as long as you follow the license terms.
+//     
+//     Under the following terms:
+//     
+//     Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+//     No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+//  
+//  </summary>
+//  --------------------------------------------------------------------------------------------------------------------
 
 namespace XamarinFormsDemo.CustomControls
 {
@@ -28,6 +28,7 @@ namespace XamarinFormsDemo.CustomControls
     using System.Collections;
     using System.Linq;
     using System.Reflection;
+
     using Xamarin.Forms;
 
     public class ObjectBindablePicker : Picker
@@ -38,20 +39,40 @@ namespace XamarinFormsDemo.CustomControls
         }
 
         /// <summary>
+        ///     Gets or sets the display name.
+        /// </summary>
+        /// <value>
+        ///     The display name.
+        /// </value>
+        public string DisplayName
+        {
+            get
+            {
+                return (string)this.GetValue(DisplayNameProperty);
+            }
+
+            set
+            {
+                this.SetValue(DisplayNameProperty, value);
+            }
+        }
+
+        /// <summary>
         ///     Gets or sets the items source.
         /// </summary>
         /// <value>
         ///     The items source.
         /// </value>
-        public IList ItemsSource
+        public IList OriginalItemsSource
         {
             get
             {
-                return (IList)this.GetValue(ItemsSourceProperty);
+                return (IList)this.GetValue(OriginalItemsSourceProperty);
             }
+
             set
             {
-                this.SetValue(ItemsSourceProperty, value);
+                this.SetValue(OriginalItemsSourceProperty, value);
             }
         }
 
@@ -61,15 +82,16 @@ namespace XamarinFormsDemo.CustomControls
         /// <value>
         ///     The selected item.
         /// </value>
-        public object SelectedItem
+        public object SelectedObject
         {
             get
             {
-                return this.GetValue(SelectedItemProperty);
+                return this.GetValue(SelectedObjectProperty);
             }
+
             set
             {
-                this.SetValue(SelectedItemProperty, value);
+                this.SetValue(SelectedObjectProperty, value);
             }
         }
 
@@ -86,6 +108,7 @@ namespace XamarinFormsDemo.CustomControls
             {
                 return this.GetValue(SelectedValueProperty);
             }
+
             set
             {
                 this.SetValue(SelectedValueProperty, value);
@@ -104,30 +127,13 @@ namespace XamarinFormsDemo.CustomControls
             {
                 return (string)this.GetValue(SelectedValuePathProperty);
             }
+
             set
             {
                 this.SetValue(SelectedValuePathProperty, value);
             }
         }
-
-        /// <summary>
-        /// Gets or sets the display name.
-        /// </summary>
-        /// <value>
-        /// The display name.
-        /// </value>
-        public string DisplayName
-        {
-            get
-            {
-                return (string)this.GetValue(DisplayNameProperty);
-            }
-            set
-            {
-                this.SetValue(DisplayNameProperty, value);
-            }
-        }
-
+        
         /// <summary>
         ///     Called when [items source changed].
         /// </summary>
@@ -150,22 +156,22 @@ namespace XamarinFormsDemo.CustomControls
             {
                 return;
             }
-            foreach (var item in list)
+
+            RefreshItems(list, picker);
+        }
+
+        private static void RefreshItems(IList list, ObjectBindablePicker picker)
+        {
+            foreach(var item in list)
             {
-                if (string.IsNullOrEmpty(picker.DisplayName))
+                if(string.IsNullOrEmpty(picker.DisplayName))
                 {
                     picker.Items.Add(item.ToString());
                 }
                 else
                 {
-                    // for PCL
-                    /*var type = item.GetType();
-                        var prop = type.GetProperty(picker.DisplayName);
-                        picker.Items.Add(prop.GetValue(item).ToString());*/
-
-                    var prop = item.GetType().GetRuntimeProperties().FirstOrDefault
-                        (p => string.Equals(p.Name, picker.DisplayName, StringComparison.OrdinalIgnoreCase));
-                    if (prop != null)
+                    var prop = item.GetType().GetRuntimeProperties().FirstOrDefault(p => string.Equals(p.Name, picker.DisplayName, StringComparison.OrdinalIgnoreCase));
+                    if(prop != null)
                     {
                         picker.Items.Add(prop.GetValue(item).ToString());
                     }
@@ -179,17 +185,20 @@ namespace XamarinFormsDemo.CustomControls
         /// <param name="bindable">The bindable.</param>
         /// <param name="oldvalue">The oldvalue.</param>
         /// <param name="newvalue">The newvalue.</param>
-        private static void OnSelectedItemChanged(BindableObject bindable, object oldvalue, object newvalue)
+        private static void OnSelectedObjectChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             var picker = bindable as ObjectBindablePicker;
 
-            if (picker?.ItemsSource == null)
-            {
+            if (picker?.SelectedObject == null)
                 return;
-            }
-            if (picker.ItemsSource.Contains(picker.SelectedItem))
+
+            if (picker.OriginalItemsSource.Contains(picker.SelectedObject))
             {
-                picker.SelectedIndex = picker.ItemsSource.IndexOf(picker.SelectedItem);
+                picker.SelectedIndex = picker.OriginalItemsSource.IndexOf(picker.SelectedObject);
+            }
+            else
+            {
+                picker.SelectedObject = null;
             }
         }
 
@@ -202,7 +211,7 @@ namespace XamarinFormsDemo.CustomControls
         {
             if (this.SelectedIndex < 0 || this.SelectedIndex > this.Items.Count - 1)
             {
-                this.SelectedItem = null;
+                this.SelectedObject = null;
             }
             else
             {
@@ -212,44 +221,29 @@ namespace XamarinFormsDemo.CustomControls
                     return;
                 }
 
-                this.SelectedItem = this.ItemsSource[this.SelectedIndex];
+                this.SelectedObject = this.OriginalItemsSource[this.SelectedIndex];
 
                 if (string.IsNullOrEmpty(this.SelectedValuePath))
                 {
                     return;
                 }
 
-                var prop = this.SelectedItem.GetType().GetRuntimeProperties().FirstOrDefault
-                    (p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
+                var prop = this.SelectedObject.GetType().GetRuntimeProperties().FirstOrDefault(p => string.Equals(p.Name, picker.SelectedValuePath, StringComparison.OrdinalIgnoreCase));
                 if (prop != null)
                 {
-                    this.SelectedValue = prop.GetValue(this.SelectedItem);
+                    this.SelectedValue = prop.GetValue(this.SelectedObject);
                 }
             }
         }
 
-        public static BindableProperty ItemsSourceProperty = BindableProperty.Create
-            (nameof(ItemsSource), typeof(IList), typeof(ObjectBindablePicker), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
+        public static BindableProperty OriginalItemsSourceProperty = BindableProperty.Create(nameof(OriginalItemsSource), typeof(IList), typeof(ObjectBindablePicker), default(IList), BindingMode.OneWay, null, OnItemsSourceChanged);
 
-        public static BindableProperty SelectedItemProperty = BindableProperty.Create
-            (nameof(SelectedItem), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
+        public static BindableProperty SelectedObjectProperty = BindableProperty.Create(nameof(SelectedObject), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.TwoWay, null, OnSelectedObjectChanged);
 
-        public static BindableProperty SelectedValueProperty = BindableProperty.Create
-            (nameof(SelectedValue), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.OneWayToSource);
+        public static BindableProperty SelectedValueProperty = BindableProperty.Create(nameof(SelectedValue), typeof(object), typeof(ObjectBindablePicker), default(object), BindingMode.OneWayToSource);
 
-        public static BindableProperty SelectedValuePathProperty = BindableProperty.Create
-            (nameof(SelectedValuePath), typeof(string), typeof(ObjectBindablePicker), string.Empty);
+        public static BindableProperty SelectedValuePathProperty = BindableProperty.Create(nameof(SelectedValuePath), typeof(string), typeof(ObjectBindablePicker), string.Empty);
 
-        public static BindableProperty DisplayNameProperty = BindableProperty.Create
-            (nameof(DisplayName), typeof(string), typeof(ObjectBindablePicker), string.Empty, BindingMode.Default, null, OnDisplayNameChanged);
-
-        private static void OnDisplayNameChanged(BindableObject bindable, object oldvalue, object newvalue)
-        {
-            var picker = (ObjectBindablePicker)bindable;
-            if (picker?.ItemsSource != null)
-            {
-                OnItemsSourceChanged(picker, picker.ItemsSource, null);
-            }
-        }
+        public static BindableProperty DisplayNameProperty = BindableProperty.Create(nameof(DisplayName), typeof(string), typeof(ObjectBindablePicker), string.Empty, BindingMode.Default);
     }
 }

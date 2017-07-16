@@ -14,8 +14,8 @@
 
       <customControls:ObjectBindablePicker Grid.Column="0"
                                            x:Name="BindablePicker"
-                                           ItemsSource="{Binding Source={x:Reference control}, Path=ItemsSource}"
-                                           SelectedItem="{Binding Source={x:Reference control}, Path=SelectedItem}"
+                                           OriginalItemsSource="{Binding Source={x:Reference control}, Path=ItemsSource}"
+                                           SelectedObject="{Binding Source={x:Reference control}, Path=SelectedItem}"
                                            DisplayName="{Binding Source={x:Reference control}, Path=DisplayMember}"/>
       <Button Grid.Column="2"
               x:Name="Button"

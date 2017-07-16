@@ -35,11 +35,11 @@ namespace XamarinFormsDemo.View
             this.InitializeComponent();
         }
 
-        protected override void OnDisappearing()
+        /*protected override void OnDisappearing()
         {
             base.OnDisappearing();
             var vm = (PickersViewModel)this.BindingContext;
             vm?.CleanupViewModel();
-        }
+        }*/
     }
 }

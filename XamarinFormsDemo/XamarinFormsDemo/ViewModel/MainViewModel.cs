@@ -1,3 +1,27 @@
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="MainViewModel.cs" company="CodigoEdulis">
+//    Código Edulis 2017
+//    http://www.codigoedulis.es
+//  </copyright>
+//  <summary>
+//     This implementation is a group of the offers of several persons along the network;
+//     because of this, it is under Creative Common By License:
+//     
+//     You are free to:
+// 
+//     Share — copy and redistribute the material in any medium or format
+//     Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+//     
+//     The licensor cannot revoke these freedoms as long as you follow the license terms.
+//     
+//     Under the following terms:
+//     
+//     Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+//     No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+//  
+//  </summary>
+//  --------------------------------------------------------------------------------------------------------------------
+
 namespace XamarinFormsDemo.ViewModel
 {
     using Constants;
@@ -11,18 +35,6 @@ namespace XamarinFormsDemo.ViewModel
     using System.Threading.Tasks;
     using System.Windows.Input;
 
-    /// <summary>
-    ///     This class contains properties that the main View can data bind to.
-    ///     <para>
-    ///         Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    ///     </para>
-    ///     <para>
-    ///         You can also use Blend to data bind with the tool's support.
-    ///     </para>
-    ///     <para>
-    ///         See http://www.galasoft.ch/mvvm
-    ///     </para>
-    /// </summary>
     public class MainViewModel : ParentViewModel
     {
         private ObservableCollection<MyColor> colorsList;
@@ -45,12 +57,6 @@ namespace XamarinFormsDemo.ViewModel
 
         private string selectedValue;
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
-        /// </summary>
-        /// <param name="messenger">The messenger.</param>
-        /// <param name="navigationService">The navigation service.</param>
-        /// <param name="dialogService">The dialog service.</param>
         public MainViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
             : base(messenger, navigationService, dialogService)
         {
@@ -70,6 +76,7 @@ namespace XamarinFormsDemo.ViewModel
             {
                 return this.colorsList;
             }
+
             set
             {
                 this.colorsList = value;
@@ -77,25 +84,17 @@ namespace XamarinFormsDemo.ViewModel
             }
         }
 
-        public ICommand GoToCarouselViewCommand
-            => this.goToCarouselViewCommand ?? (this.goToCarouselViewCommand = new RelayCommand(this.GoToCarouselView));
+        public ICommand GoToCarouselViewCommand => this.goToCarouselViewCommand ?? (this.goToCarouselViewCommand = new RelayCommand(this.GoToCarouselView));
 
-        public ICommand GoToControlTemplatePageCommand
-            => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
+        public ICommand GoToControlTemplatePageCommand => this.goToControlTemplatePageCommand ?? (this.goToControlTemplatePageCommand = new RelayCommand(this.GoToControlTemplatePage));
 
-        public ICommand GoToDynamicListViewScrollingCommand
-            => this.goToDynamicListViewScrollingCommand ?? (this.goToDynamicListViewScrollingCommand = new RelayCommand(this.GoToInfiniteScrollingView));
+        public ICommand GoToDynamicListViewScrollingCommand => this.goToDynamicListViewScrollingCommand ?? (this.goToDynamicListViewScrollingCommand = new RelayCommand(this.GoToInfiniteScrollingView));
 
-        public ICommand GoToPickersViewCommand
-            =>
-                this.goToPickersViewCommand ??
-                    (this.goToPickersViewCommand = new RelayCommand(this.GoToPickersView));
+        public ICommand GoToPickersViewCommand => this.goToPickersViewCommand ?? (this.goToPickersViewCommand = new RelayCommand(this.GoToPickersView));
 
-        public ICommand GoToToolbarWithPickerViewCommand
-            => this.goToToolbarWithPickerViewCommand ?? (this.goToToolbarWithPickerViewCommand = new RelayCommand(this.GoToToolbarWithPickerView));
+        public ICommand GoToToolbarWithPickerViewCommand => this.goToToolbarWithPickerViewCommand ?? (this.goToToolbarWithPickerViewCommand = new RelayCommand(this.GoToToolbarWithPickerView));
 
-        public ICommand OnAppearingCommand
-            => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
+        public ICommand OnAppearingCommand => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 
         public MyColor SelectedColor
         {
@@ -103,6 +102,7 @@ namespace XamarinFormsDemo.ViewModel
             {
                 return this.selectedColor;
             }
+
             set
             {
                 this.selectedColor = value;
@@ -116,6 +116,7 @@ namespace XamarinFormsDemo.ViewModel
             {
                 return this.selectedDot;
             }
+
             set
             {
                 this.selectedDot = value;
@@ -129,6 +130,7 @@ namespace XamarinFormsDemo.ViewModel
             {
                 return this.selectedValue;
             }
+
             set
             {
                 this.selectedValue = value;
@@ -143,7 +145,7 @@ namespace XamarinFormsDemo.ViewModel
         private void GoToInfiniteScrollingView()
         {
             var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(MainViewModel).Name, true);
-            MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
+            this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
 
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
         }
@@ -161,7 +163,8 @@ namespace XamarinFormsDemo.ViewModel
         {
             Debug.WriteLine("¡¡¡¡¡¡ OnAppearing");
             await Task.Delay(1);
-            //await this.DialogService.ShowMessage("OnAppearing", string.Empty);
+
+            // await this.DialogService.ShowMessage("OnAppearing", string.Empty);
         }
     }
 }

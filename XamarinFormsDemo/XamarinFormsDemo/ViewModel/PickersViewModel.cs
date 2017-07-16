@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="ObjectBindablePicker" company="CodigoEdulis">
+// <copyright file="PickersViewModel.cs" company="CodigoEdulis">
 //    Código Edulis 2017
 //    http://www.codigoedulis.es
 //  </copyright>
@@ -38,11 +38,15 @@ namespace XamarinFormsDemo.ViewModel
     {
         private ObservableCollection<MyColor> colorsList;
 
+        private ObservableCollection<MyColor> colorsList2;
+
         private ObservableCollection<MyColor> colorsListAsync;
 
         private MyColor selectedColor;
 
         private MyColor selectedColorAsync;
+
+        private MyColor selectedColor2;
 
         private string selectedValue;
 
@@ -60,6 +64,12 @@ namespace XamarinFormsDemo.ViewModel
             };
             this.SelectedColor = this.ColorsList.First();
 
+            this.ColorsList2 = new ObservableCollection<MyColor>
+            {
+                c1, c2
+            };
+            this.SelectedColor2 = this.ColorsList.Last();
+
             this.ColorsListAsync = new ObservableCollection<MyColor>();
         }
 
@@ -73,6 +83,20 @@ namespace XamarinFormsDemo.ViewModel
             set
             {
                 this.colorsList = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<MyColor> ColorsList2
+        {
+            get
+            {
+                return this.colorsList2;
+            }
+
+            set
+            {
+                this.colorsList2 = value;
                 this.RaisePropertyChanged();
             }
         }
@@ -119,6 +143,20 @@ namespace XamarinFormsDemo.ViewModel
             }
         }
 
+        public MyColor SelectedColor2
+        {
+            get
+            {
+                return this.selectedColor2;
+            }
+
+            set
+            {
+                this.selectedColor2 = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
         public string SelectedValue
         {
             get
@@ -133,24 +171,26 @@ namespace XamarinFormsDemo.ViewModel
             }
         }
 
-        private async Task OnNavigationMessageReceivedAsync(NavigationMessage message)
-        {
-            if(message != null)
-            {
-                await Task.Delay(TimeSpan.FromSeconds(5));
-                this.ColorsListAsync.Add(this.ColorsList.First());
-                this.ColorsListAsync.Add(this.ColorsList.Last());
-                this.SelectedColorAsync = this.ColorsListAsync.Last();
-            }
-        }
-
         public void CleanupViewModel()
         {
             this.ColorsListAsync.Clear();
             this.ColorsList.Clear();
             this.SelectedColorAsync = null;
             this.SelectedColor = null;
-            base.Cleanup();
+            this.Cleanup();
+        }
+
+        private async Task OnNavigationMessageReceivedAsync(NavigationMessage message)
+        {
+            if(message != null)
+            {
+                this.IsBusy = true;
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                this.ColorsListAsync.Add(this.ColorsList.First());
+                this.ColorsListAsync.Add(this.ColorsList.Last());
+                this.SelectedColorAsync = this.ColorsListAsync.Last();
+                this.IsBusy = false;
+            }
         }
     }
 }

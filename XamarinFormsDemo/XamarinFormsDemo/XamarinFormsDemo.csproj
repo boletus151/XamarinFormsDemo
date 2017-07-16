@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants\AppConstants.cs" />
+    <Compile Include="Converters\BoolToNegationConverter.cs" />
     <Compile Include="Converters\HexadecimalToColorConverter.cs" />
     <Compile Include="CustomControls\SwipeCarousel.cs" />
     <Compile Include="CustomControls\DynamicListView.cs" />

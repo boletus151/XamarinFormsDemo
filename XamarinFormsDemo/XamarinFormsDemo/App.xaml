@@ -1,36 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinFormsDemo.App"
              xmlns:viewModel="clr-namespace:XamarinFormsDemo.ViewModel;assembly=XamarinFormsDemo"
              xmlns:converters="clr-namespace:XamarinFormsDemo.Converters;assembly=XamarinFormsDemo">
-  <Application.Resources>
-    <ResourceDictionary>
-      <converters:HexadecimalToColorConverter x:Key="HexadecimalToColorConverter" />
-      
-      <Style x:Key="HeaderTitleStyle" TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="Center"></Setter>
-        <Setter Property="VerticalOptions" Value="Center"></Setter>
-        <Setter Property="FontSize" Value="30"></Setter>
-        <Setter Property="FontAttributes" Value="Bold"></Setter>
-      
-        </Style><Style x:Key="MainTitleStyle" TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="Center"></Setter>
-        <Setter Property="VerticalOptions" Value="Center"></Setter>
-        <Setter Property="FontSize" Value="20"></Setter>
-        <Setter Property="FontAttributes" Value="Bold"></Setter>
-      </Style>
-      
-      <Style x:Key="SubTilteStyle" TargetType="Label" BasedOn="{StaticResource MainTitleStyle}">
-        <Setter Property="FontSize" Value="15"></Setter>
-        <Setter Property="FontAttributes" Value="None"></Setter>
-      </Style>
-      
-      <Style x:Key="NormalTextStyle" TargetType="Label" BasedOn="{StaticResource SubTilteStyle}">
-        <Setter Property="FontSize" Value="12"></Setter>
-      </Style>
-      
-      <viewModel:ViewModelLocator x:Key="Locator"/>
-    </ResourceDictionary>
-  </Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <converters:HexadecimalToColorConverter x:Key="HexadecimalToColorConverter" />
+            <converters:BoolToNegationConverter x:Key="BoolToNegationConverter" />
+
+            <Style x:Key="HeaderTitleStyle"
+                   TargetType="Label">
+                <Setter Property="HorizontalOptions"
+                        Value="Center"></Setter>
+                <Setter Property="VerticalOptions"
+                        Value="Center"></Setter>
+                <Setter Property="FontSize"
+                        Value="30"></Setter>
+                <Setter Property="FontAttributes"
+                        Value="Bold"></Setter>
+
+            </Style>
+            <Style x:Key="MainTitleStyle"
+                   TargetType="Label">
+                <Setter Property="HorizontalOptions"
+                        Value="Center"></Setter>
+                <Setter Property="VerticalOptions"
+                        Value="Center"></Setter>
+                <Setter Property="FontSize"
+                        Value="20"></Setter>
+                <Setter Property="FontAttributes"
+                        Value="Bold"></Setter>
+            </Style>
+
+            <Style x:Key="SubTilteStyle"
+                   TargetType="Label"
+                   BasedOn="{StaticResource MainTitleStyle}">
+                <Setter Property="FontSize"
+                        Value="15"></Setter>
+                <Setter Property="FontAttributes"
+                        Value="None"></Setter>
+            </Style>
+
+            <Style x:Key="NormalTextStyle"
+                   TargetType="Label"
+                   BasedOn="{StaticResource SubTilteStyle}">
+                <Setter Property="FontSize"
+                        Value="12"></Setter>
+            </Style>
+
+            <viewModel:ViewModelLocator x:Key="Locator" />
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
