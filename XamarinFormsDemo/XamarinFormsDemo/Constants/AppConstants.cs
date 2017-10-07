@@ -15,6 +15,8 @@
             public const string MainPage = "MainPage";
 
             public const string ToolbarWithPickerPage = "ToolbarWithPickerPage";
+
+            public const string RadioButtonPage = "RadioButtonPage";
         }
     }
 }

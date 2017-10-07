@@ -49,6 +49,8 @@ namespace XamarinFormsDemo.ViewModel
 
         private ICommand goToToolbarWithPickerViewCommand;
 
+        private ICommand goToRadioButtonPageCommand;
+
         private ICommand onAppearingCommand;
 
         private MyColor selectedColor;
@@ -93,6 +95,8 @@ namespace XamarinFormsDemo.ViewModel
         public ICommand GoToPickersViewCommand => this.goToPickersViewCommand ?? (this.goToPickersViewCommand = new RelayCommand(this.GoToPickersView));
 
         public ICommand GoToToolbarWithPickerViewCommand => this.goToToolbarWithPickerViewCommand ?? (this.goToToolbarWithPickerViewCommand = new RelayCommand(this.GoToToolbarWithPickerView));
+
+        public ICommand GoToRadioButtonPageCommand => this.goToRadioButtonPageCommand ?? (this.goToRadioButtonPageCommand = new RelayCommand(()=>this.NavigationService.NavigateTo(AppConstants.NavigationPages.RadioButtonPage)));
 
         public ICommand OnAppearingCommand => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 

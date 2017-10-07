@@ -29,6 +29,8 @@
         <Button IsVisible="False"
                 Command="{Binding GoToToolbarWithPickerViewCommand}"
                 Text="Go to ToolbarWithPicker Example" />
+        <Button Command="{Binding GoToRadioButtonPageCommand}"
+                Text="Go to Radio Button Example" />
         
     </StackLayout>
 
