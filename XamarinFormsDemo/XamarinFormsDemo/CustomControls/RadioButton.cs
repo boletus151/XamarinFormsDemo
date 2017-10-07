@@ -1,11 +1,27 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RadioButton.cs" company="Pernod Ricard">
-//    Pernod Ricard 2017 - Fase 2.0
-//  </copyright>
-//  <summary>
-//    The definition of  RadioButton.cs
-//  </summary>
-//  --------------------------------------------------------------------------------------------------------------------
+﻿/*--------------------------------------------------------------------------------------------------------------------
+ <copyright file="PageIndicatorDots" company="CodigoEdulis">
+   Código Edulis 2016
+   http://www.codigoedulis.es
+ </copyright>
+ <summary>
+    This implementation is based on: http://chrisriesgo.com/xamarin-forms-carousel-view-recipe/ and https://github.com/chrisriesgo;
+    because of this, it is under Creative Common By License:
+    
+    You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+    Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+    
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+    
+    Under the following terms:
+    
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+ 
+ </summary>
+--------------------------------------------------------------------------------------------------------------------*/
+
 namespace XamarinFormsDemo.CustomControls
 {
     using System;
@@ -13,16 +29,10 @@ namespace XamarinFormsDemo.CustomControls
 
     public class RadioButton : Button
     {
-        #region Constructors
-
         public RadioButton()
         {
             this.Clicked += this.OnClicked;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public bool Checked
         {
@@ -34,19 +44,6 @@ namespace XamarinFormsDemo.CustomControls
             {
                 this.SetValue(CheckedProperty, value);
                 this.OnPropertyChanged();
-                this.RaiseCheckedChanged();
-            }
-        }
-
-        public string UncheckedImage
-        {
-            get
-            {
-                return (string)this.GetValue(UncheckedImageProperty);
-            }
-            set
-            {
-                this.SetValue(UncheckedImageProperty, value);
             }
         }
 
@@ -62,18 +59,28 @@ namespace XamarinFormsDemo.CustomControls
             }
         }
 
-        #endregion
-
-        #region Public Methods
+        public string UncheckedImage
+        {
+            get
+            {
+                return (string)this.GetValue(UncheckedImageProperty);
+            }
+            set
+            {
+                this.SetValue(UncheckedImageProperty, value);
+            }
+        }
 
         public void OnClicked(object sender, EventArgs e)
         {
             this.Checked = !this.Checked;
         }
 
-        #endregion
-
-        #region Private Static Methods
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            OnCheckedChanged(this, this.Checked, this.Checked);
+        }
 
         private static void OnCheckedChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
@@ -83,27 +90,16 @@ namespace XamarinFormsDemo.CustomControls
                 return;
             }
 
-            if (newvalue != null && (Boolean)newvalue)
+            if(newvalue != null && (Boolean)newvalue)
                 radioButton.Image = radioButton.CheckedImage;
             else
                 radioButton.Image = radioButton.UncheckedImage;
         }
 
-        #endregion
+        public static BindableProperty CheckedProperty = BindableProperty.Create(nameof(Checked), typeof(bool?), typeof(RadioButton), false, BindingMode.TwoWay, null, OnCheckedChanged);
 
-        #region Private Methods
-
-        private void RaiseCheckedChanged()
-        {
-            this.CheckedChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        #endregion
-
-        public static BindableProperty CheckedProperty = BindableProperty.Create(nameof(Checked), typeof(bool), typeof(RadioButton), false, BindingMode.OneWay, null, OnCheckedChanged);
         public static BindableProperty CheckedImageProperty = BindableProperty.Create(nameof(CheckedImage), typeof(string), typeof(RadioButton), string.Empty);
-        public static BindableProperty UncheckedImageProperty = BindableProperty.Create(nameof(UncheckedImage), typeof(string), typeof(RadioButton), string.Empty);
 
-        public event EventHandler CheckedChanged;
+        public static BindableProperty UncheckedImageProperty = BindableProperty.Create(nameof(UncheckedImage), typeof(string), typeof(RadioButton), string.Empty);
     }
 }
