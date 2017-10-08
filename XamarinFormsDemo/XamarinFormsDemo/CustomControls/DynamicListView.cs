@@ -98,22 +98,19 @@ namespace XamarinFormsDemo.CustomControls
         private void OnFullItemsSourceChanged(DynamicListView<T> listView)
         {
             var numberOfItems = int.Parse(listView.ItemsPerPage);
-            if(numberOfItems <= 0)
+
+            this.observableList.Clear();
+
+            if (numberOfItems > listView.FullItemsSource.Count)
             {
-                this.observableList.Clear();
+                numberOfItems = listView.FullItemsSource.Count;
             }
-            else
+            var items = listView.FullItemsSource.ToList().GetRange(0, numberOfItems);
+            foreach (var elem in items)
             {
-                if(numberOfItems > listView.FullItemsSource.Count)
-                {
-                    numberOfItems = listView.FullItemsSource.Count;
-                }
-                var items = listView.FullItemsSource.ToList().GetRange(0, numberOfItems);
-                foreach(var elem in items)
-                {
-                    observableList.Add(elem);
-                }
+                this.observableList.Add(elem);
             }
+
         }
 
         /// <summary>
@@ -124,7 +121,7 @@ namespace XamarinFormsDemo.CustomControls
         private void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             var listView = sender as DynamicListView<T>;
-            if(listView?.FullItemsSource == null || (this.observableList.Count == listView.FullItemsSource.Count))
+            if (listView?.FullItemsSource == null || this.observableList.Count == listView.FullItemsSource.Count)
             {
                 return;
             }
@@ -132,25 +129,25 @@ namespace XamarinFormsDemo.CustomControls
             var indexOfItem = this.observableList.IndexOf((T)e.Item);
             var numberOfItems = int.Parse(listView.ItemsPerPage);
 
-            if((indexOfItem > -1) && (e.Item == this.observableList.LastOrDefault()))
+            if (indexOfItem > -1 && e.Item == this.observableList.LastOrDefault())
             {
                 var observableItemsCount = this.observableList.Count;
                 var fullItemsCount = listView.FullItemsSource.Count;
 
-                if(numberOfItems > listView.FullItemsSource.Count)
+                if (numberOfItems > listView.FullItemsSource.Count)
                 {
                     numberOfItems = listView.FullItemsSource.Count;
                 }
 
-                if(numberOfItems > fullItemsCount - observableItemsCount)
+                if (numberOfItems > fullItemsCount - observableItemsCount)
                 {
                     numberOfItems = fullItemsCount - observableItemsCount;
                 }
 
                 var items = listView.FullItemsSource.ToList().GetRange(this.observableList.Count, numberOfItems);
-                foreach(var elem in items)
+                foreach (var elem in items)
                 {
-                    observableList.Add(elem);
+                    this.observableList.Add(elem);
                 }
             }
         }
@@ -159,8 +156,7 @@ namespace XamarinFormsDemo.CustomControls
         ///     The full items source property
         /// </summary>
         public static BindableProperty FullItemsSourceProperty = BindableProperty.Create
-            (
-                nameof(FullItemsSource), typeof(IList<T>), typeof(DynamicListView<T>), default(IList<T>), BindingMode.OneWay, null,
+            (nameof(FullItemsSource), typeof(IList<T>), typeof(DynamicListView<T>), default(IList<T>), BindingMode.OneWay, null,
                 OnFullItemsSourceChanged);
 
         /// <summary>
@@ -169,4 +165,5 @@ namespace XamarinFormsDemo.CustomControls
         public static BindableProperty ItemsPerPageProperty = BindableProperty.Create
             (nameof(ItemsPerPage), typeof(string), typeof(DynamicListView<T>), string.Empty);
     }
+
 }
