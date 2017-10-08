@@ -59,6 +59,18 @@ namespace XamarinFormsDemo.CustomControls
             }
         }
 
+        public double OpacityWhenIsDisabled
+        {
+            get
+            {
+                return (double)this.GetValue(OpacityWhenIsDisabledProperty);
+            }
+            set
+            {
+                this.SetValue(OpacityWhenIsDisabledProperty, value);
+            }
+        }
+
         public string UncheckedImage
         {
             get
@@ -90,16 +102,57 @@ namespace XamarinFormsDemo.CustomControls
                 return;
             }
 
-            if(newvalue != null && (Boolean)newvalue)
+            if(newvalue != null && (bool)newvalue)
                 radioButton.Image = radioButton.CheckedImage;
             else
                 radioButton.Image = radioButton.UncheckedImage;
         }
 
-        public static BindableProperty CheckedProperty = BindableProperty.Create(nameof(Checked), typeof(bool?), typeof(RadioButton), false, BindingMode.TwoWay, null, OnCheckedChanged);
+        private static void OnPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var radioButton = (RadioButton)bindable;
+            if(radioButton == null)
+            {
+                return;
+            }
+            if(newvalue.Equals(1.0))
+            {
+                return;
+            }
+            radioButton.Style = OpacityStyleDataTrigger(radioButton);
+        }
+
+        private static Style OpacityStyleDataTrigger(RadioButton radioButton)
+        {
+            var trigger = new Trigger(typeof(Button))
+            {
+                Property = IsEnabledProperty, Value = false
+            };
+            var setter = new Setter
+            {
+                Property = OpacityProperty, Value = radioButton.OpacityWhenIsDisabled
+            };
+            trigger.Setters.Add(setter);
+
+            var style = new Style(typeof(Button));
+
+            style.Triggers.Add(trigger);
+
+            return style;
+        }
+
+        private static bool OpacityValidateValue(BindableObject bindable, object value)
+        {
+            var opacity = (double?)value;
+            return !(opacity < 0);
+        }
+
+        public static BindableProperty CheckedProperty = BindableProperty.Create(nameof(Checked), typeof(bool), typeof(RadioButton), false, BindingMode.TwoWay, null, OnCheckedChanged);
 
         public static BindableProperty CheckedImageProperty = BindableProperty.Create(nameof(CheckedImage), typeof(string), typeof(RadioButton), string.Empty);
 
         public static BindableProperty UncheckedImageProperty = BindableProperty.Create(nameof(UncheckedImage), typeof(string), typeof(RadioButton), string.Empty);
+
+        public static BindableProperty OpacityWhenIsDisabledProperty = BindableProperty.Create(nameof(OpacityWhenIsDisabled), typeof(double), typeof(RadioButton), 1.0, BindingMode.OneWayToSource, OpacityValidateValue, OnPropertyChanged);
     }
 }
