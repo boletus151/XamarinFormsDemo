@@ -35,7 +35,7 @@ namespace XamarinFormsDemo.ViewModel
     using System.Threading.Tasks;
     using System.Windows.Input;
 
-    public class MainViewModel : ParentViewModel
+    public class MainViewModelFail : ParentViewModel
     {
         private ObservableCollection<MyColor> colorsList;
 
@@ -59,8 +59,39 @@ namespace XamarinFormsDemo.ViewModel
 
         private string selectedValue;
 
-        public MainViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
-            : base(messenger, navigationService, dialogService)
+        private ICommand goToHorizontalListViewPageCommand;
+
+        private void GoToCarouselView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
+
+        private void GoToControlTemplatePage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
+
+        private void GoToInfiniteScrollingView()
+        {
+            var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(MainViewModelFail).Name, true);
+            this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
+
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
+        }
+
+        private void GoToPickersView()
+        {
+            var message = new LoadDataNavigationMessage(this.GetType().Name, nameof(PickersViewModel), true);
+            this.MessengerService.Send<NavigationMessage, PickersViewModel>(message);
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
+        }
+
+        private void GoToToolbarWithPickerView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ToolbarWithPickerPage);
+
+        private async Task OnAppearing()
+        {
+            Debug.WriteLine("　　　 OnAppearing");
+            await Task.Delay(1);
+
+            // await this.DialogService.ShowMessage("OnAppearing", string.Empty);
+        }
+
+        public MainViewModelFail(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
+                                                            : base(messenger, navigationService, dialogService)
         {
             var c1 = new MyColor("Pink", "#FF69B4", @"http://weknowyourdreams.com/images/pink-color/pink-color-05.jpg");
             var c2 = new MyColor("Black", "#000000", @"http://www.color-hex.com/palettes/7449.png");
@@ -97,6 +128,7 @@ namespace XamarinFormsDemo.ViewModel
         public ICommand GoToToolbarWithPickerViewCommand => this.goToToolbarWithPickerViewCommand ?? (this.goToToolbarWithPickerViewCommand = new RelayCommand(this.GoToToolbarWithPickerView));
 
         public ICommand GoToRadioButtonPageCommand => this.goToRadioButtonPageCommand ?? (this.goToRadioButtonPageCommand = new RelayCommand(()=>this.NavigationService.NavigateTo(AppConstants.NavigationPages.RadioButtonPage)));
+        public ICommand GoToHorizontalListViewPageCommand => this.goToHorizontalListViewPageCommand ?? (this.goToHorizontalListViewPageCommand = new RelayCommand(()=>this.NavigationService.NavigateTo(AppConstants.NavigationPages.HorizontalListViewPage)));
 
         public ICommand OnAppearingCommand => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 
@@ -140,35 +172,6 @@ namespace XamarinFormsDemo.ViewModel
                 this.selectedValue = value;
                 this.RaisePropertyChanged();
             }
-        }
-
-        private void GoToCarouselView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
-
-        private void GoToControlTemplatePage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ControlTemplatePage);
-
-        private void GoToInfiniteScrollingView()
-        {
-            var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(MainViewModel).Name, true);
-            this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
-
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
-        }
-
-        private void GoToPickersView()
-        {
-            var message = new LoadDataNavigationMessage(this.GetType().Name, nameof(PickersViewModel), true);
-            this.MessengerService.Send<NavigationMessage, PickersViewModel>(message);
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
-        }
-
-        private void GoToToolbarWithPickerView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ToolbarWithPickerPage);
-
-        private async Task OnAppearing()
-        {
-            Debug.WriteLine("　　　 OnAppearing");
-            await Task.Delay(1);
-
-            // await this.DialogService.ShowMessage("OnAppearing", string.Empty);
         }
     }
 }

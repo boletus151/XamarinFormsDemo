@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinFormsDemo.View.HorizontalListViewPage"
+             BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicList}"
+             xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls"
+             x:Name="thisPage">
+    <StackLayout>
+        <Label Text="Horizontal Listview Scrolling Example"
+               Style="{StaticResource MainTitleStyle}"
+               Margin="0,10" />
+
+        <Label Text="My Colors List"
+               Style="{StaticResource MainTitleStyle}" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   Text="My Colors List Second Title"
+                   Style="{StaticResource MainTitleStyle}" />
+
+            <ScrollView Grid.Row="1"
+                        Orientation="Horizontal">
+                <controls:HorizontalListView ItemsSource="{Binding ColorsList2}"
+                                             MaxNumberOfRows="10">
+                    <controls:HorizontalListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout WidthRequest="100"
+                                         HeightRequest="100"
+                                         BackgroundColor="Pink">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                          Command="{Binding Source={x:Reference thisPage}, Path=BindingContext.ItemTappedCommand}" />
+
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="Soy un color anonimo"
+                                       LineBreakMode="WordWrap">
+                                </Label>
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:HorizontalListView.ItemTemplate>
+                </controls:HorizontalListView>
+            </ScrollView>
+        </Grid>
+
+
+    </StackLayout>
+</ContentPage>

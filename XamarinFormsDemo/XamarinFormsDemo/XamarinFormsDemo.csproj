@@ -41,6 +41,7 @@
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Converters\BoolToNegationConverter.cs" />
     <Compile Include="Converters\HexadecimalToColorConverter.cs" />
+    <Compile Include="CustomControls\HorizontalListView.cs" />
     <Compile Include="CustomControls\RadioButton.cs" />
     <Compile Include="CustomControls\SwipeCarousel.cs" />
     <Compile Include="CustomControls\DynamicListView.cs" />
@@ -51,8 +52,12 @@
       <DependentUpon>ToolbarWithPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CarouselViewModel.cs" />
+    <Compile Include="ViewModel\FirstViewModel.cs" />
     <Compile Include="ViewModel\PickersViewModel.cs" />
     <Compile Include="ViewModel\RadioButtonViewModel.cs" />
+    <Compile Include="View\HorizontalListViewPage.xaml.cs">
+      <DependentUpon>HorizontalListViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -62,7 +67,7 @@
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\ExtendedNavigationService.cs" />
     <Compile Include="ViewModel\DynamicListViewScrollingViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModelFail.cs" />
     <Compile Include="ViewModel\ParentViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\CarouselPage.xaml.cs">
@@ -181,6 +186,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\RadioButtonPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\HorizontalListViewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

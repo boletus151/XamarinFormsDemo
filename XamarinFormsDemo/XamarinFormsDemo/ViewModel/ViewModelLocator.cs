@@ -37,7 +37,7 @@ namespace XamarinFormsDemo.ViewModel
         }
 
         public DynamicListViewScrollingViewModel DynamicList => ServiceLocator.Current.GetInstance<DynamicListViewScrollingViewModel>();
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public FirstViewModel Main => ServiceLocator.Current.GetInstance<FirstViewModel>();
         public CarouselViewModel Carousel => ServiceLocator.Current.GetInstance<CarouselViewModel>();
         public PickersViewModel Pickers => ServiceLocator.Current.GetInstance<PickersViewModel>();
         public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
@@ -58,6 +58,7 @@ namespace XamarinFormsDemo.ViewModel
             nav.Configure(AppConstants.NavigationPages.ObjectBindablePickerPage, typeof(ObjectBindablePickerPage));
             nav.Configure(AppConstants.NavigationPages.ToolbarWithPickerPage, typeof(ToolbarWithPickerPage));
             nav.Configure(AppConstants.NavigationPages.RadioButtonPage, typeof(RadioButtonPage));
+            nav.Configure(AppConstants.NavigationPages.HorizontalListViewPage, typeof(HorizontalListViewPage));
 
             return nav;
         }
@@ -71,7 +72,7 @@ namespace XamarinFormsDemo.ViewModel
 
             SimpleIoc.Default.Register<CarouselViewModel>();
             SimpleIoc.Default.Register<DynamicListViewScrollingViewModel>(true);
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<FirstViewModel>();
             SimpleIoc.Default.Register<ParentViewModel>(true);
             SimpleIoc.Default.Register<PickersViewModel>(true);
             SimpleIoc.Default.Register<RadioButtonViewModel>();

@@ -17,6 +17,8 @@
             public const string ToolbarWithPickerPage = "ToolbarWithPickerPage";
 
             public const string RadioButtonPage = "RadioButtonPage";
+
+            public const string HorizontalListViewPage = "HorizontalListViewPage";
         }
     }
 }
