@@ -13,40 +13,29 @@
         <Label Text="My Colors List"
                Style="{StaticResource MainTitleStyle}" />
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <Label Grid.Row="0"
-                   Text="My Colors List Second Title"
-                   Style="{StaticResource MainTitleStyle}" />
-
-            <ScrollView Grid.Row="1"
-                        Orientation="Horizontal">
-                <controls:HorizontalListView ItemsSource="{Binding ColorsList2}"
-                                             MaxNumberOfRows="10">
-                    <controls:HorizontalListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout WidthRequest="100"
-                                         HeightRequest="100"
-                                         BackgroundColor="Pink">
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                          Command="{Binding Source={x:Reference thisPage}, Path=BindingContext.ItemTappedCommand}" />
-
-                                </StackLayout.GestureRecognizers>
-                                <Label Text="Soy un color anonimo"
-                                       LineBreakMode="WordWrap">
-                                </Label>
-                            </StackLayout>
-                        </DataTemplate>
-                    </controls:HorizontalListView.ItemTemplate>
-                </controls:HorizontalListView>
-            </ScrollView>
-        </Grid>
 
 
+        <ScrollView Orientation="Horizontal">
+            <controls:HorizontalListView ItemsSource="{Binding ColorsList2}"
+                                         MaxNumberOfRows="3">
+                <controls:HorizontalListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout WidthRequest="100"
+                                     HeightRequest="100"
+                                     BindingContext="{Binding}"
+                                     BackgroundColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                      Command="{Binding Source={x:Reference thisPage}, Path=BindingContext.ItemTappedCommand}" />
+
+                            </StackLayout.GestureRecognizers>
+                            <Label Text="{Binding HexadecimalValue}"
+                                   HorizontalTextAlignment="Center">
+                            </Label>
+                        </StackLayout>
+                    </DataTemplate>
+                </controls:HorizontalListView.ItemTemplate>
+            </controls:HorizontalListView>
+        </ScrollView>
     </StackLayout>
 </ContentPage>
