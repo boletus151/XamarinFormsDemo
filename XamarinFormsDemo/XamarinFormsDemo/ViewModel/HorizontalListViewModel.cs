@@ -1,15 +1,31 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="HorizontalListViewModel.cs" company="Pernod Ricard">
-//    Pernod Ricard 2017 - Fase 2.0
+﻿// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="MainViewModel.cs" company="CodigoEdulis">
+//    Código Edulis 2017
+//    http://www.codigoedulis.es
 //  </copyright>
 //  <summary>
-//    The definition of  HorizontalListViewModel.cs
+//     This implementation is a group of the offers of several persons along the network;
+//     because of this, it is under Creative Common By License:
+//     
+//     You are free to:
+// 
+//     Share — copy and redistribute the material in any medium or format
+//     Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+//     
+//     The licensor cannot revoke these freedoms as long as you follow the license terms.
+//     
+//     Under the following terms:
+//     
+//     Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+//     No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+//  
 //  </summary>
 //  --------------------------------------------------------------------------------------------------------------------
 
 namespace XamarinFormsDemo.ViewModel
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using GalaSoft.MvvmLight.Messaging;
@@ -21,7 +37,7 @@ namespace XamarinFormsDemo.ViewModel
     {
         private ObservableCollection<MyColor> colorsList;
 
-        private ObservableCollection<MyColor> colorsListCopy;
+        private readonly List<MyColor> colorsListCopy;
 
         private string filterText;
 
@@ -30,9 +46,18 @@ namespace XamarinFormsDemo.ViewModel
         {
             this.MessengerService.Register<NavigationMessage>(this, this.MessageRecieved);
             this.ColorsList = new ObservableCollection<MyColor>();
-            this.FillListWithColors(20);
-            this.colorsListCopy = new ObservableCollection<MyColor>(this.ColorsList);
+            var list = this.GetColorList(20);
+            this.FillListWithColors(list);
+            this.colorsListCopy = new List<MyColor>(this.ColorsList);
             this.FilterByTextCommand = new Command(this.FiterByTextCommandExecute);
+        }
+
+        private void FillListWithColors(List<MyColor> list)
+        {
+            foreach(var color in list)
+            {
+                this.ColorsList.Add(color);
+            }
         }
 
         public ObservableCollection<MyColor> ColorsList
@@ -63,9 +88,10 @@ namespace XamarinFormsDemo.ViewModel
             }
         }
 
-        private void FillListWithColors(int max = 200)
+        private List<MyColor> GetColorList(int max = 200)
         {
             var random = new Random();
+            var list = new List<MyColor>();
             for(var i = 0; i < max; i++)
             {
                 var hexadecimalColor = random.Next(100000, 999999);
@@ -73,8 +99,9 @@ namespace XamarinFormsDemo.ViewModel
                 {
                     HexadecimalValue = $"#{hexadecimalColor}", Name = i.ToString()
                 };
-                this.ColorsList.Add(color);
+                list.Add(color);
             }
+            return list.OrderBy(e=>e.HexadecimalValue).ToList();
         }
 
         private void FiterByTextCommandExecute()
@@ -82,7 +109,7 @@ namespace XamarinFormsDemo.ViewModel
             this.ColorsList.Clear();
             if (string.IsNullOrEmpty(this.FilterText))
             {
-                this.FillListWithColors(20);
+                this.FillListWithColors(this.colorsListCopy);
             }
             else
             {
