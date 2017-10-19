@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinFormsDemo.View.HorizontalListViewPage"
-             BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicList}"
+             BindingContext="{Binding Source={StaticResource Locator}, Path=HorizontalListVm}"
              xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls"
              x:Name="thisPage">
     <StackLayout>
@@ -14,9 +14,15 @@
                Style="{StaticResource MainTitleStyle}" />
 
 
+        <Entry Text="{Binding FilterText, Mode=TwoWay}"
+               Placeholder="Filter by number"></Entry>
+        <Button Command="{Binding FilterByTextCommand}"
+                Text="Filter By Text"
+                BackgroundColor="Navy"
+                TextColor="White"></Button>
 
         <ScrollView Orientation="Horizontal">
-            <controls:HorizontalListView ItemsSource="{Binding ColorsList2}"
+            <controls:HorizontalListView ItemsSource="{Binding ColorsList}"
                                          MaxNumberOfRows="3">
                 <controls:HorizontalListView.ItemTemplate>
                     <DataTemplate>
@@ -24,11 +30,6 @@
                                      HeightRequest="100"
                                      BindingContext="{Binding}"
                                      BackgroundColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}">
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                      Command="{Binding Source={x:Reference thisPage}, Path=BindingContext.ItemTappedCommand}" />
-
-                            </StackLayout.GestureRecognizers>
                             <Label Text="{Binding HexadecimalValue}"
                                    HorizontalTextAlignment="Center">
                             </Label>

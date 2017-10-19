@@ -1,26 +1,11 @@
-﻿/*--------------------------------------------------------------------------------------------------------------------
- <copyright file="HorizontalListView.cs" company="CodigoEdulis">
-   Código Edulis 2016
-   http://www.codigoedulis.es
- </copyright>
- <summary>
-    This implementation is a group of the offers of several persons along the network;
-    because of this, it is under Creative Common By License:
-    
-    You are free to:
-
-    Share — copy and redistribute the material in any medium or format
-    Adapt — remix, transform, and build upon the material for any purpose, even commercially.
-    
-    The licensor cannot revoke these freedoms as long as you follow the license terms.
-    
-    Under the following terms:
-    
-    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
- 
- </summary>
---------------------------------------------------------------------------------------------------------------------*/
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HorizontalListView.cs" company="Pernod Ricard">
+//    Pernod Ricard 2017 - Fase 2.0
+//  </copyright>
+//  <summary>
+//    The definition of  HorizontalListView.cs
+//  </summary>
+//  --------------------------------------------------------------------------------------------------------------------
 
 namespace XamarinFormsDemo.CustomControls
 {
@@ -33,6 +18,8 @@ namespace XamarinFormsDemo.CustomControls
 
     public class HorizontalListView : Grid
     {
+        private int lastRow;
+
         public IEnumerable ItemsSource
         {
             get
@@ -95,23 +82,25 @@ namespace XamarinFormsDemo.CustomControls
             }
 
             control.Children.Clear();
+            control.RowDefinitions.Clear();
+            control.ColumnDefinitions.Clear();
             var columns = -1;
             var rows = 0;
 
             var requiredRows = control.CheckIfItIsInt();
-            for (var i = 0; i < requiredRows; i++)
+            for(var i = 0; i < requiredRows; i++)
             {
                 control.RowDefinitions.Add(new RowDefinition
                 {
-                    Height = new GridLength(1, GridUnitType.Star)
+                    Height = new GridLength(1, GridUnitType.Auto)
                 });
             }
 
-            foreach (var item in newValueAsEnumerable)
+            foreach(var item in newValueAsEnumerable)
             {
                 var view = control.CreateChildViewFor(item);
 
-                if (rows % requiredRows == 0)
+                if(rows % requiredRows == 0)
                 {
                     control.ColumnDefinitions.Add(new ColumnDefinition
                     {
@@ -127,6 +116,46 @@ namespace XamarinFormsDemo.CustomControls
 
             control.UpdateChildrenLayout();
             control.InvalidateLayout();
+        }
+
+        private void AddNewItem(NotifyCollectionChangedEventArgs e)
+        {
+            var columns = this.ColumnDefinitions.Count;
+            var rows = this.RowDefinitions.Count;
+
+            var requiredRows = this.CheckIfItIsInt();
+
+            if(rows != requiredRows)
+            {
+                for(var i = 0; i < requiredRows; i++)
+                {
+                    this.RowDefinitions.Add(new RowDefinition
+                    {
+                        Height = new GridLength(1, GridUnitType.Auto)
+                    });
+                }
+            }
+            rows = this.lastRow;
+            foreach(var item in e.NewItems)
+            {
+                var view = this.CreateChildViewFor(item);
+
+                if(rows % requiredRows == 0)
+                {
+                    this.ColumnDefinitions.Add(new ColumnDefinition
+                    {
+                        Width = new GridLength(1, GridUnitType.Auto)
+                    });
+                    columns++;
+                    rows = 0;
+                }
+                this.Children.Add(view, columns, rows);
+                rows++;
+                this.OnItemCreated(view);
+            }
+            this.lastRow = rows;
+            this.UpdateChildrenLayout();
+            this.InvalidateLayout();
         }
 
         private int CheckIfItIsInt()
@@ -146,33 +175,30 @@ namespace XamarinFormsDemo.CustomControls
 
         private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var invalidate = false;
-
-            if(e.OldItems != null)
+            switch(e.Action)
             {
-                this.Children.RemoveAt(e.OldStartingIndex);
-                invalidate = true;
+                case NotifyCollectionChangedAction.Reset:
+                    this.ResetControl(e);
+                    return;
+                case NotifyCollectionChangedAction.Add:
+                    this.AddNewItem(e);
+                    break;
             }
+        }
 
-            if(e.NewItems != null)
+        private void ResetControl(NotifyCollectionChangedEventArgs e)
+        {
+            this.lastRow = 0;
+            var oldObservableCollection = e.OldItems as INotifyCollectionChanged;
+            if(oldObservableCollection != null)
             {
-                for(var i = 0; i < e.NewItems.Count; ++i)
-                {
-                    var item = e.NewItems[i];
-                    var view = this.CreateChildViewFor(item);
-
-                    this.Children.Insert(i + e.NewStartingIndex, view);
-                    this.OnItemCreated(view);
-                }
-
-                invalidate = true;
+                oldObservableCollection.CollectionChanged -= this.OnItemsSourceCollectionChanged;
             }
-
-            if(invalidate)
-            {
-                this.UpdateChildrenLayout();
-                this.InvalidateLayout();
-            }
+            this.Children.Clear();
+            this.RowDefinitions.Clear();
+            this.ColumnDefinitions.Clear();
+            this.UpdateChildrenLayout();
+            this.InvalidateLayout();
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(HorizontalListView), null, BindingMode.OneWay, propertyChanged: ItemsChanged);

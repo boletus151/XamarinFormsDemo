@@ -41,6 +41,7 @@ namespace XamarinFormsDemo.ViewModel
         public CarouselViewModel Carousel => ServiceLocator.Current.GetInstance<CarouselViewModel>();
         public PickersViewModel Pickers => ServiceLocator.Current.GetInstance<PickersViewModel>();
         public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
+        public HorizontalListViewModel HorizontalListVm => ServiceLocator.Current.GetInstance<HorizontalListViewModel>();
 
         public static void Cleanup()
         {
@@ -76,6 +77,7 @@ namespace XamarinFormsDemo.ViewModel
             SimpleIoc.Default.Register<ParentViewModel>(true);
             SimpleIoc.Default.Register<PickersViewModel>(true);
             SimpleIoc.Default.Register<RadioButtonViewModel>();
+            SimpleIoc.Default.Register<HorizontalListViewModel>();
         }
 
         public static void SetLocatorProvider()

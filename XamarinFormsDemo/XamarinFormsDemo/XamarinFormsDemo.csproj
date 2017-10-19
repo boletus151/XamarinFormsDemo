@@ -52,6 +52,7 @@
       <DependentUpon>ToolbarWithPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CarouselViewModel.cs" />
+    <Compile Include="ViewModel\HorizontalListViewModel.cs" />
     <Compile Include="ViewModel\FirstViewModel.cs" />
     <Compile Include="ViewModel\PickersViewModel.cs" />
     <Compile Include="ViewModel\RadioButtonViewModel.cs" />
