@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinFormsDemo.View.RegexPage"
+             BindingContext="{Binding Source={StaticResource Locator}, Path=RegexVm}">
+    <ContentPage.Content>
+        <StackLayout Margin="30">
+            <Label Text="Regex Example"
+                   Style="{StaticResource MainTitleStyle}"
+                   Margin="0,10" />
+
+            <Entry Text="{Binding TextValue, Mode=TwoWay}"
+                   Placeholder="Your pattern"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ListView ItemsSource="{Binding PatternList}"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                          HeightRequest="300">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding}"></TextCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <Label Text="{Binding Result, Mode=TwoWay}"
+                   Style="{StaticResource MainTitleStyle}"
+                   Margin="0,10" />
+            <Button Text="Match"
+                    Command="{Binding MatchCommand}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

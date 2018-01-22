@@ -46,7 +46,7 @@ namespace XamarinFormsDemo.ViewModel
         {
             this.MessengerService.Register<NavigationMessage>(this, this.MessageRecieved);
             this.ColorsList = new ObservableCollection<MyColor>();
-            var list = this.GetColorList(20);
+            var list = this.GetColorList(12);
             this.FillListWithColors(list);
             this.colorsListCopy = new List<MyColor>(this.ColorsList);
             this.FilterByTextCommand = new Command(this.FiterByTextCommandExecute);
@@ -54,7 +54,7 @@ namespace XamarinFormsDemo.ViewModel
 
         private void FillListWithColors(List<MyColor> list)
         {
-            foreach(var color in list)
+            foreach (var color in list)
             {
                 this.ColorsList.Add(color);
             }
@@ -92,16 +92,37 @@ namespace XamarinFormsDemo.ViewModel
         {
             var random = new Random();
             var list = new List<MyColor>();
-            for(var i = 0; i < max; i++)
+            for (var i = 0; i < max; i++)
             {
                 var hexadecimalColor = random.Next(100000, 999999);
                 var color = new MyColor
                 {
-                    HexadecimalValue = $"#{hexadecimalColor}", Name = i.ToString()
+                    HexadecimalValue = $"#{hexadecimalColor}",
+                    Name = i.ToString()
                 };
                 list.Add(color);
             }
-            return list.OrderBy(e=>e.HexadecimalValue).ToList();
+            return list.OrderBy(e => e.HexadecimalValue, new HexadecimalStringComarator()).ToList();
+        }
+
+        private class HexadecimalStringComarator : IComparer<string>
+        {
+            public int Compare(string x, string y)
+            {
+                var numX = x?.Replace("#", "");
+                var numY = y?.Replace("#", "");
+                if (numY != null && numX != null)
+                {
+                    var intX = int.Parse(numX);
+                    var intY = int.Parse(numY);
+                    if(intX == intY)
+                    {
+                        return 0;
+                    }
+                    return intX > intY ? 1 : -1;
+                }
+                return -1;
+            }
         }
 
         private void FiterByTextCommandExecute()

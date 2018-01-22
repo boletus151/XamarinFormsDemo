@@ -46,6 +46,7 @@ namespace XamarinFormsDemo.ViewModel
             this.GoToPickersViewCommand = new Command(this.GoToPickersView);
             this.GoToRadioButtonPageCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.RadioButtonPage));
             this.GoToToolbarWithPickerViewCommand = new Command(this.GoToToolbarWithPickerView);
+            this.GoToRegexViewCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.RegexPage));
         }
 
         public ICommand GoToCarouselViewCommand { get; }
@@ -59,6 +60,8 @@ namespace XamarinFormsDemo.ViewModel
         public ICommand GoToRadioButtonPageCommand { get; }
 
         public ICommand GoToToolbarWithPickerViewCommand { get; }
+
+        public ICommand GoToRegexViewCommand { get; }
 
         public ICommand OnAppearingCommand { get; }
 

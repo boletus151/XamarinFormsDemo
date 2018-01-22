@@ -33,6 +33,8 @@
                 Text="Go to Radio Button Example" />
         <Button Command="{Binding GoToHorizontalListViewPageCommand}"
                 Text="Go to Horizontal ListView Example" />
+        <Button Command="{Binding GoToRegexViewCommand}"
+                Text="Go to Regex Example" />
         
     </StackLayout>
 

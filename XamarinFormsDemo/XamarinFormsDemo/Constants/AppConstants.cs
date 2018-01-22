@@ -2,6 +2,8 @@
 {
     public static class AppConstants
     {
+        public const string Decimals = @"\d";
+
         public static class NavigationPages
         {
             public const string ObjectBindablePickerPage = "ObjectBindablePickerPage";
@@ -19,6 +21,8 @@
             public const string RadioButtonPage = "RadioButtonPage";
 
             public const string HorizontalListViewPage = "HorizontalListViewPage";
+
+            public const string RegexPage = "RegexPage";
         }
     }
 }

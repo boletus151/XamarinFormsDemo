@@ -42,6 +42,7 @@ namespace XamarinFormsDemo.ViewModel
         public PickersViewModel Pickers => ServiceLocator.Current.GetInstance<PickersViewModel>();
         public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
         public HorizontalListViewModel HorizontalListVm => ServiceLocator.Current.GetInstance<HorizontalListViewModel>();
+        public RegexViewModel RegexVm => ServiceLocator.Current.GetInstance<RegexViewModel>();
 
         public static void Cleanup()
         {
@@ -60,6 +61,7 @@ namespace XamarinFormsDemo.ViewModel
             nav.Configure(AppConstants.NavigationPages.ToolbarWithPickerPage, typeof(ToolbarWithPickerPage));
             nav.Configure(AppConstants.NavigationPages.RadioButtonPage, typeof(RadioButtonPage));
             nav.Configure(AppConstants.NavigationPages.HorizontalListViewPage, typeof(HorizontalListViewPage));
+            nav.Configure(AppConstants.NavigationPages.RegexPage, typeof(RegexPage));
 
             return nav;
         }
@@ -78,6 +80,7 @@ namespace XamarinFormsDemo.ViewModel
             SimpleIoc.Default.Register<PickersViewModel>(true);
             SimpleIoc.Default.Register<RadioButtonViewModel>();
             SimpleIoc.Default.Register<HorizontalListViewModel>();
+            SimpleIoc.Default.Register<RegexViewModel>();
         }
 
         public static void SetLocatorProvider()

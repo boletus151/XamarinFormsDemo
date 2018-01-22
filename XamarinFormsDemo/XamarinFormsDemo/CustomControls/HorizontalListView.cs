@@ -33,7 +33,7 @@ namespace XamarinFormsDemo.CustomControls
 
     public class HorizontalListView : Grid
     {
-        private readonly int lastColumn = 0;
+        private int lastColumn;
 
         private int lastRow;
 
@@ -85,7 +85,7 @@ namespace XamarinFormsDemo.CustomControls
             }
         }
 
-        public int MaxRowHeight
+        /*public int MaxRowHeight
         {
             get
             {
@@ -95,7 +95,7 @@ namespace XamarinFormsDemo.CustomControls
             {
                 this.SetValue(MaxRowHeightProperty, value);
             }
-        }
+        }*/
 
         protected virtual void OnItemCreated(View view) => this.ItemCreated?.Invoke(this, new HorizontalListViewItemAddedEventArgs(view, view.BindingContext));
 
@@ -127,20 +127,10 @@ namespace XamarinFormsDemo.CustomControls
 
             for(var i = 0; i < control.MaxNumberOfRows; i++)
             {
-                if(control.MaxRowHeight > 0)
+                control.RowDefinitions.Add(new RowDefinition
                 {
-                    control.RowDefinitions.Add(new RowDefinition
-                    {
-                        Height = new GridLength(control.MaxRowHeight, GridUnitType.Auto)
-                    });
-                }
-                else
-                {
-                    control.RowDefinitions.Add(new RowDefinition
-                    {
-                        Height = new GridLength(1, GridUnitType.Auto)
-                    });
-                }
+                    Height = new GridLength(1, GridUnitType.Auto)
+                });
             }
 
             foreach(var item in newValueAsEnumerable)
@@ -149,18 +139,18 @@ namespace XamarinFormsDemo.CustomControls
 
                 if(rows % control.MaxNumberOfRows == 0)
                 {
-                    if(control.MaxColumnWidth > 0)
+                    if (control.MaxColumnWidth > 0)
                     {
                         control.ColumnDefinitions.Add(new ColumnDefinition
                         {
-                            Width = new GridLength(control.MaxColumnWidth, GridUnitType.Auto)
+                            Width = new GridLength(control.MaxColumnWidth, GridUnitType.Absolute)
                         });
                     }
                     else
                     {
                         control.ColumnDefinitions.Add(new ColumnDefinition
                         {
-                            Width = new GridLength(1, GridUnitType.Auto)
+                            Width = new GridLength(1, GridUnitType.Star)
                         });
                     }
                     columns++;
@@ -170,9 +160,6 @@ namespace XamarinFormsDemo.CustomControls
                 rows++;
                 control.OnItemCreated(view);
             }
-
-            control.UpdateChildrenLayout();
-            control.InvalidateLayout();
         }
 
         private void AddNewItem(NotifyCollectionChangedEventArgs e)
@@ -183,20 +170,10 @@ namespace XamarinFormsDemo.CustomControls
             {
                 for(var i = 0; i < this.MaxNumberOfRows; i++)
                 {
-                    //if (this.MaxRowHeight > 0)
-                    //{
-                    //    this.RowDefinitions.Add(new RowDefinition
-                    //    {
-                    //        Height = new GridLength(this.MaxRowHeight)
-                    //    });
-                    //}
-                    //else
+                    this.RowDefinitions.Add(new RowDefinition
                     {
-                        this.RowDefinitions.Add(new RowDefinition
-                        {
-                            Height = new GridLength(1, GridUnitType.Auto)
-                        });
-                    }
+                        Height = new GridLength(1, GridUnitType.Auto)
+                    });
                 }
             }
             var columns = this.lastColumn;
@@ -207,18 +184,18 @@ namespace XamarinFormsDemo.CustomControls
 
                 if(rows % this.MaxNumberOfRows == 0)
                 {
-                    //if (this.MaxColumnWidth > 0)
-                    //{
-                    //    this.ColumnDefinitions.Add(new ColumnDefinition
-                    //    {
-                    //        Width = new GridLength(this.MaxColumnWidth)
-                    //    }); 
-                    //}
-                    //else
+                    if (this.MaxColumnWidth > 0)
                     {
                         this.ColumnDefinitions.Add(new ColumnDefinition
                         {
-                            Width = new GridLength(1, GridUnitType.Auto)
+                            Width = new GridLength(this.MaxColumnWidth, GridUnitType.Absolute)
+                        }); 
+                    }
+                    else
+                    {
+                        this.ColumnDefinitions.Add(new ColumnDefinition
+                        {
+                            Width = new GridLength(1, GridUnitType.Star)
                         });
                     }
                     columns++;
@@ -229,8 +206,7 @@ namespace XamarinFormsDemo.CustomControls
                 this.OnItemCreated(view);
             }
             this.lastRow = rows;
-            this.UpdateChildrenLayout();
-            this.InvalidateLayout();
+            this.lastColumn = columns;
         }
 
         private View CreateChildViewFor(object item)
@@ -255,6 +231,7 @@ namespace XamarinFormsDemo.CustomControls
         private void ResetControl(NotifyCollectionChangedEventArgs e)
         {
             this.lastRow = 0;
+            this.lastColumn = 0;
             var oldObservableCollection = e.OldItems as INotifyCollectionChanged;
             if(oldObservableCollection != null)
             {
@@ -263,8 +240,7 @@ namespace XamarinFormsDemo.CustomControls
             this.Children.Clear();
             this.RowDefinitions.Clear();
             this.ColumnDefinitions.Clear();
-            this.UpdateChildrenLayout();
-            this.InvalidateLayout();
+            this.InvalidateMeasure();
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(HorizontalListView), null, BindingMode.OneWay, propertyChanged: ItemsChanged);
@@ -273,9 +249,11 @@ namespace XamarinFormsDemo.CustomControls
 
         public static readonly BindableProperty MaxNumberOfRowsProperty = BindableProperty.Create(nameof(MaxNumberOfRows), typeof(int), typeof(HorizontalListView), 2, BindingMode.OneWayToSource);
 
+/*
         public static readonly BindableProperty MaxRowHeightProperty = BindableProperty.Create(nameof(MaxRowHeight), typeof(int), typeof(HorizontalListView), 0, BindingMode.OneWayToSource);
-
+*/
         public static readonly BindableProperty MaxColumnWidthProperty = BindableProperty.Create(nameof(MaxColumnWidth), typeof(int), typeof(HorizontalListView), 0, BindingMode.OneWayToSource);
+
 
         public event HorizontalListViewItemAddedEventHandler ItemCreated;
     }

@@ -263,19 +263,19 @@
             try
             {
                 var existingPages = this.navigation.Navigation.NavigationStack.ToList();
-
-                for(var i = existingPages.Count - 2; i >= 0; i--)
+                var lastPage = existingPages.Count - 2;
+                if (lastPage > 0)
                 {
-                    this.navigation.Navigation.RemovePage(existingPages[i]);
+                    for (var i = lastPage; i >= 0; i--)
+                    {
+                        this.navigation.Navigation.RemovePage(existingPages[i]);
+                    }
                 }
             }
             catch(Exception ex)
             {
                 Debug.WriteLine(ex);
             }
-
-            //foreach (var page in existingPages)
-            //    this.navigation.Navigation.RemovePage(page);
         }
 
         /// <summary>

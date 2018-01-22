@@ -23,9 +23,8 @@
 
         <ScrollView Orientation="Horizontal">
             <controls:HorizontalListView ItemsSource="{Binding ColorsList}"
-                                         MaxNumberOfRows="3"
-                                         MaxColumnWidth="100"
-                                         MaxRowHeight="100">
+                                         MaxNumberOfRows="1"
+                                         MaxColumnWidth="200">
                 <controls:HorizontalListView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout WidthRequest="100"
