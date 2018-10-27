@@ -1,17 +1,14 @@
 ﻿namespace XamarinFormsDemo.ViewModel
 {
-    using System.Collections.Generic;
+    using GalaSoft.MvvmLight.Messaging;
+    using GalaSoft.MvvmLight.Views;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using Constants;
-    using GalaSoft.MvvmLight.Messaging;
-    using GalaSoft.MvvmLight.Views;
     using Xamarin.Forms;
 
     public class RegexViewModel : ParentViewModel
     {
-
         #region Private Fields
 
         private string result;

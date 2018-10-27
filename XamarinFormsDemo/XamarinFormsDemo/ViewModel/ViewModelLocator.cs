@@ -4,7 +4,7 @@
       <vm:ViewModelLocator xmlns:vm="clr-namespace:XamarinFormsDemo"
                            x:Key="Locator" />
   </Application.Resources>
-  
+
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 
@@ -14,35 +14,51 @@
 
 namespace XamarinFormsDemo.ViewModel
 {
+    using CommonServiceLocator;
     using Constants;
     using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;
-    using Microsoft.Practices.ServiceLocation;
     using Services;
     using View;
 
     /// <summary>
-    ///     This class contains static references to all the view models in the
-    ///     application and provides an entry point for the bindings.
+    /// This class contains static references to all the view models in the application and provides
+    /// an entry point for the bindings.
     /// </summary>
     public class ViewModelLocator
     {
+        #region Public Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the ViewModelLocator class.
+        /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
         public ViewModelLocator()
         {
             SetLocatorProvider();
         }
 
+        #endregion
+
+        #region Public Properties
+
         public DynamicListViewScrollingViewModel DynamicList => ServiceLocator.Current.GetInstance<DynamicListViewScrollingViewModel>();
+
         public FirstViewModel Main => ServiceLocator.Current.GetInstance<FirstViewModel>();
+
         public CarouselViewModel Carousel => ServiceLocator.Current.GetInstance<CarouselViewModel>();
+
         public PickersViewModel Pickers => ServiceLocator.Current.GetInstance<PickersViewModel>();
+
         public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
+
         public HorizontalListViewModel HorizontalListVm => ServiceLocator.Current.GetInstance<HorizontalListViewModel>();
+
         public RegexViewModel RegexVm => ServiceLocator.Current.GetInstance<RegexViewModel>();
+
+        #endregion
+
+        #region Public Methods
 
         public static void Cleanup()
         {
@@ -87,11 +103,13 @@ namespace XamarinFormsDemo.ViewModel
 
         public static void SetLocatorProvider()
         {
-            if(!ServiceLocator.IsLocationProviderSet)
+            if (!ServiceLocator.IsLocationProviderSet)
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
                 RegisterInIocContainer();
             }
         }
+
+        #endregion
     }
 }

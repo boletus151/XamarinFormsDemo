@@ -1,20 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Views;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Views;
 using Xamarin.Forms;
 
 namespace XamarinFormsDemo.ViewModel
 {
     public class Test01ViewModel : ViewModelBase
     {
+        #region Private Fields
+
         private IDialogService dialogService;
         private string reverseString;
+
+        private string myText;
+
+        #endregion
+
+        #region Private Methods
+
+        private async Task ReverseCommandExectue()
+        {
+            if (string.IsNullOrEmpty(this.MyText))
+            {
+                await this.dialogService.ShowMessage("The input text is empty", "Reverse String Demo");
+            }
+            else
+            {
+                Array myArray = Array.CreateInstance(typeof(String), this.MyText.Length);
+                myArray.SetValue(this.MyText, 0, this.myText.Length);
+                this.ReverseString = myArray.ToString();
+
+                await this.dialogService.ShowMessage($"The input text in reversed order is: {this.ReverseString}", "Reverse String Demo");
+            }
+        }
+
+        #endregion
+
+        #region Public Constructors
+
+        public Test01ViewModel(IDialogService dialogService)
+        {
+            this.ReverseCommand = new Command(async () => await this.ReverseCommandExectue());
+            this.dialogService = dialogService;
+        }
+
+        #endregion
+
+        #region Public Properties
 
         public string ReverseString
         {
@@ -25,9 +59,6 @@ namespace XamarinFormsDemo.ViewModel
                 this.RaisePropertyChanged();
             }
         }
-
-
-        private string myText;
 
         public string MyText
         {
@@ -41,27 +72,6 @@ namespace XamarinFormsDemo.ViewModel
 
         public ICommand ReverseCommand { get; }
 
-        public Test01ViewModel(IDialogService dialogService)
-        {
-            this.ReverseCommand = new Command(async()=> await this.ReverseCommandExectue());
-            this.dialogService = dialogService;
-        }
-
-        private async Task ReverseCommandExectue()
-        {
-            if (string.IsNullOrEmpty(this.MyText))
-            {
-                await this.dialogService.ShowMessage("The input text is empty", "Reverse String Demo");
-
-            }
-            else
-            {
-                Array myArray = Array.CreateInstance(typeof(String), this.MyText.Length);
-                myArray.SetValue(this.MyText, 0, this.myText.Length);
-                this.ReverseString = myArray.ToString();
-
-                await this.dialogService.ShowMessage($"The input text in reversed order is: {this.ReverseString}", "Reverse String Demo");
-            }
-        }
+        #endregion
     }
 }

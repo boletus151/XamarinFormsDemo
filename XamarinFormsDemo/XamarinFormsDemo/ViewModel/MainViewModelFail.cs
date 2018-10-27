@@ -1,26 +1,26 @@
 // -------------------------------------------------------------------------------------------------------------------
 // <copyright file="MainViewModel.cs" company="CodigoEdulis">
-//    Código Edulis 2017
-//    http://www.codigoedulis.es
-//  </copyright>
-//  <summary>
-//     This implementation is a group of the offers of several persons along the network;
-//     because of this, it is under Creative Common By License:
-//     
-//     You are free to:
-// 
-//     Share — copy and redistribute the material in any medium or format
-//     Adapt — remix, transform, and build upon the material for any purpose, even commercially.
-//     
-//     The licensor cannot revoke these freedoms as long as you follow the license terms.
-//     
-//     Under the following terms:
-//     
-//     Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-//     No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
-//  
-//  </summary>
-//  --------------------------------------------------------------------------------------------------------------------
+//     Código Edulis 2017 http://www.codigoedulis.es
+// </copyright>
+// <summary>
+// This implementation is a group of the offers of several persons along the network; because of
+// this, it is under Creative Common By License:
+//
+// You are free to:
+//
+// Share — copy and redistribute the material in any medium or format Adapt — remix, transform, and
+// build upon the material for any purpose, even commercially.
+//
+// The licensor cannot revoke these freedoms as long as you follow the license terms.
+//
+// Under the following terms:
+//
+// Attribution — You must give appropriate credit, provide a link to the license, and indicate if
+// changes were made. You may do so in any reasonable manner, but not in any way that suggests the
+// licensor endorses you or your use. No additional restrictions — You may not apply legal terms or
+// technological measures that legally restrict others from doing anything the license permits.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace XamarinFormsDemo.ViewModel
 {
@@ -37,6 +37,8 @@ namespace XamarinFormsDemo.ViewModel
 
     public class MainViewModelFail : ParentViewModel
     {
+        #region Private Fields
+
         private ObservableCollection<MyColor> colorsList;
 
         private ICommand goToCarouselViewCommand;
@@ -60,6 +62,10 @@ namespace XamarinFormsDemo.ViewModel
         private string selectedValue;
 
         private ICommand goToHorizontalListViewPageCommand;
+
+        #endregion
+
+        #region Private Methods
 
         private void GoToCarouselView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
 
@@ -90,6 +96,10 @@ namespace XamarinFormsDemo.ViewModel
             // await this.DialogService.ShowMessage("OnAppearing", string.Empty);
         }
 
+        #endregion
+
+        #region Public Constructors
+
         public MainViewModelFail(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
                                                             : base(messenger, navigationService, dialogService)
         {
@@ -102,6 +112,10 @@ namespace XamarinFormsDemo.ViewModel
             };
             this.SelectedColor = this.ColorsList.First();
         }
+
+        #endregion
+
+        #region Public Properties
 
         public ObservableCollection<MyColor> ColorsList
         {
@@ -127,8 +141,9 @@ namespace XamarinFormsDemo.ViewModel
 
         public ICommand GoToToolbarWithPickerViewCommand => this.goToToolbarWithPickerViewCommand ?? (this.goToToolbarWithPickerViewCommand = new RelayCommand(this.GoToToolbarWithPickerView));
 
-        public ICommand GoToRadioButtonPageCommand => this.goToRadioButtonPageCommand ?? (this.goToRadioButtonPageCommand = new RelayCommand(()=>this.NavigationService.NavigateTo(AppConstants.NavigationPages.RadioButtonPage)));
-        public ICommand GoToHorizontalListViewPageCommand => this.goToHorizontalListViewPageCommand ?? (this.goToHorizontalListViewPageCommand = new RelayCommand(()=>this.NavigationService.NavigateTo(AppConstants.NavigationPages.HorizontalListViewPage)));
+        public ICommand GoToRadioButtonPageCommand => this.goToRadioButtonPageCommand ?? (this.goToRadioButtonPageCommand = new RelayCommand(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.RadioButtonPage)));
+
+        public ICommand GoToHorizontalListViewPageCommand => this.goToHorizontalListViewPageCommand ?? (this.goToHorizontalListViewPageCommand = new RelayCommand(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.HorizontalListViewPage)));
 
         public ICommand OnAppearingCommand => this.onAppearingCommand ?? (this.onAppearingCommand = new RelayCommand(async () => await this.OnAppearing()));
 
@@ -173,5 +188,7 @@ namespace XamarinFormsDemo.ViewModel
                 this.RaisePropertyChanged();
             }
         }
+
+        #endregion
     }
 }

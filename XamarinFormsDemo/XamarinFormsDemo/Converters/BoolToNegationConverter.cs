@@ -6,6 +6,8 @@
 
     public class BoolToNegationConverter : IValueConverter
     {
+        #region Public Methods
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return !(value is bool && (bool)value);
@@ -15,5 +17,7 @@
         {
             return !(value is bool && (bool)value);
         }
+
+        #endregion
     }
 }

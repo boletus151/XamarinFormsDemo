@@ -1,9 +1,10 @@
 ﻿namespace XamarinFormsDemo
 {
+    using CommonServiceLocator;
     using Constants;
     using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Views;
-    using Microsoft.Practices.ServiceLocation;
+    
     using Services;
     using View;
     using ViewModel;

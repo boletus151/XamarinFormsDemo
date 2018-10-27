@@ -4,16 +4,22 @@
 
     public abstract class NavigationMessage : MessageBase
     {
+        #region Protected Constructors
+
         protected NavigationMessage(object sender, object target)
             : base(sender, target)
         {
         }
+
+        #endregion
     }
 
     public class MyColorNavigationMessage : NavigationMessage
     {
+        #region Public Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MyColorNavigationMessage" /> class.
+        /// Initializes a new instance of the <see cref="MyColorNavigationMessage"/> class.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="target">The target.</param>
@@ -26,16 +32,22 @@
             this.MyColor = myColor;
         }
 
-        /// <value>
-        ///     The MyColor.
-        /// </value>
+        #endregion
+
+        #region Public Properties
+
+        /// <value>The MyColor.</value>
         public MyColor MyColor { get; set; }
+
+        #endregion
     }
 
     public class LoadDataNavigationMessage : NavigationMessage
     {
+        #region Public Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="MyColorNavigationMessage" /> class.
+        /// Initializes a new instance of the <see cref="MyColorNavigationMessage"/> class.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="target">The target.</param>
@@ -48,9 +60,13 @@
             this.LoadData = loadData;
         }
 
-        /// <value>
-        ///     The MyColor.
-        /// </value>
+        #endregion
+
+        #region Public Properties
+
+        /// <value>The MyColor.</value>
         public bool LoadData { get; set; }
+
+        #endregion
     }
 }

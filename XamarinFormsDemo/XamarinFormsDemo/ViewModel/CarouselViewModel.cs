@@ -1,36 +1,30 @@
 namespace XamarinFormsDemo.ViewModel
 {
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Windows.Input;
-    using Constants;
-    using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;
     using Model;
+    using System.Collections.ObjectModel;
 
     /// <summary>
-    ///     This class contains properties that the main View can data bind to.
-    ///     <para>
-    ///         Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    ///     </para>
-    ///     <para>
-    ///         You can also use Blend to data bind with the tool's support.
-    ///     </para>
-    ///     <para>
-    ///         See http://www.galasoft.ch/mvvm
-    ///     </para>
+    /// This class contains properties that the main View can data bind to.
+    /// <para>Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.</para>
+    /// <para>You can also use Blend to data bind with the tool's support.</para>
+    /// <para>See http://www.galasoft.ch/mvvm</para>
     /// </summary>
     public class CarouselViewModel : ParentViewModel
     {
+        #region Private Fields
+
         private ObservableCollection<MyColor> colorsList;
-        
+
         private MyColor selectedDot;
 
+        #endregion
+
+        #region Public Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CarouselViewModel" /> class.
+        /// Initializes a new instance of the <see cref="CarouselViewModel"/> class.
         /// </summary>
         /// <param name="messenger">The messenger.</param>
         /// <param name="navigationService">The navigation service.</param>
@@ -46,6 +40,10 @@ namespace XamarinFormsDemo.ViewModel
                 c1, c2
             };
         }
+
+        #endregion
+
+        #region Public Properties
 
         public ObservableCollection<MyColor> ColorsList
         {
@@ -71,6 +69,8 @@ namespace XamarinFormsDemo.ViewModel
                 this.selectedDot = value;
                 this.RaisePropertyChanged();
             }
-        }       
+        }
+
+        #endregion
     }
 }

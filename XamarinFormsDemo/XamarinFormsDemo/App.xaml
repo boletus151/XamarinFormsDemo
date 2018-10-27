@@ -1,55 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinFormsDemo.App"
-             xmlns:viewModel="clr-namespace:XamarinFormsDemo.ViewModel;assembly=XamarinFormsDemo"
-             xmlns:converters="clr-namespace:XamarinFormsDemo.Converters;assembly=XamarinFormsDemo">
-    <Application.Resources>
-        <ResourceDictionary>
-            <converters:HexadecimalToColorConverter x:Key="HexadecimalToColorConverter" />
-            <converters:BoolToNegationConverter x:Key="BoolToNegationConverter" />
-
-            <Style x:Key="HeaderTitleStyle"
-                   TargetType="Label">
-                <Setter Property="HorizontalOptions"
-                        Value="Center"></Setter>
-                <Setter Property="VerticalOptions"
-                        Value="Center"></Setter>
-                <Setter Property="FontSize"
-                        Value="30"></Setter>
-                <Setter Property="FontAttributes"
-                        Value="Bold"></Setter>
-
-            </Style>
-            <Style x:Key="MainTitleStyle"
-                   TargetType="Label">
-                <Setter Property="HorizontalOptions"
-                        Value="Center"></Setter>
-                <Setter Property="VerticalOptions"
-                        Value="Center"></Setter>
-                <Setter Property="FontSize"
-                        Value="20"></Setter>
-                <Setter Property="FontAttributes"
-                        Value="Bold"></Setter>
-            </Style>
-
-            <Style x:Key="SubTilteStyle"
-                   TargetType="Label"
-                   BasedOn="{StaticResource MainTitleStyle}">
-                <Setter Property="FontSize"
-                        Value="15"></Setter>
-                <Setter Property="FontAttributes"
-                        Value="None"></Setter>
-            </Style>
-
-            <Style x:Key="NormalTextStyle"
-                   TargetType="Label"
-                   BasedOn="{StaticResource SubTilteStyle}">
-                <Setter Property="FontSize"
-                        Value="12"></Setter>
-            </Style>
-
-            <viewModel:ViewModelLocator x:Key="Locator" />
-        </ResourceDictionary>
-    </Application.Resources>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinFormsDemo.App" xmlns:viewModel="clr-namespace:XamarinFormsDemo.ViewModel;assembly=XamarinFormsDemo" xmlns:converters="clr-namespace:XamarinFormsDemo.Converters;assembly=XamarinFormsDemo" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <Application.Resources>
+    <ResourceDictionary>
+      <converters:HexadecimalToColorConverter x:Key="HexadecimalToColorConverter" />
+      <converters:BoolToNegationConverter x:Key="BoolToNegationConverter" />
+      <Style x:Key="HeaderTitleStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="Center">
+        </Setter>
+        <Setter Property="VerticalOptions" Value="Center">
+        </Setter>
+        <Setter Property="FontSize" Value="30">
+        </Setter>
+        <Setter Property="FontAttributes" Value="Bold">
+        </Setter>
+      </Style>
+      <Style x:Key="MainTitleStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="Center">
+        </Setter>
+        <Setter Property="VerticalOptions" Value="Center">
+        </Setter>
+        <Setter Property="FontSize" Value="20">
+        </Setter>
+        <Setter Property="FontAttributes" Value="Bold">
+        </Setter>
+      </Style>
+      <Style x:Key="SubTilteStyle" TargetType="Label" BasedOn="{StaticResource MainTitleStyle}">
+        <Setter Property="FontSize" Value="15">
+        </Setter>
+        <Setter Property="FontAttributes" Value="None">
+        </Setter>
+      </Style>
+      <Style x:Key="NormalTextStyle" TargetType="Label" BasedOn="{StaticResource SubTilteStyle}">
+        <Setter Property="FontSize" Value="12">
+        </Setter>
+      </Style>
+      <viewModel:ViewModelLocator x:Key="Locator" />
+      <vm:ViewModelLocator d4p1:Key="Locator" d:IsDataSource="True" xmlns:d4p1="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:vm="clr-namespace:XamarinFormsDemo.ViewModel" />
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>

@@ -1,13 +1,19 @@
 ﻿namespace XamarinFormsDemo.Services
 {
+    using GalaSoft.MvvmLight.Views;
     using System;
     using System.Threading.Tasks;
-    using GalaSoft.MvvmLight.Views;
     using Xamarin.Forms;
 
     public class DialogService : IDialogService
     {
+        #region Private Fields
+
         private Page dialogPage;
+
+        #endregion
+
+        #region Public Methods
 
         public async Task ShowError(string message, string title, string buttonText, Action afterHideCallback)
         {
@@ -54,5 +60,7 @@
         {
             this.dialogPage = dialog;
         }
+
+        #endregion
     }
 }
