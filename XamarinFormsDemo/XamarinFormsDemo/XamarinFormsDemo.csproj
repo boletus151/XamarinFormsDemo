@@ -57,6 +57,7 @@
     <Compile Include="ViewModel\PickersViewModel.cs" />
     <Compile Include="ViewModel\RadioButtonViewModel.cs" />
     <Compile Include="ViewModel\RegexViewModel.cs" />
+    <Compile Include="ViewModel\Test01ViewModel.cs" />
     <Compile Include="View\HorizontalListViewPage.xaml.cs">
       <DependentUpon>HorizontalListViewPage.xaml</DependentUpon>
     </Compile>
@@ -89,6 +90,9 @@
     </Compile>
     <Compile Include="View\RegexPage.xaml.cs">
       <DependentUpon>RegexPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\test01.xaml.cs">
+      <DependentUpon>test01.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ToolbarWithPickerPage.xaml.cs">
       <DependentUpon>ToolbarWithPickerPage.xaml</DependentUpon>
@@ -203,6 +207,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\RegexPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\test01.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

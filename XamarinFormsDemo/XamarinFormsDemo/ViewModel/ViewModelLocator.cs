@@ -62,6 +62,7 @@ namespace XamarinFormsDemo.ViewModel
             nav.Configure(AppConstants.NavigationPages.RadioButtonPage, typeof(RadioButtonPage));
             nav.Configure(AppConstants.NavigationPages.HorizontalListViewPage, typeof(HorizontalListViewPage));
             nav.Configure(AppConstants.NavigationPages.RegexPage, typeof(RegexPage));
+            nav.Configure(AppConstants.NavigationPages.Test01Page, typeof(test01));
 
             return nav;
         }
@@ -81,6 +82,7 @@ namespace XamarinFormsDemo.ViewModel
             SimpleIoc.Default.Register<RadioButtonViewModel>();
             SimpleIoc.Default.Register<HorizontalListViewModel>();
             SimpleIoc.Default.Register<RegexViewModel>();
+            SimpleIoc.Default.Register<Test01ViewModel>();
         }
 
         public static void SetLocatorProvider()

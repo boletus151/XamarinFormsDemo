@@ -23,6 +23,8 @@
             public const string HorizontalListViewPage = "HorizontalListViewPage";
 
             public const string RegexPage = "RegexPage";
+
+            public const string Test01Page = "Test01Page";
         }
     }
 }

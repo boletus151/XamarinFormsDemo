@@ -11,31 +11,34 @@
         </b:BehaviorCollection>
     </b:Interaction.Behaviors>
 
-    <StackLayout>
-        <Label Text="Xamarin Forms Demo App"
-               Style="{StaticResource HeaderTitleStyle}"
-               Margin="0,10" />
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Xamarin Forms Demo App"
+                   Style="{StaticResource HeaderTitleStyle}"
+                   Margin="0,10" />
 
-        <Button Text="OnAppearing Event writes log on output."
-                IsEnabled="False" />
-        <Button Command="{Binding GoToControlTemplatePageCommand}"
-                Text="Go to Control Template Example" />
-        <Button Command="{Binding GoToPickersViewCommand}"
-                Text="Go to Object Bindable Picker Example" />
-        <Button Command="{Binding GoToDynamicListViewScrollingCommand}"
-                Text="Go to Dynamic List Scrolling Example" />
-        <Button Command="{Binding GoToCarouselViewCommand}"
-                Text="Go to Carousel Example" />
-        <Button IsVisible="False"
-                Command="{Binding GoToToolbarWithPickerViewCommand}"
-                Text="Go to ToolbarWithPicker Example" />
-        <Button Command="{Binding GoToRadioButtonPageCommand}"
-                Text="Go to Radio Button Example" />
-        <Button Command="{Binding GoToHorizontalListViewPageCommand}"
-                Text="Go to Horizontal ListView Example" />
-        <Button Command="{Binding GoToRegexViewCommand}"
-                Text="Go to Regex Example" />
-        
-    </StackLayout>
+            <Button Text="OnAppearing Event writes log on output."
+                    IsEnabled="False" />
+            <Button Command="{Binding GoToControlTemplatePageCommand}"
+                    Text="Go to Control Template Example" />
+            <Button Command="{Binding GoToPickersViewCommand}"
+                    Text="Go to Object Bindable Picker Example" />
+            <Button Command="{Binding GoToDynamicListViewScrollingCommand}"
+                    Text="Go to Dynamic List Scrolling Example" />
+            <Button Command="{Binding GoToCarouselViewCommand}"
+                    Text="Go to Carousel Example" />
+            <Button IsVisible="False"
+                    Command="{Binding GoToToolbarWithPickerViewCommand}"
+                    Text="Go to ToolbarWithPicker Example" />
+            <Button Command="{Binding GoToRadioButtonPageCommand}"
+                    Text="Go to Radio Button Example" />
+            <Button Command="{Binding GoToHorizontalListViewPageCommand}"
+                    Text="Go to Horizontal ListView Example" />
+            <Button Command="{Binding GoToRegexViewCommand}"
+                    Text="Go to Regex Example" />
+            <Button Command="{Binding GoToTestViewCommand}"
+                    Text="Go to Test String Example" />
 
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
