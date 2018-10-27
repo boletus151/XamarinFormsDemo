@@ -2,40 +2,49 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinFormsDemo.MainPage"
-             xmlns:b="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
-             BindingContext="{Binding Source={StaticResource Locator}, Path=Main}">
-    <b:Interaction.Behaviors>
-        <b:BehaviorCollection>
-            <b:EventToCommand EventName="Appearing"
-                              Command="{Binding OnAppearingCommand}" />
-        </b:BehaviorCollection>
-    </b:Interaction.Behaviors>
+             BindingContext="{Binding Source={StaticResource Locator}, Path=MainVm}"
+             x:Name="thisPage">
+    
+    
 
-    <StackLayout>
-        <Label Text="Xamarin Forms Demo App"
-               Style="{StaticResource HeaderTitleStyle}"
-               Margin="0,10" />
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Xamarin Forms Demo App"
+                   Style="{StaticResource HeaderTitleStyle}"
+                   Margin="0,10" />
 
-        <Button Text="OnAppearing Event writes log on output."
-                IsEnabled="False" />
-        <Button Command="{Binding GoToControlTemplatePageCommand}"
-                Text="Go to Control Template Example" />
-        <Button Command="{Binding GoToPickersViewCommand}"
-                Text="Go to Object Bindable Picker Example" />
-        <Button Command="{Binding GoToDynamicListViewScrollingCommand}"
-                Text="Go to Dynamic List Scrolling Example" />
-        <Button Command="{Binding GoToCarouselViewCommand}"
-                Text="Go to Carousel Example" />
-        <Button IsVisible="False"
-                Command="{Binding GoToToolbarWithPickerViewCommand}"
-                Text="Go to ToolbarWithPicker Example" />
-        <Button Command="{Binding GoToRadioButtonPageCommand}"
-                Text="Go to Radio Button Example" />
-        <Button Command="{Binding GoToHorizontalListViewPageCommand}"
-                Text="Go to Horizontal ListView Example" />
-        <Button Command="{Binding GoToRegexViewCommand}"
-                Text="Go to Regex Example" />
-        
-    </StackLayout>
+            <Button Text="OnAppearing Event writes log on output."
+                    IsEnabled="False" />
 
+            <Button Command="{Binding GoToControlTemplatePageCommand}"
+                    Text="Go to Control Template Example" />
+
+            <Button Command="{Binding GoToPickersPageCommand}"
+                    Text="Go to Object Bindable Picker Example" />
+
+            <Button Command="{Binding GoToDynamicListViewScrollingPageCommand}"
+                    Text="Go to Dynamic List Scrolling Example" />
+
+            <Button IsEnabled="False"
+                    Command="{Binding GoToCarouselPageCommand}"
+                    Text="Go to Carousel Example (to review)"/>
+            
+            <Button IsVisible="False"
+                    Command="{Binding GoToToolbarWithPickerPageCommand}"
+                    Text="Go to ToolbarWithPicker Example" />
+
+            <Button Command="{Binding GoToRadioButtonPageCommand}"
+                    Text="Go to Radio Button Example" />
+
+            <Button Command="{Binding GoToHorizontalListViewPageCommand}"
+                    Text="Go to Horizontal ListView Example" />
+
+            <Button Command="{Binding GoToRegexPageCommand}"
+                    Text="Go to Regex Example" />
+
+            <Button Command="{Binding GoToReverseStringPageCommand}"
+                    Text="Go to Test String Example" />
+
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,9 +1,10 @@
 ﻿namespace XamarinFormsDemo
 {
+    using CommonServiceLocator;
     using Constants;
     using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Views;
-    using Microsoft.Practices.ServiceLocation;
+    
     using Services;
     using View;
     using ViewModel;
@@ -34,7 +35,11 @@
             var navPage = new NavigationPage(new MainPage());
             var nav = ServiceLocator.Current.GetInstance<INavigationService>() as ExtendedNavigationService;
             nav?.Initialize(navPage);
+
             this.MainPage = navPage;
+
+            var dialog = ServiceLocator.Current.GetInstance<IDialogService>() as DialogService;
+            dialog?.Initialize(this.MainPage);
         }
     }
 }

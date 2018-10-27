@@ -1,11 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:customControls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
+             x:Class="XamarinFormsDemo.View.DynamicListViewPage"
              xmlns:myModel="clr-namespace:XamarinFormsDemo.Model;assembly=XamarinFormsDemo"
-             x:Class="XamarinFormsDemo.View.DynamicListViewScrollingPage"
-             BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicList}">
-
+             xmlns:customControls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
+             BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicListVm}">
     <StackLayout>
         <Label Text="Dynamic Listview Scrolling Example"
                Style="{StaticResource MainTitleStyle}"
@@ -23,7 +22,7 @@
 
             <StackLayout Grid.Row="0">
                 <Label Text="My color list loaded from constructor"
-                       Style="{StaticResource SubTilteStyle}"/>
+                       Style="{StaticResource SubTilteStyle}" />
                 <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
                                                 FullItemsSource="{Binding ColorsList}"
                                                 ItemsPerPage="15">
@@ -64,4 +63,5 @@
             </StackLayout>
         </Grid>
     </StackLayout>
+
 </ContentPage>

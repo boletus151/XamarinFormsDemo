@@ -3,52 +3,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinFormsDemo.App"
              xmlns:viewModel="clr-namespace:XamarinFormsDemo.ViewModel;assembly=XamarinFormsDemo"
-             xmlns:converters="clr-namespace:XamarinFormsDemo.Converters;assembly=XamarinFormsDemo">
+             xmlns:converters="clr-namespace:XamarinFormsDemo.Converters;assembly=XamarinFormsDemo"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d1p1:Ignorable="d"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <Application.Resources>
         <ResourceDictionary>
             <converters:HexadecimalToColorConverter x:Key="HexadecimalToColorConverter" />
             <converters:BoolToNegationConverter x:Key="BoolToNegationConverter" />
-
             <Style x:Key="HeaderTitleStyle"
                    TargetType="Label">
                 <Setter Property="HorizontalOptions"
-                        Value="Center"></Setter>
+                        Value="Center">
+                </Setter>
                 <Setter Property="VerticalOptions"
-                        Value="Center"></Setter>
+                        Value="Center">
+                </Setter>
                 <Setter Property="FontSize"
-                        Value="30"></Setter>
+                        Value="30">
+                </Setter>
                 <Setter Property="FontAttributes"
-                        Value="Bold"></Setter>
-
+                        Value="Bold">
+                </Setter>
             </Style>
             <Style x:Key="MainTitleStyle"
                    TargetType="Label">
                 <Setter Property="HorizontalOptions"
-                        Value="Center"></Setter>
+                        Value="Center">
+                </Setter>
                 <Setter Property="VerticalOptions"
-                        Value="Center"></Setter>
+                        Value="Center">
+                </Setter>
                 <Setter Property="FontSize"
-                        Value="20"></Setter>
+                        Value="20">
+                </Setter>
                 <Setter Property="FontAttributes"
-                        Value="Bold"></Setter>
+                        Value="Bold">
+                </Setter>
             </Style>
-
             <Style x:Key="SubTilteStyle"
                    TargetType="Label"
                    BasedOn="{StaticResource MainTitleStyle}">
                 <Setter Property="FontSize"
-                        Value="15"></Setter>
+                        Value="15">
+                </Setter>
                 <Setter Property="FontAttributes"
-                        Value="None"></Setter>
+                        Value="None">
+                </Setter>
             </Style>
-
             <Style x:Key="NormalTextStyle"
                    TargetType="Label"
                    BasedOn="{StaticResource SubTilteStyle}">
                 <Setter Property="FontSize"
-                        Value="12"></Setter>
+                        Value="12">
+                </Setter>
             </Style>
-
             <viewModel:ViewModelLocator x:Key="Locator" />
         </ResourceDictionary>
     </Application.Resources>

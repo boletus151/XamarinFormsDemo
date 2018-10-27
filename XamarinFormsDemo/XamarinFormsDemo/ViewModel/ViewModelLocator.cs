@@ -4,7 +4,7 @@
       <vm:ViewModelLocator xmlns:vm="clr-namespace:XamarinFormsDemo"
                            x:Key="Locator" />
   </Application.Resources>
-  
+
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 
@@ -14,35 +14,46 @@
 
 namespace XamarinFormsDemo.ViewModel
 {
+    using CommonServiceLocator;
     using Constants;
     using GalaSoft.MvvmLight.Ioc;
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;
-    using Microsoft.Practices.ServiceLocation;
     using Services;
     using View;
 
     /// <summary>
-    ///     This class contains static references to all the view models in the
-    ///     application and provides an entry point for the bindings.
+    /// This class contains static references to all the view models in the application and provides
+    /// an entry point for the bindings.
     /// </summary>
     public class ViewModelLocator
     {
+        #region Public Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the ViewModelLocator class.
+        /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
         public ViewModelLocator()
         {
             SetLocatorProvider();
         }
 
-        public DynamicListViewScrollingViewModel DynamicList => ServiceLocator.Current.GetInstance<DynamicListViewScrollingViewModel>();
-        public FirstViewModel Main => ServiceLocator.Current.GetInstance<FirstViewModel>();
-        public CarouselViewModel Carousel => ServiceLocator.Current.GetInstance<CarouselViewModel>();
-        public PickersViewModel Pickers => ServiceLocator.Current.GetInstance<PickersViewModel>();
-        public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
+        #endregion
+
+        #region Public Properties
+
+        public CarouselViewModel CarouselVm => ServiceLocator.Current.GetInstance<CarouselViewModel>();
+        public DynamicListViewScrollingViewModel DynamicListVm => ServiceLocator.Current.GetInstance<DynamicListViewScrollingViewModel>();
+        public FirstViewModel MainVm => ServiceLocator.Current.GetInstance<FirstViewModel>();
         public HorizontalListViewModel HorizontalListVm => ServiceLocator.Current.GetInstance<HorizontalListViewModel>();
+        public PickersViewModel PickersVm => ServiceLocator.Current.GetInstance<PickersViewModel>();
+        public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
         public RegexViewModel RegexVm => ServiceLocator.Current.GetInstance<RegexViewModel>();
+        public ReverseStringViewModel ReverseStringVm => ServiceLocator.Current.GetInstance<ReverseStringViewModel>();
+
+        #endregion
+
+        #region Public Methods
 
         public static void Cleanup()
         {
@@ -55,13 +66,14 @@ namespace XamarinFormsDemo.ViewModel
 
             nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
             nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
-            nav.Configure(AppConstants.NavigationPages.InfiniteScrollingPage, typeof(DynamicListViewScrollingPage));
+            nav.Configure(AppConstants.NavigationPages.DynamicListViewScrollingPage, typeof(DynamicListViewPage));
             nav.Configure(AppConstants.NavigationPages.CarouselPage, typeof(CarouselPage));
             nav.Configure(AppConstants.NavigationPages.ObjectBindablePickerPage, typeof(ObjectBindablePickerPage));
             nav.Configure(AppConstants.NavigationPages.ToolbarWithPickerPage, typeof(ToolbarWithPickerPage));
             nav.Configure(AppConstants.NavigationPages.RadioButtonPage, typeof(RadioButtonPage));
             nav.Configure(AppConstants.NavigationPages.HorizontalListViewPage, typeof(HorizontalListViewPage));
             nav.Configure(AppConstants.NavigationPages.RegexPage, typeof(RegexPage));
+            nav.Configure(AppConstants.NavigationPages.ReverseStringPage, typeof(ReverseStringPage));
 
             return nav;
         }
@@ -73,23 +85,26 @@ namespace XamarinFormsDemo.ViewModel
             var nav = ConfigureNavigationPages();
             SimpleIoc.Default.Register<INavigationService>(() => nav);
 
+            SimpleIoc.Default.Register<FirstViewModel>();
             SimpleIoc.Default.Register<CarouselViewModel>();
             SimpleIoc.Default.Register<DynamicListViewScrollingViewModel>(true);
-            SimpleIoc.Default.Register<FirstViewModel>();
+            SimpleIoc.Default.Register<HorizontalListViewModel>();
             SimpleIoc.Default.Register<ParentViewModel>(true);
             SimpleIoc.Default.Register<PickersViewModel>(true);
             SimpleIoc.Default.Register<RadioButtonViewModel>();
-            SimpleIoc.Default.Register<HorizontalListViewModel>();
             SimpleIoc.Default.Register<RegexViewModel>();
+            SimpleIoc.Default.Register<ReverseStringViewModel>();
         }
 
         public static void SetLocatorProvider()
         {
-            if(!ServiceLocator.IsLocationProviderSet)
+            if (!ServiceLocator.IsLocationProviderSet)
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
                 RegisterInIocContainer();
             }
         }
+
+        #endregion
     }
 }

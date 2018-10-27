@@ -6,11 +6,13 @@
 
     public class HexadecimalToColorConverter : IValueConverter
     {
+        #region Public Methods
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var str = value as string;
             var colorString = str?.Replace("#", "");
-            if(string.IsNullOrEmpty(colorString))
+            if (string.IsNullOrEmpty(colorString))
             {
                 return Color.Black;
             }
@@ -23,5 +25,7 @@
         {
             throw new NotSupportedException("Color tu Hex not supported");
         }
+
+        #endregion
     }
 }

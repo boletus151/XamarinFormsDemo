@@ -1,12 +1,10 @@
 ﻿namespace XamarinFormsDemo.ViewModel
 {
-    using System.Collections.Generic;
+    using GalaSoft.MvvmLight.Messaging;
+    using GalaSoft.MvvmLight.Views;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using Constants;
-    using GalaSoft.MvvmLight.Messaging;
-    using GalaSoft.MvvmLight.Views;
     using Xamarin.Forms;
 
     public class RegexViewModel : ParentViewModel
@@ -23,10 +21,26 @@
 
         #endregion
 
-        #region Constructors
+        #region Private Methods
+
+        private void MatchCommandExecute()
+        {
+            if (string.IsNullOrEmpty(this.TextValue) || Regex.IsMatch(this.TextValue, this.SelectedItem))
+            {
+                this.Result = true.ToString();
+            }
+            else
+            {
+                this.Result = false.ToString();
+            }
+        }
+
+        #endregion
+
+        #region Public Constructors
 
         public RegexViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
-            : base(messenger, navigationService, dialogService)
+                    : base(messenger, navigationService, dialogService)
         {
             this.MatchCommand = new Command(this.MatchCommandExecute);
             this.PatternList = new ObservableCollection<string>
@@ -39,6 +53,10 @@
             this.TextValue = "1.2";
             this.SelectedItem = this.PatternList.First();
         }
+
+        #endregion
+
+        #region Public Properties
 
         public ObservableCollection<string> PatternList
         {
@@ -66,10 +84,6 @@
             }
         }
 
-        #endregion
-
-        #region Public Properties
-
         public Command MatchCommand { get; }
 
         public string Result
@@ -95,22 +109,6 @@
             {
                 this.textValue = value;
                 this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void MatchCommandExecute()
-        {
-            if (string.IsNullOrEmpty(this.TextValue) || Regex.IsMatch(this.TextValue, this.SelectedItem))
-            {
-                this.Result = true.ToString();
-            }
-            else
-            {
-                this.Result = false.ToString();
             }
         }
 

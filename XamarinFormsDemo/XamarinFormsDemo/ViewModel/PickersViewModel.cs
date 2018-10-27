@@ -1,41 +1,41 @@
 // -------------------------------------------------------------------------------------------------------------------
 // <copyright file="PickersViewModel.cs" company="CodigoEdulis">
-//    Código Edulis 2017
-//    http://www.codigoedulis.es
-//  </copyright>
-//  <summary>
-//     This implementation is a group of the offers of several persons along the network;
-//     because of this, it is under Creative Common By License:
-//     
-//     You are free to:
-// 
-//     Share — copy and redistribute the material in any medium or format
-//     Adapt — remix, transform, and build upon the material for any purpose, even commercially.
-//     
-//     The licensor cannot revoke these freedoms as long as you follow the license terms.
-//     
-//     Under the following terms:
-//     
-//     Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-//     No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
-//  
-//  </summary>
-//  --------------------------------------------------------------------------------------------------------------------
+//     Código Edulis 2017 http://www.codigoedulis.es
+// </copyright>
+// <summary>
+// This implementation is a group of the offers of several persons along the network; because of
+// this, it is under Creative Common By License:
+//
+// You are free to:
+//
+// Share — copy and redistribute the material in any medium or format Adapt — remix, transform, and
+// build upon the material for any purpose, even commercially.
+//
+// The licensor cannot revoke these freedoms as long as you follow the license terms.
+//
+// Under the following terms:
+//
+// Attribution — You must give appropriate credit, provide a link to the license, and indicate if
+// changes were made. You may do so in any reasonable manner, but not in any way that suggests the
+// licensor endorses you or your use. No additional restrictions — You may not apply legal terms or
+// technological measures that legally restrict others from doing anything the license permits.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace XamarinFormsDemo.ViewModel
 {
+    using GalaSoft.MvvmLight.Messaging;
+    using GalaSoft.MvvmLight.Views;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using GalaSoft.MvvmLight.Messaging;
-    using GalaSoft.MvvmLight.Views;
-
     using XamarinFormsDemo.Model;
 
     public class PickersViewModel : ParentViewModel
     {
+        #region Private Fields
+
         private ObservableCollection<MyColor> colorsList;
 
         private ObservableCollection<MyColor> colorsList2;
@@ -50,8 +50,29 @@ namespace XamarinFormsDemo.ViewModel
 
         private string selectedValue;
 
+        #endregion
+
+        #region Private Methods
+
+        private async Task OnNavigationMessageReceivedAsync(NavigationMessage message)
+        {
+            if (message != null)
+            {
+                this.IsBusy = true;
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                this.ColorsListAsync.Add(this.ColorsList.First());
+                this.ColorsListAsync.Add(this.ColorsList.Last());
+                this.SelectedColorAsync = this.ColorsListAsync.Last();
+                this.IsBusy = false;
+            }
+        }
+
+        #endregion
+
+        #region Public Constructors
+
         public PickersViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
-            : base(messenger, navigationService, dialogService)
+                    : base(messenger, navigationService, dialogService)
         {
             this.MessengerService.Register<NavigationMessage>(this, async message => await this.OnNavigationMessageReceivedAsync(message));
 
@@ -72,6 +93,10 @@ namespace XamarinFormsDemo.ViewModel
 
             this.ColorsListAsync = new ObservableCollection<MyColor>();
         }
+
+        #endregion
+
+        #region Public Properties
 
         public ObservableCollection<MyColor> ColorsList
         {
@@ -171,6 +196,10 @@ namespace XamarinFormsDemo.ViewModel
             }
         }
 
+        #endregion
+
+        #region Public Methods
+
         public void CleanupViewModel()
         {
             this.ColorsListAsync.Clear();
@@ -180,17 +209,6 @@ namespace XamarinFormsDemo.ViewModel
             this.Cleanup();
         }
 
-        private async Task OnNavigationMessageReceivedAsync(NavigationMessage message)
-        {
-            if(message != null)
-            {
-                this.IsBusy = true;
-                await Task.Delay(TimeSpan.FromSeconds(5));
-                this.ColorsListAsync.Add(this.ColorsList.First());
-                this.ColorsListAsync.Add(this.ColorsList.Last());
-                this.SelectedColorAsync = this.ColorsListAsync.Last();
-                this.IsBusy = false;
-            }
-        }
+        #endregion
     }
 }

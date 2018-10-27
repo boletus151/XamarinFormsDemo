@@ -4,6 +4,8 @@
 
     public class MyColor : IEquatable<MyColor>
     {
+        #region Public Constructors
+
         public MyColor(string name, string hexadecimalValue)
         {
             this.Name = name;
@@ -18,6 +20,10 @@
         {
             this.ImageUrl = url;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public string HexadecimalValue
         {
@@ -37,9 +43,15 @@
             set;
         }
 
+        #endregion
+
+        #region Public Methods
+
         public bool Equals(MyColor other)
         {
             return string.Equals(this.Name, other.Name) && string.Equals(this.HexadecimalValue, other.HexadecimalValue);
         }
+
+        #endregion
     }
 }
