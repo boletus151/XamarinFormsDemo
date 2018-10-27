@@ -35,7 +35,11 @@
             var navPage = new NavigationPage(new MainPage());
             var nav = ServiceLocator.Current.GetInstance<INavigationService>() as ExtendedNavigationService;
             nav?.Initialize(navPage);
+
             this.MainPage = navPage;
+
+            var dialog = ServiceLocator.Current.GetInstance<IDialogService>() as DialogService;
+            dialog?.Initialize(this.MainPage);
         }
     }
 }

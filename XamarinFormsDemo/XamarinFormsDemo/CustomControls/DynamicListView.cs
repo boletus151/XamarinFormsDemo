@@ -57,18 +57,22 @@ namespace XamarinFormsDemo.CustomControls
         /// <param name="listView">The list view.</param>
         private void OnFullItemsSourceChanged(DynamicListView<T> listView)
         {
-            var numberOfItems = int.Parse(listView.ItemsPerPage);
-
-            this.observableList.Clear();
-
-            if (numberOfItems > listView.FullItemsSource.Count)
+            if (listView.FullItemsSource != null)
             {
-                numberOfItems = listView.FullItemsSource.Count;
-            }
-            var items = listView.FullItemsSource.ToList().GetRange(0, numberOfItems);
-            foreach (var elem in items)
-            {
-                this.observableList.Add(elem);
+                var numberOfItems = int.Parse(listView.ItemsPerPage);
+
+                this.observableList.Clear();
+
+
+                if (numberOfItems > listView.FullItemsSource.Count)
+                {
+                    numberOfItems = listView.FullItemsSource.Count;
+                }
+                var items = listView.FullItemsSource.ToList().GetRange(0, numberOfItems);
+                foreach (var elem in items)
+                {
+                    this.observableList.Add(elem);
+                }
             }
         }
 

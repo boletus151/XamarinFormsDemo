@@ -22,7 +22,7 @@ namespace XamarinFormsDemoTests
         {
             // Arrange
             var text = string.Empty;
-            var vm = new Test01ViewModel(this.dialogService);
+            var vm = new ReverseStringViewModel(this.dialogService);
             vm.MyText = text;
 
             // Act
@@ -37,7 +37,7 @@ namespace XamarinFormsDemoTests
         {
             // Arrange
             var text = "hello";
-            var vm = new Test01ViewModel(this.dialogService);
+            var vm = new ReverseStringViewModel(this.dialogService);
             vm.MyText = text;
 
             // Act

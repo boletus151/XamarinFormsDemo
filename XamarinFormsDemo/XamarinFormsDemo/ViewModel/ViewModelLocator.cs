@@ -42,19 +42,14 @@ namespace XamarinFormsDemo.ViewModel
 
         #region Public Properties
 
-        public DynamicListViewScrollingViewModel DynamicList => ServiceLocator.Current.GetInstance<DynamicListViewScrollingViewModel>();
-
-        public FirstViewModel Main => ServiceLocator.Current.GetInstance<FirstViewModel>();
-
-        public CarouselViewModel Carousel => ServiceLocator.Current.GetInstance<CarouselViewModel>();
-
-        public PickersViewModel Pickers => ServiceLocator.Current.GetInstance<PickersViewModel>();
-
-        public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
-
+        public CarouselViewModel CarouselVm => ServiceLocator.Current.GetInstance<CarouselViewModel>();
+        public DynamicListViewScrollingViewModel DynamicListVm => ServiceLocator.Current.GetInstance<DynamicListViewScrollingViewModel>();
+        public FirstViewModel MainVm => ServiceLocator.Current.GetInstance<FirstViewModel>();
         public HorizontalListViewModel HorizontalListVm => ServiceLocator.Current.GetInstance<HorizontalListViewModel>();
-
+        public PickersViewModel PickersVm => ServiceLocator.Current.GetInstance<PickersViewModel>();
+        public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
         public RegexViewModel RegexVm => ServiceLocator.Current.GetInstance<RegexViewModel>();
+        public ReverseStringViewModel ReverseStringVm => ServiceLocator.Current.GetInstance<ReverseStringViewModel>();
 
         #endregion
 
@@ -71,14 +66,14 @@ namespace XamarinFormsDemo.ViewModel
 
             nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
             nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
-            nav.Configure(AppConstants.NavigationPages.InfiniteScrollingPage, typeof(DynamicListViewScrollingPage));
+            nav.Configure(AppConstants.NavigationPages.DynamicListViewScrollingPage, typeof(DynamicListViewPage));
             nav.Configure(AppConstants.NavigationPages.CarouselPage, typeof(CarouselPage));
             nav.Configure(AppConstants.NavigationPages.ObjectBindablePickerPage, typeof(ObjectBindablePickerPage));
             nav.Configure(AppConstants.NavigationPages.ToolbarWithPickerPage, typeof(ToolbarWithPickerPage));
             nav.Configure(AppConstants.NavigationPages.RadioButtonPage, typeof(RadioButtonPage));
             nav.Configure(AppConstants.NavigationPages.HorizontalListViewPage, typeof(HorizontalListViewPage));
             nav.Configure(AppConstants.NavigationPages.RegexPage, typeof(RegexPage));
-            nav.Configure(AppConstants.NavigationPages.Test01Page, typeof(test01));
+            nav.Configure(AppConstants.NavigationPages.ReverseStringPage, typeof(ReverseStringPage));
 
             return nav;
         }
@@ -90,15 +85,15 @@ namespace XamarinFormsDemo.ViewModel
             var nav = ConfigureNavigationPages();
             SimpleIoc.Default.Register<INavigationService>(() => nav);
 
+            SimpleIoc.Default.Register<FirstViewModel>();
             SimpleIoc.Default.Register<CarouselViewModel>();
             SimpleIoc.Default.Register<DynamicListViewScrollingViewModel>(true);
-            SimpleIoc.Default.Register<FirstViewModel>();
+            SimpleIoc.Default.Register<HorizontalListViewModel>();
             SimpleIoc.Default.Register<ParentViewModel>(true);
             SimpleIoc.Default.Register<PickersViewModel>(true);
             SimpleIoc.Default.Register<RadioButtonViewModel>();
-            SimpleIoc.Default.Register<HorizontalListViewModel>();
             SimpleIoc.Default.Register<RegexViewModel>();
-            SimpleIoc.Default.Register<Test01ViewModel>();
+            SimpleIoc.Default.Register<ReverseStringViewModel>();
         }
 
         public static void SetLocatorProvider()

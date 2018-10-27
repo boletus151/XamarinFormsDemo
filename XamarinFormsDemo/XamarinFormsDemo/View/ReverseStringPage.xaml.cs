@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace XamarinFormsDemo.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class test01 : ContentPage
+    public partial class ReverseStringPage : ContentPage
     {
-        public test01()
+        public ReverseStringPage()
         {
             InitializeComponent();
         }

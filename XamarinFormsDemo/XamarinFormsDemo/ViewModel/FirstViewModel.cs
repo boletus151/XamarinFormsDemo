@@ -37,9 +37,9 @@ namespace XamarinFormsDemo.ViewModel
     {
         #region Private Methods
 
-        private void GoToCarouselView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
+        private void GoToCarouselPage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
 
-        private void GoToHorizontalListView()
+        private void GoToHorizontalListViewPage()
         {
             var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(DynamicListViewScrollingViewModel).Name, true);
             this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
@@ -47,22 +47,22 @@ namespace XamarinFormsDemo.ViewModel
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.HorizontalListViewPage);
         }
 
-        private void GoToInfiniteScrollingView()
+        private void GoToDynamicListViewScrollingPage()
         {
             var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(DynamicListViewScrollingViewModel).Name, true);
             this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
 
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.InfiniteScrollingPage);
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.DynamicListViewScrollingPage);
         }
 
-        private void GoToPickersView()
+        private void GoToPickersPage()
         {
             var message = new LoadDataNavigationMessage(this.GetType().Name, nameof(PickersViewModel), true);
             this.MessengerService.Send<NavigationMessage, PickersViewModel>(message);
             this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
         }
 
-        private void GoToToolbarWithPickerView() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ToolbarWithPickerPage);
+        private void GoToToolbarWithPickerPage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ToolbarWithPickerPage);
 
         private async Task OnAppearing()
         {
@@ -80,35 +80,35 @@ namespace XamarinFormsDemo.ViewModel
                                                             : base(messenger, navigationService, dialogService)
         {
             this.OnAppearingCommand = new Command(async () => await this.OnAppearing());
-            this.GoToCarouselViewCommand = new Command(this.GoToCarouselView);
-            this.GoToDynamicListViewScrollingCommand = new Command(this.GoToInfiniteScrollingView);
-            this.GoToHorizontalListViewPageCommand = new Command(this.GoToHorizontalListView);
-            this.GoToPickersViewCommand = new Command(this.GoToPickersView);
+            this.GoToCarouselPageCommand = new Command(this.GoToCarouselPage);
+            this.GoToDynamicListViewScrollingPageCommand = new Command(this.GoToDynamicListViewScrollingPage);
+            this.GoToHorizontalListViewPageCommand = new Command(this.GoToHorizontalListViewPage);
+            this.GoToPickersPageCommand = new Command(this.GoToPickersPage);
             this.GoToRadioButtonPageCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.RadioButtonPage));
-            this.GoToToolbarWithPickerViewCommand = new Command(this.GoToToolbarWithPickerView);
-            this.GoToRegexViewCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.RegexPage));
-            this.GoToTestViewCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.Test01Page));
+            this.GoToToolbarWithPickerPageCommand = new Command(this.GoToToolbarWithPickerPage);
+            this.GoToRegexPageCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.RegexPage));
+            this.GoToReverseStringPageCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ReverseStringPage));
         }
 
         #endregion
 
         #region Public Properties
 
-        public ICommand GoToCarouselViewCommand { get; }
+        public ICommand GoToCarouselPageCommand { get; }
 
-        public ICommand GoToDynamicListViewScrollingCommand { get; }
+        public ICommand GoToDynamicListViewScrollingPageCommand { get; }
 
         public ICommand GoToHorizontalListViewPageCommand { get; }
 
-        public ICommand GoToPickersViewCommand { get; }
+        public ICommand GoToPickersPageCommand { get; }
 
         public ICommand GoToRadioButtonPageCommand { get; }
 
-        public ICommand GoToToolbarWithPickerViewCommand { get; }
+        public ICommand GoToToolbarWithPickerPageCommand { get; }
 
-        public ICommand GoToRegexViewCommand { get; }
+        public ICommand GoToRegexPageCommand { get; }
 
-        public ICommand GoToTestViewCommand { get; }
+        public ICommand GoToReverseStringPageCommand { get; }
 
         public ICommand OnAppearingCommand { get; }
 

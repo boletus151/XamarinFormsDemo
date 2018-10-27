@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace XamarinFormsDemo.ViewModel
 {
-    public class Test01ViewModel : ViewModelBase
+    public class ReverseStringViewModel : ViewModelBase
     {
         #region Private Fields
 
@@ -28,9 +28,9 @@ namespace XamarinFormsDemo.ViewModel
             }
             else
             {
-                Array myArray = Array.CreateInstance(typeof(String), this.MyText.Length);
-                myArray.SetValue(this.MyText, 0, this.myText.Length);
-                this.ReverseString = myArray.ToString();
+                var charArray = this.myText.ToCharArray();
+                Array.Reverse(charArray);
+                this.ReverseString = new string(charArray);
 
                 await this.dialogService.ShowMessage($"The input text in reversed order is: {this.ReverseString}", "Reverse String Demo");
             }
@@ -40,10 +40,11 @@ namespace XamarinFormsDemo.ViewModel
 
         #region Public Constructors
 
-        public Test01ViewModel(IDialogService dialogService)
+        public ReverseStringViewModel(IDialogService dialogService)
         {
             this.ReverseCommand = new Command(async () => await this.ReverseCommandExectue());
             this.dialogService = dialogService;
+            this.MyText = "hola";
         }
 
         #endregion
