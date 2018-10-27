@@ -4,23 +4,56 @@
              xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls"
              x:Class="XamarinFormsDemo.View.RadioButtonPage"
              BindingContext="{Binding Source={StaticResource Locator}, Path=RadioButtonVm}">
-    <ContentPage.Content>
-        <StackLayout>
+    
+    <ScrollView>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     MinimumHeightRequest="500">
             <Label Text="Radio Button Example"
                    Style="{StaticResource MainTitleStyle}"
                    Margin="0,10" />
+
             <controls:RadioButton Checked="{Binding Checked}"
-                                  WidthRequest="100"
-                                  HeightRequest="100"
                                   CheckedImage="checked.png"
-                                  UncheckedImage="unchecked.png"/>
+                                  UncheckedImage="unchecked.png">
+                <controls:RadioButton.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="iOS"
+                            Value="100" />
+                        <On Platform="Android"
+                            Value="10" />
+                    </OnPlatform>
+                </controls:RadioButton.WidthRequest>
+                <controls:RadioButton.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="iOS"
+                            Value="100" />
+                        <On Platform="Android"
+                            Value="10" />
+                    </OnPlatform>
+                </controls:RadioButton.HeightRequest>
+            </controls:RadioButton>
             <controls:RadioButton Checked="{Binding CheckedDisabled}"
-                                  WidthRequest="100"
-                                  HeightRequest="100"
                                   CheckedImage="checked.png"
                                   UncheckedImage="unchecked.png"
                                   IsEnabled="False"
-                                  OpacityWhenIsDisabled="0.3"/>
+                                  OpacityWhenIsDisabled="0.3">
+                <controls:RadioButton.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="iOS"
+                            Value="100" />
+                        <On Platform="Android"
+                            Value="10" />
+                    </OnPlatform>
+                </controls:RadioButton.WidthRequest>
+                <controls:RadioButton.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="iOS"
+                            Value="100" />
+                        <On Platform="Android"
+                            Value="10" />
+                    </OnPlatform>
+                </controls:RadioButton.HeightRequest>            
+            </controls:RadioButton>
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>

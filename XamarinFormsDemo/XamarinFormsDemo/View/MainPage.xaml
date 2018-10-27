@@ -25,8 +25,9 @@
             <Button Command="{Binding GoToDynamicListViewScrollingPageCommand}"
                     Text="Go to Dynamic List Scrolling Example" />
 
-            <Button Command="{Binding GoToCarouselPageCommand}"
-                    Text="Go to Carousel Example" />
+            <Button IsEnabled="False"
+                    Command="{Binding GoToCarouselPageCommand}"
+                    Text="Go to Carousel Example (to review)"/>
             
             <Button IsVisible="False"
                     Command="{Binding GoToToolbarWithPickerPageCommand}"
