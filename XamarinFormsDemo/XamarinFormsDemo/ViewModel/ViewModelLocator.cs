@@ -50,6 +50,7 @@ namespace XamarinFormsDemo.ViewModel
         public RadioButtonViewModel RadioButtonVm => ServiceLocator.Current.GetInstance<RadioButtonViewModel>();
         public RegexViewModel RegexVm => ServiceLocator.Current.GetInstance<RegexViewModel>();
         public ReverseStringViewModel ReverseStringVm => ServiceLocator.Current.GetInstance<ReverseStringViewModel>();
+        public DynamicListViewWithCommandViewModel DynamicListViewWithCommandVm => ServiceLocator.Current.GetInstance<DynamicListViewWithCommandViewModel>();
 
         #endregion
 
@@ -74,6 +75,7 @@ namespace XamarinFormsDemo.ViewModel
             nav.Configure(AppConstants.NavigationPages.HorizontalListViewPage, typeof(HorizontalListViewPage));
             nav.Configure(AppConstants.NavigationPages.RegexPage, typeof(RegexPage));
             nav.Configure(AppConstants.NavigationPages.ReverseStringPage, typeof(ReverseStringPage));
+            nav.Configure(AppConstants.NavigationPages.DynamicListviewWithCommandPage, typeof(DynamicListViewWithCommandPage));
 
             return nav;
         }
@@ -94,6 +96,7 @@ namespace XamarinFormsDemo.ViewModel
             SimpleIoc.Default.Register<RadioButtonViewModel>();
             SimpleIoc.Default.Register<RegexViewModel>();
             SimpleIoc.Default.Register<ReverseStringViewModel>();
+            SimpleIoc.Default.Register<DynamicListViewWithCommandViewModel>();
         }
 
         public static void SetLocatorProvider()

@@ -24,6 +24,7 @@
             public const string RegexPage = "RegexPage";
             public const string ReverseStringPage = "ReverseStringPage";
             public const string ToolbarWithPickerPage = "ToolbarWithPickerPage";
+            public const string DynamicListviewWithCommandPage = "DynamicListviewWithCommandPage";
 
             #endregion
         }

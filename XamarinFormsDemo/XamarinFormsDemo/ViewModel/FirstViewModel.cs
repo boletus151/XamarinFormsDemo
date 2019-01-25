@@ -88,6 +88,7 @@ namespace XamarinFormsDemo.ViewModel
             this.GoToToolbarWithPickerPageCommand = new Command(this.GoToToolbarWithPickerPage);
             this.GoToRegexPageCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.RegexPage));
             this.GoToReverseStringPageCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ReverseStringPage));
+            this.GoToDynamicListviewWithCommand = new Command(() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.DynamicListviewWithCommandPage));
         }
 
         #endregion
@@ -109,6 +110,8 @@ namespace XamarinFormsDemo.ViewModel
         public ICommand GoToRegexPageCommand { get; }
 
         public ICommand GoToReverseStringPageCommand { get; }
+
+        public ICommand GoToDynamicListviewWithCommand { get; }
 
         public ICommand OnAppearingCommand { get; }
 

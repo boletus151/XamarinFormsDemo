@@ -97,6 +97,11 @@
     <Compile Include="View\ToolbarWithPickerPage.xaml.cs">
       <DependentUpon>ToolbarWithPickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\DynamicListViewWithCommand.cs" />
+    <Compile Include="ViewModel\DynamicListViewWithCommandViewModel.cs" />
+    <Compile Include="View\DynamicListViewWithCommandPage.xaml.cs">
+      <DependentUpon>DynamicListViewWithCommandPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\MainPage.xaml">
@@ -104,6 +109,10 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DynamicListViewWithCommandPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
