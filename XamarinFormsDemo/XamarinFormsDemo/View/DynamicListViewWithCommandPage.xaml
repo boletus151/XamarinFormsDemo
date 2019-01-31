@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="XamarinFormsDemo.View.DynamicListViewWithCommandPage"
     xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls"
-    xmlns:myModel="clr-namespace:XamarinFormsDemo.Model"
     BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicListViewWithCommandVm}">
     <StackLayout>
         <Label
@@ -27,25 +26,9 @@
                     Text="My color list loaded from constructor"
                     Style="{StaticResource SubTilteStyle}" />
                 <controls:DynamicListViewWithCommand
-                    x:TypeArguments="myModel:MyColor"
-                    FullItemsSource="{Binding ColorsList}"
-                    GetMoreElementsCommand="{Binding GetMoreElementsCommand}">
-                    <controls:DynamicListViewWithCommand.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell
-                                BindingContext="{Binding}">
-                                <StackLayout
-                                    Orientation="Horizontal"
-                                    Padding="5">
-                                    <Label
-                                        Text="{Binding HexadecimalValue}" />
-                                    <Label
-                                        Text="{Binding Name}"
-                                        TextColor="{Binding HexadecimalValue, Converter={StaticResource HexadecimalToColorConverter}}" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </controls:DynamicListViewWithCommand.ItemTemplate>
+                    ItemsSource="{Binding ColorsList}"
+                    GetMoreElementsCommand="{Binding GetMoreElementsCommand}"
+                    ItemTemplate="{StaticResource ColorsTemplate}">
                 </controls:DynamicListViewWithCommand>
             </StackLayout>
         </Grid>
