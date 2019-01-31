@@ -28,8 +28,7 @@
                 <controls:DynamicListViewWithCommand
                     ItemsSource="{Binding ColorsList}"
                     GetMoreElementsCommand="{Binding GetMoreElementsCommand}"
-                    ItemTemplate="{StaticResource ColorsTemplate}">
-                </controls:DynamicListViewWithCommand>
+                    ItemTemplate="{StaticResource ColorsTemplate}"/>
             </StackLayout>
         </Grid>
     </StackLayout>
