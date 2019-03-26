@@ -47,7 +47,9 @@ namespace XamarinFormsDemo.iOS.Renderers
 
             var label = (Label)Element;
             if (label == null)
+            {
                 return;
+            }
 
             if (Control == null)
             {
