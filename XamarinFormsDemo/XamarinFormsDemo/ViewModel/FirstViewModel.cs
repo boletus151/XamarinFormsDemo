@@ -35,45 +35,6 @@ namespace XamarinFormsDemo.ViewModel
 
     public class FirstViewModel : ParentViewModel
     {
-        #region Private Methods
-
-        private void GoToCarouselPage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
-
-        private void GoToHorizontalListViewPage()
-        {
-            var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(DynamicListViewScrollingViewModel).Name, true);
-            this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
-
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.HorizontalListViewPage);
-        }
-
-        private void GoToDynamicListViewScrollingPage()
-        {
-            var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(DynamicListViewScrollingViewModel).Name, true);
-            this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
-
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.DynamicListViewScrollingPage);
-        }
-
-        private void GoToPickersPage()
-        {
-            var message = new LoadDataNavigationMessage(this.GetType().Name, nameof(PickersViewModel), true);
-            this.MessengerService.Send<NavigationMessage, PickersViewModel>(message);
-            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
-        }
-
-        private void GoToToolbarWithPickerPage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ToolbarWithPickerPage);
-
-        private async Task OnAppearing()
-        {
-            Debug.WriteLine("¡¡¡¡¡¡ OnAppearing");
-            await Task.Delay(1);
-
-            // await this.DialogService.ShowMessage("OnAppearing", string.Empty);
-        }
-
-        #endregion
-
         #region Public Constructors
 
         public FirstViewModel(IMessenger messenger, INavigationService navigationService, IDialogService dialogService)
@@ -114,6 +75,46 @@ namespace XamarinFormsDemo.ViewModel
         public ICommand GoToDynamicListviewWithCommand { get; }
 
         public ICommand OnAppearingCommand { get; }
+
+        #endregion
+
+
+        #region Private Methods
+
+        private void GoToCarouselPage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.CarouselPage);
+
+        private void GoToHorizontalListViewPage()
+        {
+            var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(DynamicListViewScrollingViewModel).Name, true);
+            this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
+
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.HorizontalListViewPage);
+        }
+
+        private void GoToDynamicListViewScrollingPage()
+        {
+            var message = new LoadDataNavigationMessage(this.GetType().Name, typeof(DynamicListViewScrollingViewModel).Name, true);
+            this.MessengerService.Send<NavigationMessage, DynamicListViewScrollingViewModel>(message);
+
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.DynamicListViewScrollingPage);
+        }
+
+        private void GoToPickersPage()
+        {
+            var message = new LoadDataNavigationMessage(this.GetType().Name, nameof(PickersViewModel), true);
+            this.MessengerService.Send<NavigationMessage, PickersViewModel>(message);
+            this.NavigationService.NavigateTo(AppConstants.NavigationPages.ObjectBindablePickerPage);
+        }
+
+        private void GoToToolbarWithPickerPage() => this.NavigationService.NavigateTo(AppConstants.NavigationPages.ToolbarWithPickerPage);
+
+        private async Task OnAppearing()
+        {
+            Debug.WriteLine("¡¡¡¡¡¡ OnAppearing");
+            await Task.Delay(1);
+
+            // await this.DialogService.ShowMessage("OnAppearing", string.Empty);
+        }
 
         #endregion
     }
