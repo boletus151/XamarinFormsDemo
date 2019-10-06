@@ -1,4 +1,4 @@
-﻿namespace XamarinFormsDemo.ViewModel
+﻿namespace XFDemo.ViewModel
 {
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;

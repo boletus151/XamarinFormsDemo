@@ -22,7 +22,7 @@
  </summary>
 --------------------------------------------------------------------------------------------------------------------*/
 
-namespace XamarinFormsDemo.CustomControls
+namespace XFDemo.CustomControls
 {
     using System;
     using Xamarin.Forms;

@@ -1,10 +1,10 @@
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using Moq;
-using XamarinFormsDemo.ViewModel;
+using XFDemo.ViewModel;
 using Xunit;
 
-namespace XamarinFormsDemo.Tests.ViewModel
+namespace XFDemo.Tests.ViewModel
 {
     public class MainViewModelTests
     {

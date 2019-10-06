@@ -23,12 +23,12 @@
 --------------------------------------------------------------------------------------------------------------------*/
 
 using Xamarin.Forms;
-using XamarinFormsDemo.CustomControls;
-using XamarinFormsDemo.iOS.Renderers;
+using XFDemo.CustomControls;
+using XFDemo.iOS.Renderers;
 
 [assembly: ExportRenderer(typeof(SwipeCarousel), typeof(CarouselLayoutRenderer))]
 
-namespace XamarinFormsDemo.iOS.Renderers
+namespace XFDemo.iOS.Renderers
 {
     using System;
     using System.ComponentModel;
@@ -60,7 +60,7 @@ namespace XamarinFormsDemo.iOS.Renderers
         void NativeScrolled(object sender, EventArgs e)
         {
             var center = this._native.ContentOffset.X + (this._native.Bounds.Width / 2);
-            ((XamarinFormsDemo.CustomControls.SwipeCarousel)this.Element).SelectedIndex = ((int)center) / ((int)this._native.Bounds.Width);
+            ((XFDemo.CustomControls.SwipeCarousel)this.Element).SelectedIndex = ((int)center) / ((int)this._native.Bounds.Width);
         }
 
         void ElementPropertyChanged(object sender, PropertyChangedEventArgs e)

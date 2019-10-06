@@ -1,4 +1,4 @@
-﻿namespace XamarinFormsDemo.Services
+﻿namespace XFDemo.Services
 {
     using GalaSoft.MvvmLight.Views;
     using System;

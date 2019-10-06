@@ -23,12 +23,12 @@
 --------------------------------------------------------------------------------------------------------------------*/
 
 using Xamarin.Forms;
-using XamarinFormsDemo.iOS.Renderers;
+using XFDemo.iOS.Renderers;
 using CoreGraphics;
 
 [assembly: ExportRenderer(typeof(Label), typeof(LabelCustomRenderer))]
 
-namespace XamarinFormsDemo.iOS.Renderers
+namespace XFDemo.iOS.Renderers
 {
     using System;
     using UIKit;

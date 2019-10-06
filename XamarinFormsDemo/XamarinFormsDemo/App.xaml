@@ -2,9 +2,9 @@
 <Application
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="XamarinFormsDemo.App"
-    xmlns:viewModel="clr-namespace:XamarinFormsDemo.ViewModel;assembly=XamarinFormsDemo"
-    xmlns:converters="clr-namespace:XamarinFormsDemo.Converters;assembly=XamarinFormsDemo"
+    x:Class="XFDemo.App"
+    xmlns:viewModel="clr-namespace:XFDemo.ViewModel;assembly=XFDemo"
+    xmlns:converters="clr-namespace:XFDemo.Converters;assembly=XFDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     d1p1:Ignorable="d"
     xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">

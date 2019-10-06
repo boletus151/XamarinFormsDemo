@@ -1,4 +1,4 @@
-﻿namespace XamarinFormsDemo.CustomControls
+﻿namespace XFDemo.CustomControls
 {
     using Xamarin.Forms;
 

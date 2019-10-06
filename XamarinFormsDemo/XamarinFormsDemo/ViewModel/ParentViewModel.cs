@@ -22,7 +22,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace XamarinFormsDemo.ViewModel
+namespace XFDemo.ViewModel
 {
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;

@@ -1,4 +1,4 @@
-﻿namespace XamarinFormsDemo.Converters
+﻿namespace XFDemo.Converters
 {
     using System;
     using System.Globalization;

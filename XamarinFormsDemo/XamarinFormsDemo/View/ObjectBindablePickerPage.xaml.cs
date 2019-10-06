@@ -22,11 +22,11 @@
 //  </summary>
 //  --------------------------------------------------------------------------------------------------------------------
 
-namespace XamarinFormsDemo.View
+namespace XFDemo.View
 {
     using Xamarin.Forms;
 
-    using XamarinFormsDemo.ViewModel;
+    using XFDemo.ViewModel;
 
     public partial class ObjectBindablePickerPage : ContentPage
     {

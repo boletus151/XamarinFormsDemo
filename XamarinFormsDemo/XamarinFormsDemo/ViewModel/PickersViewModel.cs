@@ -22,7 +22,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace XamarinFormsDemo.ViewModel
+namespace XFDemo.ViewModel
 {
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Views;
@@ -30,7 +30,7 @@ namespace XamarinFormsDemo.ViewModel
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
-    using XamarinFormsDemo.Model;
+    using XFDemo.Model;
 
     public class PickersViewModel : ParentViewModel
     {

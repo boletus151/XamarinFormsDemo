@@ -1,7 +1,7 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:customControls="clr-namespace:XamarinFormsDemo.CustomControls;assembly=XamarinFormsDemo"
-             x:Class="XamarinFormsDemo.View.ObjectBindablePickerPage"
+             xmlns:customControls="clr-namespace:XFDemo.CustomControls;assembly=XFDemo"
+             x:Class="XFDemo.View.ObjectBindablePickerPage"
              BindingContext="{Binding Source={StaticResource Locator}, Path=PickersVm}">
 
     <ScrollView>

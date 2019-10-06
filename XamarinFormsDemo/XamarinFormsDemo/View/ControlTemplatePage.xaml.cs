@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace XamarinFormsDemo.View
+namespace XFDemo.View
 {
     public partial class ControlTemplatePage : ContentPage
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace XamarinFormsDemo.CustomControls
+namespace XFDemo.CustomControls
 {
     public class ColoreableCell : ViewCell
     {

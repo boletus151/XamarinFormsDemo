@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace XamarinFormsDemo.CustomControls.Templates
+namespace XFDemo.CustomControls.Templates
 {
     public partial class Page1 : ContentPage
     {

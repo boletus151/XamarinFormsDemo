@@ -21,6 +21,6 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamarinFormsDemo\XamarinFormsDemo.csproj" />
+    <ProjectReference Include="..\XamarinFormsDemo\XFDemo.csproj" />
   </ItemGroup>
 </Project>

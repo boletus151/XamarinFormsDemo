@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace XamarinFormsDemo.ViewModel
+namespace XFDemo.ViewModel
 {
     public class ReverseStringViewModel : ViewModelBase
     {

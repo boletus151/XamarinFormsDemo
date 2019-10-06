@@ -1,7 +1,7 @@
 /*
   In App.xaml:
   <Application.Resources>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:XamarinFormsDemo"
+      <vm:ViewModelLocator xmlns:vm="clr-namespace:XFDemo"
                            x:Key="Locator" />
   </Application.Resources>
 
@@ -12,7 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
-namespace XamarinFormsDemo.ViewModel
+namespace XFDemo.ViewModel
 {
     using CommonServiceLocator;
     using Constants;

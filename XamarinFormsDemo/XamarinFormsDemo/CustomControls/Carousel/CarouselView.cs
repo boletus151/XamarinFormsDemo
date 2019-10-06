@@ -1,4 +1,4 @@
-﻿namespace XamarinFormsDemo.CustomControls.Carousel
+﻿namespace XFDemo.CustomControls.Carousel
 {
     using System.Collections.Generic;
     using System.Collections.Specialized;

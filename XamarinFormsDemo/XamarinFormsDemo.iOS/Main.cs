@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace XamarinFormsDemo.iOS
+namespace XFDemo.iOS
 {
     using System.Diagnostics;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace XamarinFormsDemo.CustomControls
+namespace XFDemo.CustomControls
 {
     public class DynamicListViewWithCommand: ListView
     {

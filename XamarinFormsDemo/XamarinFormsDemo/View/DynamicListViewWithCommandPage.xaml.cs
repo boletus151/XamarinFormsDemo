@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace XamarinFormsDemo.View
+namespace XFDemo.View
 {
     public partial class DynamicListViewWithCommandPage : ContentPage
     {

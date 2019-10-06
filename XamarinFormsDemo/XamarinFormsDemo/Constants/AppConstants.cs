@@ -1,4 +1,4 @@
-﻿namespace XamarinFormsDemo.Constants
+﻿namespace XFDemo.Constants
 {
     public static class AppConstants
     {

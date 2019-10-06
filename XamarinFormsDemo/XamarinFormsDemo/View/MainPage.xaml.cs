@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using XamarinFormsDemo.ViewModel;
+using XFDemo.ViewModel;
 
-namespace XamarinFormsDemo
+namespace XFDemo
 {
     public partial class MainPage : ContentPage
     {

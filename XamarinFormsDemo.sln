@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo.iOS", "XamarinFormsDemo\XamarinFormsDemo.iOS\XamarinFormsDemo.iOS.csproj", "{F7C6B1FF-86A6-40B4-9FEA-468A740F6F9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFDemo.iOS", "XamarinFormsDemo\XamarinFormsDemo.iOS\XFDemo.iOS.csproj", "{F7C6B1FF-86A6-40B4-9FEA-468A740F6F9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo.Tests", "XamarinFormsDemo\XamarinFormsDemo.Tests\XamarinFormsDemo.Tests.csproj", "{E3EFF565-95AA-4921-9AD2-AF2897642A4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFDemo.Tests", "XamarinFormsDemo\XamarinFormsDemo.Tests\XFDemo.Tests.csproj", "{E3EFF565-95AA-4921-9AD2-AF2897642A4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo.CustomControls", "XamarinFormsDemo\XamarinFormsDemo.CustomControls\XamarinFormsDemo.CustomControls.csproj", "{C82A85AB-31AF-4428-9347-3AF654072BA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFDemo.CustomControls", "XamarinFormsDemo\XamarinFormsDemo.CustomControls\XFDemo.CustomControls.csproj", "{C82A85AB-31AF-4428-9347-3AF654072BA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo", "XamarinFormsDemo\XamarinFormsDemo\XamarinFormsDemo.csproj", "{0BC230CC-1FCB-4D35-9E2E-A431F9933FDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFDemo", "XamarinFormsDemo\XamarinFormsDemo\XFDemo.csproj", "{0BC230CC-1FCB-4D35-9E2E-A431F9933FDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFDemo.Android", "XamarinFormsDemo\XFDemo.Android\XFDemo.Android.csproj", "{1A256803-4C7C-48A6-B4ED-055AC463EEE9}"
 EndProject

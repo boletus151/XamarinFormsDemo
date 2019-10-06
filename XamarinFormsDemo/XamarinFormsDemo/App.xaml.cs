@@ -1,4 +1,4 @@
-﻿namespace XamarinFormsDemo
+﻿namespace XFDemo
 {
     using CommonServiceLocator;
     using Constants;
@@ -16,7 +16,7 @@
         {
             InitializeComponent();
 
-            //MainPage = new XamarinFormsDemo.MainPage();
+            //MainPage = new XFDemo.MainPage();
         }
 
         protected override void OnResume()

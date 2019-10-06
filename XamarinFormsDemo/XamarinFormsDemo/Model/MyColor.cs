@@ -1,4 +1,4 @@
-﻿namespace XamarinFormsDemo.Model
+﻿namespace XFDemo.Model
 {
     using System;
 

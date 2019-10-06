@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace XamarinFormsDemo.CustomControls
+namespace XFDemo.CustomControls
 {
     using System.Collections;
 

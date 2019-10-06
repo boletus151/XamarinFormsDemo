@@ -2,8 +2,8 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="XamarinFormsDemo.View.DynamicListViewWithCommandPage"
-    xmlns:controls="clr-namespace:XamarinFormsDemo.CustomControls"
+    x:Class="XFDemo.View.DynamicListViewWithCommandPage"
+    xmlns:controls="clr-namespace:XFDemo.CustomControls"
     BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicListViewWithCommandVm}">
     <StackLayout>
         <Label

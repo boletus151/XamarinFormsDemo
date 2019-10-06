@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace XamarinFormsDemo.View
+namespace XFDemo.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DynamicListViewPage : ContentPage
