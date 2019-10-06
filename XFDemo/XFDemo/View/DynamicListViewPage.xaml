@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XFDemo.View.DynamicListViewPage"
              xmlns:myModel="clr-namespace:XFDemo.Model;assembly=XFDemo"
-             xmlns:customControls="clr-namespace:XFDemo.CustomControls"
+             xmlns:controls="clr-namespace:XFDemo.CustomControls;assembly=XFDemo.CustomControls"
              BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicListVm}">
     <StackLayout>
         <Label Text="Dynamic Listview Scrolling Example"
@@ -23,7 +23,7 @@
             <StackLayout Grid.Row="0">
                 <Label Text="My color list loaded from constructor"
                        Style="{StaticResource SubTilteStyle}" />
-                <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
+                <controls:DynamicListView x:TypeArguments="myModel:MyColor"
                                                 FullItemsSource="{Binding ColorsList}"
                                                 ItemsPerPage="15"
                                                 ItemTemplate="{StaticResource ColorsTemplate}"/>
@@ -32,10 +32,10 @@
             <StackLayout Grid.Row="1">
                 <Label Text="My color list loaded with navigation message"
                        Style="{StaticResource SubTilteStyle}" />
-                <customControls:DynamicListView x:TypeArguments="myModel:MyColor"
+                <controls:DynamicListView x:TypeArguments="myModel:MyColor"
                                                 FullItemsSource="{Binding ColorsList2}"
                                                 ItemsPerPage="15">
-                    <customControls:DynamicListView.ItemTemplate>
+                    <controls:DynamicListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell BindingContext="{Binding}">
                                 <StackLayout Orientation="Horizontal"
@@ -46,8 +46,8 @@
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
-                    </customControls:DynamicListView.ItemTemplate>
-                </customControls:DynamicListView>
+                    </controls:DynamicListView.ItemTemplate>
+                </controls:DynamicListView>
             </StackLayout>
         </Grid>
     </StackLayout>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XFDemo.View.HorizontalListViewPage"
              BindingContext="{Binding Source={StaticResource Locator}, Path=HorizontalListVm}"
-             xmlns:controls="clr-namespace:XFDemo.CustomControls"
+             xmlns:controls="clr-namespace:XFDemo.CustomControls;assembly=XFDemo.CustomControls"
              x:Name="thisPage">
     <StackLayout>
         <Label Text="Horizontal Listview Scrolling Example"

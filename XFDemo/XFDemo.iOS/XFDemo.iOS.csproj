@@ -9,7 +9,7 @@
     <ProjectGuid>{F7C6B1FF-86A6-40B4-9FEA-468A740F6F9C}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>XamarinFormsDemo.iOS</RootNamespace>
+    <RootNamespace>XFDemo.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>XamarinFormsDemoiOS</AssemblyName>
     <NuGetPackageImportStamp>
@@ -100,12 +100,11 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>XamarinFormsDemo.iOS.Application</StartupObject>
+    <StartupObject>XFDemo.iOS.Application</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Renderers\CarouselLayoutRenderer.cs" />
     <None Include="app.config" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
@@ -156,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\unchecked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XFDemo\XFDemo.csproj">
+      <Project>{0BC230CC-1FCB-4D35-9E2E-A431F9933FDC}</Project>
+      <Name>XFDemo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.4.2.0.848062\build\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.4.2.0.848062\build\Xamarin.Forms.targets')" />

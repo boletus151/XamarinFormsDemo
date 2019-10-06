@@ -88,7 +88,7 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamarinFormsDemo\XFDemo.csproj">
+    <ProjectReference Include="..\XFDemo\XFDemo.csproj">
       <Project>{0BC230CC-1FCB-4D35-9E2E-A431F9933FDC}</Project>
       <Name>XFDemo</Name>
     </ProjectReference>

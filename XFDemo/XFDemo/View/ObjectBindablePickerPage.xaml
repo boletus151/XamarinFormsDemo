@@ -1,6 +1,6 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:customControls="clr-namespace:XFDemo.CustomControls;assembly=XFDemo"
+             xmlns:controls="clr-namespace:XFDemo.CustomControls;assembly=XFDemo.CustomControls"
              x:Class="XFDemo.View.ObjectBindablePickerPage"
              BindingContext="{Binding Source={StaticResource Locator}, Path=PickersVm}">
 
@@ -13,7 +13,7 @@
             <StackLayout Margin="0,10">
                 <Label Text="ObjectBindablePicker: This control does not works if you are loading data with behaviors in OnAppearing event"
                        Style="{StaticResource NormalTextStyle}" />
-                <customControls:ObjectBindablePicker OriginalItemsSource="{Binding ColorsList}"
+                <controls:ObjectBindablePicker OriginalItemsSource="{Binding ColorsList}"
                                                      DisplayName="Name"
                                                      SelectedValue="{Binding SelectedValue}"
                                                      SelectedValuePath="Name"
@@ -38,7 +38,7 @@
                                    WidthRequest="50"
                                    HeightRequest="50" />
 
-                <customControls:ObjectBindableNotifierPicker OriginalItemsSource="{Binding ColorsListAsync}"
+                <controls:ObjectBindableNotifierPicker OriginalItemsSource="{Binding ColorsListAsync}"
                                                              DisplayName="Name"
                                                              SelectedObject="{Binding SelectedColorAsync, Mode=TwoWay}"
                                                              IsVisible="{Binding IsBusy, Converter={StaticResource BoolToNegationConverter}}" />
@@ -47,7 +47,7 @@
             <StackLayout Margin="0,10">
                 <Label Text="ObjectBindableNotifierPicker: Also works if you are loading data from constructor. But, in those cases remember that Selected Object will be null and Selected Index will be -1. This is the default behavior with pickers if you don't manually do it."
                        Style="{StaticResource NormalTextStyle}" />
-                <customControls:ObjectBindableNotifierPicker OriginalItemsSource="{Binding ColorsList2}"
+                <controls:ObjectBindableNotifierPicker OriginalItemsSource="{Binding ColorsList2}"
                                                              DisplayName="Name"
                                                              SelectedObject="{Binding SelectedColor2, Mode=TwoWay}" />
 

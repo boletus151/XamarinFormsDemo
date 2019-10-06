@@ -10,7 +10,6 @@
       <PackageReference Include="MvvmLight" version="5.4.1.1" Version="5.4.1.1" />
       <PackageReference Include="MvvmLightLibs" version="5.4.1.1" Version="5.4.1.1" />
       <PackageReference Include="NETStandard.Library" version="2.0.3" Version="2.0.3" />
-      <PackageReference Include="Portable.MvvmLightLibs" version="5.0.2.0" Version="5.0.2.0" />
       <PackageReference Include="runtime.native.System" version="4.3.1" Version="4.3.1" />
       <PackageReference Include="System.Collections" version="4.3.0" Version="4.3.0" />
       <PackageReference Include="System.Collections.Concurrent" version="4.3.0" Version="4.3.0" />

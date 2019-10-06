@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:customControls="clr-namespace:XFDemo.CustomControls;assembly=XFDemo"
+             xmlns:controls="clr-namespace:XFDemo.CustomControls;assembly=XFDemo.CustomControls"
              x:Class="XFDemo.View.ToolbarWithPickerPage"
              BindingContext="{Binding Source={StaticResource Locator}, Path=DynamicListVm}">
   <StackLayout>
@@ -9,10 +9,10 @@
            VerticalOptions="Center"
            HorizontalOptions="Center" />
 
-    <customControls:ToolbarWithPicker ItemsSource="{Binding ColorsList}"
+    <controls:ToolbarWithPicker ItemsSource="{Binding ColorsList}"
                                       SelectedItem="{Binding SelectedColor}"
                                       DisplayMember="Name"
-                                      Icon="icon.png"></customControls:ToolbarWithPicker>
+                                      Icon="icon.png"></controls:ToolbarWithPicker>
 
   </StackLayout>
 </ContentPage>

@@ -23,9 +23,9 @@
 	<key>MinimumOSVersion</key>
 	<string>10.3</string>
 	<key>CFBundleDisplayName</key>
-	<string>XamarinFormsDemo</string>
+	<string>XFDemo</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.codigoedulis.XamarinFormsDemo</string>
+	<string>com.codigoedulis.XFDemo</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
@@ -49,6 +49,6 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
-	<string>XamarinFormsDemo</string>
+	<string>XFDemo</string>
 </dict>
 </plist>
