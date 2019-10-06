@@ -68,7 +68,6 @@ namespace XFDemo.ViewModel
             nav.Configure(AppConstants.NavigationPages.MainPage, typeof(MainPage));
             nav.Configure(AppConstants.NavigationPages.ControlTemplatePage, typeof(ControlTemplatePage));
             nav.Configure(AppConstants.NavigationPages.DynamicListViewScrollingPage, typeof(DynamicListViewPage));
-            nav.Configure(AppConstants.NavigationPages.CarouselPage, typeof(CarouselPage));
             nav.Configure(AppConstants.NavigationPages.ObjectBindablePickerPage, typeof(ObjectBindablePickerPage));
             nav.Configure(AppConstants.NavigationPages.ToolbarWithPickerPage, typeof(ToolbarWithPickerPage));
             nav.Configure(AppConstants.NavigationPages.RadioButtonPage, typeof(RadioButtonPage));
