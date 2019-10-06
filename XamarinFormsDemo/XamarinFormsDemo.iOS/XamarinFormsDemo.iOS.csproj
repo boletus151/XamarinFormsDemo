@@ -152,12 +152,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamarinFormsDemo\XamarinFormsDemo.csproj">
-      <Project>{46C281F1-91BE-47DA-AC68-BEB211D301E7}</Project>
-      <Name>XamarinFormsDemo</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\checked.png" />
   </ItemGroup>
   <ItemGroup>
