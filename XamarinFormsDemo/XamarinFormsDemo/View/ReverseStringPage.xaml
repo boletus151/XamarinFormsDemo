@@ -6,18 +6,19 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ActivityIndicator IsEnabled="{Binding IsBusy, Mode=TwoWay}" 
-                               IsVisible="{Binding IsBusy, Mode=TwoWay}"
-                               IsRunning="{Binding IsBusy, Mode=TwoWay}"
+            <ActivityIndicator IsEnabled="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
                                BackgroundColor="Red"
                                Color="Olive"/>
-            <Entry Text="{Binding MyText}"
+            <Entry Text="{Binding MyText, Mode=TwoWay}"
                    Placeholder="Enter text"
                    HorizontalTextAlignment="Center"
-                   VerticalOptions="CenterAndExpand"
+                   VerticalOptions="Center"
                    HorizontalOptions="CenterAndExpand" />
             <Button Text="Reverse"
-                    Command="{Binding ReverseCommand}" />
+                    Command="{Binding ReverseCommand}"
+                    Margin="0,20"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
