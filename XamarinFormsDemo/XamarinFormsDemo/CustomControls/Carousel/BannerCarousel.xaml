@@ -17,7 +17,7 @@
     </Grid.RowDefinitions>
 
 
-    <icons:IconRender Grid.Column="0"
+    <!--<icons:IconRender Grid.Column="0"
                       Grid.Row="1"
                       BindingContext="{x:Reference This}"
                       IsVisible="{Binding ManyItems, Source={x:Reference This}}"
@@ -25,7 +25,7 @@
       <icons:IconRender.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding ScrollToPreviousCommand}" />
       </icons:IconRender.GestureRecognizers>
-    </icons:IconRender>
+    </icons:IconRender>-->
 
     <ffimageloading:CachedImage Grid.Column="0"
                                 Grid.Row="0"

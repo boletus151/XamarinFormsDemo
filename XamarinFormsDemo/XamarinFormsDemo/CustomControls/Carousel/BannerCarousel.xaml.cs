@@ -6,7 +6,7 @@
 
     public partial class BannerCarousel : CarouselView
     {
-        private int _currentIndex;
+        /*private int _currentIndex;
 
         private ICommand _scrollToNextCommand;
 
@@ -65,7 +65,7 @@
         }
 
         public static readonly BindableProperty ManyItemsProperty = BindableProperty.Create
-            (nameof(ManyItems), typeof(bool), typeof(SingleItemCarouselView), false, BindingMode.Default);
+            (nameof(ManyItems), typeof(bool), typeof(SingleItemCarouselView), false, BindingMode.Default);*/
     }
 
 }

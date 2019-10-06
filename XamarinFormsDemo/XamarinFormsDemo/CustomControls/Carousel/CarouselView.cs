@@ -8,7 +8,7 @@
 
     public abstract class CarouselView : StackLayout
     {
-        public ICommand Command
+        /*public ICommand Command
         {
             get
             {
@@ -130,5 +130,5 @@
 
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create
             (nameof(CommandParameter), typeof(object), typeof(CarouselView), null, BindingMode.Default, null, CommandParameterChanged);
-    }
+    */}
 }
