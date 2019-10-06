@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo.Droid", "XamarinFormsDemo\XamarinFormsDemo.Droid\XamarinFormsDemo.Droid.csproj", "{31B21A7C-90F0-46FC-BCD3-CCC5786AC78B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo.iOS", "XamarinFormsDemo\XamarinFormsDemo.iOS\XamarinFormsDemo.iOS.csproj", "{F7C6B1FF-86A6-40B4-9FEA-468A740F6F9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo", "XamarinFormsDemo\XamarinFormsDemo\XamarinFormsDemo.csproj", "{46C281F1-91BE-47DA-AC68-BEB211D301E7}"
@@ -12,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo.Tests", "XamarinFormsDemo\XamarinFormsDemo.Tests\XamarinFormsDemo.Tests.csproj", "{E3EFF565-95AA-4921-9AD2-AF2897642A4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormsDemo.CustomControls", "XamarinFormsDemo\XamarinFormsDemo.CustomControls\XamarinFormsDemo.CustomControls.csproj", "{C82A85AB-31AF-4428-9347-3AF654072BA9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFDemo.Android", "XamarinFormsDemo\XFDemo.Android\XFDemo.Android.csproj", "{C936B6DE-8703-4BD5-850B-08837A6BE7E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
