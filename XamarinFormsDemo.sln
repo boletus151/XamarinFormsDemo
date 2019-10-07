@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFDemo.Android", "XFDemo\XF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFDemo.iOS", "XFDemo\XFDemo.iOS\XFDemo.iOS.csproj", "{868E932B-A319-4ADE-8814-47EC2E03852D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Platforms", "1.Platforms", "{AD48B0A1-7935-4649-9286-D76BE9256F3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -455,5 +457,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2CDA1D-C1CE-4D1F-B75F-2DD4D32F6135}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A256803-4C7C-48A6-B4ED-055AC463EEE9} = {AD48B0A1-7935-4649-9286-D76BE9256F3C}
+		{868E932B-A319-4ADE-8814-47EC2E03852D} = {AD48B0A1-7935-4649-9286-D76BE9256F3C}
 	EndGlobalSection
 EndGlobal

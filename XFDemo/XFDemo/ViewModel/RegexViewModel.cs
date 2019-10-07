@@ -67,7 +67,7 @@
             set
             {
                 this.patternList = value;
-                this.RaisePropertyChanged();
+                this.RaisePropertyChanged(() => this.PatternList);
             }
         }
 
@@ -80,7 +80,7 @@
             set
             {
                 this.selectedItem = value;
-                this.RaisePropertyChanged();
+                this.RaisePropertyChanged(() => this.SelectedItem);
             }
         }
 
@@ -108,7 +108,7 @@
             set
             {
                 this.textValue = value;
-                this.RaisePropertyChanged();
+                this.RaisePropertyChanged(() => this.TextValue);
             }
         }
 

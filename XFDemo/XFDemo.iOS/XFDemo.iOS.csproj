@@ -65,6 +65,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CustomRenders\ColoreableCellCustomRender.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -128,6 +129,13 @@
       <Project>{0BC230CC-1FCB-4D35-9E2E-A431F9933FDC}</Project>
       <Name>XFDemo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XFDemo.CustomControls\XFDemo.CustomControls.csproj">
+      <Project>{C82A85AB-31AF-4428-9347-3AF654072BA9}</Project>
+      <Name>XFDemo.CustomControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomRenders\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

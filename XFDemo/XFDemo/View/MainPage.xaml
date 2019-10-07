@@ -14,18 +14,12 @@
             <Button
                 Text="OnAppearing Event writes log on output."
                 IsEnabled="False" />
-            <!--<Button Command="{Binding GoToControlTemplatePageCommand}"
-                    Text="Go to Control Template Example" />-->
             <Button
                 Command="{Binding GoToPickersPageCommand}"
                 Text="Go to Object Bindable Picker Example" />
             <Button
                 Command="{Binding GoToDynamicListViewScrollingPageCommand}"
                 Text="Go to Dynamic List Scrolling Example" />
-            <Button
-                IsEnabled="False"
-                Command="{Binding GoToCarouselPageCommand}"
-                Text="Go to Carousel Example (to review)" />
             <Button
                 IsVisible="False"
                 Command="{Binding GoToToolbarWithPickerPageCommand}"

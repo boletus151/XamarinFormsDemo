@@ -60,6 +60,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CustomRenders\ColoreableCellCustomRender.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -83,14 +84,27 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\drawable\unchecked.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\checked.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="CustomRenders\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XFDemo\XFDemo.csproj">
       <Project>{0BC230CC-1FCB-4D35-9E2E-A431F9933FDC}</Project>
       <Name>XFDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XFDemo.CustomControls\XFDemo.CustomControls.csproj">
+      <Project>{C82A85AB-31AF-4428-9347-3AF654072BA9}</Project>
+      <Name>XFDemo.CustomControls</Name>
     </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
