@@ -40,9 +40,13 @@ namespace XFDemo.CustomControls
             }
 
             if (newvalue != null && (bool)newvalue)
-                radioButton.Image = radioButton.CheckedImage;
+            {
+                radioButton.ImageSource = radioButton.CheckedImage;
+            }
             else
-                radioButton.Image = radioButton.UncheckedImage;
+            {
+                radioButton.ImageSource = radioButton.UncheckedImage;
+            }
         }
 
         private static void OnPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
