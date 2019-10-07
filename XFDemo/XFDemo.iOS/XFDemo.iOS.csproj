@@ -137,5 +137,9 @@
   <ItemGroup>
     <Folder Include="CustomRenders\" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unchecked.png" />
+    <BundleResource Include="Resources\checked.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
