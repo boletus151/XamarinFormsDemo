@@ -27,7 +27,7 @@ namespace XFDemo.CustomControls
     using System;
     using Xamarin.Forms;
 
-    public class RadioButton : Button
+    public class RadioButton : ImageButton
     {
         #region Private Methods
 
@@ -41,11 +41,11 @@ namespace XFDemo.CustomControls
 
             if (newvalue != null && (bool)newvalue)
             {
-                radioButton.ImageSource = radioButton.CheckedImage;
+                radioButton.Source = radioButton.CheckedImage;
             }
             else
             {
-                radioButton.ImageSource = radioButton.UncheckedImage;
+                radioButton.Source = radioButton.UncheckedImage;
             }
         }
 
@@ -65,7 +65,7 @@ namespace XFDemo.CustomControls
 
         private static Style OpacityStyleDataTrigger(RadioButton radioButton)
         {
-            var trigger = new Trigger(typeof(Button))
+            var trigger = new Trigger(typeof(ImageButton))
             {
                 Property = IsEnabledProperty,
                 Value = false
@@ -77,7 +77,7 @@ namespace XFDemo.CustomControls
             };
             trigger.Setters.Add(setter);
 
-            var style = new Style(typeof(Button));
+            var style = new Style(typeof(ImageButton));
 
             style.Triggers.Add(trigger);
 
@@ -112,6 +112,10 @@ namespace XFDemo.CustomControls
 
         public static BindableProperty OpacityWhenIsDisabledProperty = BindableProperty.Create(nameof(OpacityWhenIsDisabled), typeof(double), typeof(RadioButton), 1.0, BindingMode.OneWayToSource, OpacityValidateValue, OnPropertyChanged);
 
+        public static BindableProperty ImageWidthProperty = BindableProperty.Create(nameof(ImageWidth), typeof(double), typeof(RadioButton), 30.0);
+
+        public static BindableProperty ImageHeightProperty = BindableProperty.Create(nameof(ImageHeight), typeof(double), typeof(RadioButton), 30.0);
+
         #endregion
 
         #region Public Constructors
@@ -119,6 +123,9 @@ namespace XFDemo.CustomControls
         public RadioButton()
         {
             this.Clicked += this.OnClicked;
+            this.HeightRequest = ImageHeight;
+            this.WidthRequest = ImageWidth;
+            this.BackgroundColor = Color.Transparent;
         }
 
         #endregion
@@ -159,6 +166,30 @@ namespace XFDemo.CustomControls
             set
             {
                 this.SetValue(OpacityWhenIsDisabledProperty, value);
+            }
+        }
+
+        public double ImageHeight
+        {
+            get
+            {
+                return (double)this.GetValue(ImageHeightProperty);
+            }
+            set
+            {
+                this.SetValue(ImageHeightProperty, value);
+            }
+        }
+
+        public double ImageWidth
+        {
+            get
+            {
+                return (double)this.GetValue(ImageWidthProperty);
+            }
+            set
+            {
+                this.SetValue(ImageWidthProperty, value);
             }
         }
 

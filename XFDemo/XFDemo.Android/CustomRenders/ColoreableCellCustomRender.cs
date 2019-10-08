@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.Android;
 using XFDemo.CustomControls;
 using XFDemo.Droid.CustomRenders;
 
-//[assembly: ExportRenderer(typeof(ColoreableCell), typeof(ColoreableCellCustomRender))]
+[assembly: ExportRenderer(typeof(ColoreableCell), typeof(ColoreableCellCustomRender))]
 namespace XFDemo.Droid.CustomRenders
 {
     public class ColoreableCellCustomRender : ViewCellRenderer
