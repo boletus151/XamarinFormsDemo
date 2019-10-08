@@ -26,7 +26,7 @@
                 Text="Go to ToolbarWithPicker Example" />
             <Button
                 Command="{Binding GoToRadioButtonPageCommand}"
-                Text="Go to Radio Button Example (not working on Android)" />
+                Text="Go to Radio Button Example" />
             <Button
                 Command="{Binding GoToHorizontalListViewPageCommand}"
                 Text="Go to Horizontal ListView Example" />
