@@ -17,15 +17,16 @@
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                       SeparatorVisibility="None"
                       Margin="20"
-                      VerticalOptions="Start">
+                      VerticalOptions="FillAndExpand"
+                      MinimumHeightRequest="100">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <controls:ColoreableCell CellBackgroundColor="CadetBlue">
+                        <ViewCell>
                             <StackLayout Padding="10"
-                                         VerticalOptions="Center">
+                                         VerticalOptions="FillAndExpand">
                                 <Label Text="{Binding}" />
                             </StackLayout>
-                        </controls:ColoreableCell>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -35,6 +36,18 @@
                    TextColor="Red"
                    Margin="0,30"
                    VerticalOptions="Center"/>
+            
+            <StackLayout Orientation="Horizontal" Margin="10,30">
+                <Label Text="Selected Pattern"
+                   Style="{StaticResource MainTitleStyle}"
+                   Margin="10"
+                   VerticalOptions="Center"/>
+                <Label Text="{Binding SelectedItem}"
+                   Style="{StaticResource MainTitleStyle}"
+                   Margin="10"
+                   VerticalOptions="Center"/>
+            </StackLayout>
+
             <Button Text="Match"
                     Command="{Binding MatchCommand}"></Button>
         </StackLayout>
