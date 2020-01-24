@@ -4,9 +4,9 @@
       <TargetFramework>netstandard2.1</TargetFramework>
    </PropertyGroup>
    <ItemGroup>
-      <PackageReference Include="CommonServiceLocator" version="2.0.4" Version="2.0.4" />
-      <PackageReference Include="Microsoft.NETCore.Platforms" version="3.0.0" Version="3.0.0" />
-      <PackageReference Include="Microsoft.NETCore.Targets" version="3.0.0" Version="3.0.0" />
+      <PackageReference Include="CommonServiceLocator" version="2.0.4" Version="2.0.5" />
+      <PackageReference Include="Microsoft.NETCore.Platforms" version="3.0.0" Version="3.1.0" />
+      <PackageReference Include="Microsoft.NETCore.Targets" version="3.0.0" Version="3.1.0" />
       <PackageReference Include="MvvmLight" version="5.4.1.1" Version="5.4.1.1" />
       <PackageReference Include="MvvmLightLibs" version="5.4.1.1" Version="5.4.1.1" />
       <PackageReference Include="NETStandard.Library" version="2.0.3" Version="2.0.3" />
@@ -43,7 +43,7 @@
       <PackageReference Include="System.Xml.XDocument" version="4.3.0" Version="4.3.0" />
       <PackageReference Include="Xamarin.FFImageLoading" version="2.4.11.982" Version="2.4.11.982" />
       <PackageReference Include="Xamarin.FFImageLoading.Forms" version="2.4.11.982" Version="2.4.11.982" />
-      <PackageReference Include="Xamarin.Forms" version="4.2.0.848062" Version="4.2.0.848062" />
+      <PackageReference Include="Xamarin.Forms" version="4.2.0.848062" Version="4.4.0.991537" />
    </ItemGroup>
    <ItemGroup>
      <ProjectReference Include="..\XFDemo.CustomControls\XFDemo.CustomControls.csproj" />
